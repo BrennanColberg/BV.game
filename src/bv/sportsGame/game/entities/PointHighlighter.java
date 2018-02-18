@@ -13,7 +13,6 @@ import bv.gameFramework.physics.Entity;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;
-import bv.syntax.BV;
 
 /** 
  * @author	Brennan Colberg
