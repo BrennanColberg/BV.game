@@ -13,9 +13,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import bv.io.v0.FileType;
-import bv.io.v0.IO;
-
 /** A command class designed to read from, write to, and generally manage raw text files. 
  * 	Use {@link FileType}.RawText to reference the corresponding file type.
  * @author	Brennan Colberg

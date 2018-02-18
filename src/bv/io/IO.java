@@ -4,8 +4,6 @@
  */
 package bv.io;
 
-import bv.io.v0.FileType;
-
 /** A command class containing various commands used in BV.io for general IO.
  * @author	Brennan Colberg
  * @since	Nov 25, 2017
