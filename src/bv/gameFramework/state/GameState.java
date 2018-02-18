@@ -33,7 +33,6 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	
 	public GameState() {
 		pixelsPerUnit = 1;
-		objects.add(this);
 		init();
 	}
 	
@@ -58,6 +57,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	}
 	
 	public void updatePhysics() {
+		super.updatePhysics();
 		for (int i = 0; i < objects.size(); i++) {
 			if (objects.get(i) instanceof Physics) ((Physics) objects.get(i)).updatePhysics();
 		}
