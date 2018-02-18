@@ -33,6 +33,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	
 	public GameState() {
 		pixelsPerUnit = 1;
+		objects.add(this);
 		init();
 	}
 	
