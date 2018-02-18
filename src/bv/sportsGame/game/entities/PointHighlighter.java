@@ -23,7 +23,6 @@ public class PointHighlighter extends Entity implements Renderable {
 
 	public void tick() {
 		this.setPosition(Core.input.getMouseAdjustedPosition());
-		BV.println("mouse coords: " + this.position.values[0] + " " + this.position.values[1]);
 	}
 	
 	public void render(Renderer r) {

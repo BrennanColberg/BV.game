@@ -10,6 +10,8 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Entity;
+import bv.gameFramework.spritesCore.Sprite;
+import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;
@@ -35,12 +37,9 @@ public class MouseTracker extends Entity implements Renderable {
 		super.updatePhysics();
 	}
 
-	/* (non-Javadoc)
-	 * @see bv.gameFramework.v0.graphics.Renderable#render(bv.gameFramework.v0.graphics.Renderer)
-	 */
-	@Override
+	Sprite sprite = SpriteIO.get("drone").scale(25);
 	public void render(Renderer r) {
-		r.outline(rectBounds(), Color.BLACK);
+		sprite.render(r, this.position, this.velocity.getAngle(), Color.black);
 	}
 
 	/* (non-Javadoc)

@@ -33,7 +33,8 @@ public class Poly implements Renderable {
 	}
 	
 	public Poly(Poly template) {
-		this(template.position, template.points.toArray(new PVector[]{}));
+		this.position = template.position;
+		for (PVector point:template.points) points.add(new PVector(point));
 	}
 	public Poly clone() { return new Poly(this); }
 	

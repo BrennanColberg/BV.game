@@ -23,9 +23,7 @@ public class Game extends GameState {
 	}
 	
 	public void updatePhysics() {
-		
 		super.updatePhysics();
-		
 	}
 	
 	public void load() {
