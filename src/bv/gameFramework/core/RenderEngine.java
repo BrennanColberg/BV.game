@@ -66,7 +66,6 @@ public class RenderEngine extends Thread {
 			}
 		}
 	}
-	@SuppressWarnings("deprecation")
 	public void render() {
 		
 		BufferStrategy bs = this.getCanvas().getBufferStrategy();

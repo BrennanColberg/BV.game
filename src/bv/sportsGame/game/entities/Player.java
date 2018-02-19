@@ -10,7 +10,6 @@ import bv.gameFramework.physics.Entity;
 import bv.gameFramework.spritesCore.Sprite;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
-import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
 /**
