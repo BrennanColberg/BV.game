@@ -26,7 +26,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	
 	public double pixelsPerUnit = 1;
 	
-	public ArrayList<Object> objects = new ArrayList<Object>();
+	public static ArrayList<Object> objects = new ArrayList<Object>();
 
 	
 	/* CONSTRUCTORS */
@@ -82,9 +82,6 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	public CVector getSize() {
 		return (CVector) Core.renderEngine.getDisplay().getSize().scaledBy(1/pixelsPerUnit);
 	}
-	
-	
-	
 	/* TECHNICAL METHODS */
 	
 	public Rect rectBounds() {

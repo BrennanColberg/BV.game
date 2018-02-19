@@ -11,8 +11,10 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
+import bv.math.CVector;
 import bv.sportsGame.game.entities.Player;
 import bv.sportsGame.game.entities.PointHighlighter;
+import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
  * @author	Brennan Colberg
@@ -25,6 +27,7 @@ public class Game extends GameState {
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);
+		objects.add(new Missile(new CVector(0,0), Math.PI, 10, 1));
 		this.pixelsPerUnit = 0.5;
 	}
 	
