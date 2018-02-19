@@ -22,7 +22,6 @@ public class Game extends GameState {
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(new MouseTracker());
-		this.velocity.setMagnitude(1);
 	}
 	
 	public void updatePhysics() {

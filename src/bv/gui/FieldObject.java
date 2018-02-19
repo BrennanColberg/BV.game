@@ -11,11 +11,15 @@ import bv.math.Poly;
 import bv.math.Rect;
 
 public class FieldObject implements Renderable{
-	Sprite square = SpriteIO.get("Square").scale(100);
+	//This sprite is the box around the goal.
+	Sprite goalArea = SpriteIO.get("square").scale(50);
+	Sprite center = SpriteIO.get("center").scale(50);
 	@Override
 	public void render(Renderer r) {
 		// TODO Auto-generated method stub
-		square.render(r, new CVector(-200,0), 0.0, Color.black);
+		goalArea.render(r, new CVector(-475,0), 0.0, Color.white);
+		goalArea.render(r, new CVector(475,0), Math.PI, Color.white);
+		center.render(r, new CVector(0,0), Math.PI/4, Color.white);
 	}
 
 	@Override
