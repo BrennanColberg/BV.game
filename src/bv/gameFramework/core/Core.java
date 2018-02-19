@@ -22,7 +22,6 @@ public class Core {
 	public static GameStateManager gameStateManager;
 	public static TickEngine tickEngine;
 	public static RenderEngine renderEngine;
-	
 	public static void main(String[] args) {
 		
 		SpriteIO.load();
@@ -30,7 +29,6 @@ public class Core {
 		renderEngine = new RenderEngine(120, STARTING_SCREEN_SIZE);
 		gameStateManager = new GameStateManager();
 		tickEngine = new TickEngine(100);
-		
 		renderEngine.start();
 		tickEngine.start();
 		
