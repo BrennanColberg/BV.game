@@ -8,7 +8,6 @@ import java.awt.Canvas;
 import java.awt.image.BufferStrategy;
 
 import bv.gameFramework.graphics.Renderer;
-import bv.gui.Display;
 import bv.math.CVector;
 import bv.syntax.BV;
 
@@ -32,7 +31,7 @@ public class RenderEngine extends Thread {
 	public RenderEngine(double newTargetFPS, CVector displaySize) {
 		canvas = new Canvas();
 		renderer = new Renderer();
-		display = new Display(displaySize, this.canvas, Core.input);
+		display = new Display(displaySize, this.canvas);
 		setTargetFPS(newTargetFPS);
 	}
 	
@@ -67,6 +66,7 @@ public class RenderEngine extends Thread {
 			}
 		}
 	}
+	@SuppressWarnings("deprecation")
 	public void render() {
 		
 		BufferStrategy bs = this.getCanvas().getBufferStrategy();

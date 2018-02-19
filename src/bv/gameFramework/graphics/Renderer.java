@@ -46,6 +46,7 @@ public class Renderer {
 	
 	
 	// graphics
+	@Deprecated
 	public Graphics getGraphics() {
 		return graphics;
 	}

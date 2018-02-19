@@ -38,7 +38,7 @@ public class GameStateManager {
 		if (currentState != game.peek())
 			loadGameState(game.peek());
 		
-		Core.input.tick();
+		Input.tick();
 		currentState.tick();
 		currentState.updatePhysics();
 	}
