@@ -22,13 +22,11 @@ public class Core {
 	public static GameStateManager gameStateManager;
 	public static TickEngine tickEngine;
 	public static RenderEngine renderEngine;
-	public static InputEngine input;
 	
 	public static void main(String[] args) {
 		
 		SpriteIO.load();
 		
-		input = new InputEngine();
 		renderEngine = new RenderEngine(120, STARTING_SCREEN_SIZE);
 		gameStateManager = new GameStateManager();
 		tickEngine = new TickEngine(100);

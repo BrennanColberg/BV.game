@@ -1,4 +1,4 @@
-package bv.gui;
+package bv.gameFramework.core;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -6,7 +6,6 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 
-import bv.gameFramework.core.InputEngine;
 import bv.math.CVector;
 import bv.math.Rect;
 
@@ -23,7 +22,6 @@ public class Display {
 	private Canvas canvas;
 	
 	private CVector size;
-	private Input input;
 
 	
 	/// CONSTRUCTORS ///
@@ -35,17 +33,14 @@ public class Display {
 		frame.setLocationRelativeTo(null);
 		
 	}
- 	public Display(CVector newSize, Canvas newCanvas, Input newInput) {
+ 	public Display(CVector newSize, Canvas newCanvas) {
  		this();
  		this.setSize(newSize);
  		this.setCanvas(newCanvas);
- 		this.setInput(newInput);
- 	}
- 	public Display(CVector newSize, Input newInput) {
- 		this(newSize, new Canvas(), newInput);
+ 		this.loadInput();
  	}
  	public Display(CVector newSize) {
- 		this(newSize, new Canvas(), new Input());
+ 		this(newSize, new Canvas());
  	}
  	
 	
@@ -77,17 +72,13 @@ public class Display {
 		
 	}
 	
-	public Input getInput() {
-		return this.input;
-	}
-	public void setInput(Input newInput) {
-		this.input = newInput;
-		input.display = this;
-		InputEngine.live = true;
-		canvas.addKeyListener(input);
-		canvas.addMouseListener(input);
-		canvas.addMouseMotionListener(input);
-		canvas.addMouseWheelListener(input);
+	public void loadInput() {
+		Input.display = this;
+		Input.live = true;
+		canvas.addKeyListener(new Input());
+		canvas.addMouseListener(new Input());
+		canvas.addMouseMotionListener(new Input());
+		canvas.addMouseWheelListener(new Input());
 	}
 	
 	public boolean getVisible() {

@@ -5,8 +5,9 @@
 package bv.sportsGame.game.entities;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
-import bv.gameFramework.core.Core;
+import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Entity;
@@ -31,9 +32,13 @@ public class MouseTracker extends Entity implements Renderable {
 	}
 	
 	public void updatePhysics() {
-		CVector targetLocation = Core.input.getMouseAdjustedPosition();
+		CVector targetLocation = Input.getMouseAdjustedPosition();
 		velocity.setAngle(Math.atan2(targetLocation.getValue(1) - position.getValue(1), targetLocation.getValue(0) - position.getValue(0)));
-		velocity.setMagnitude(Core.input.getMouseAdjustedPosition().minus(this.position).toPVector().getMagnitude() / 100);
+		
+		
+		if (Input.isKeyPressed(KeyEvent.VK_SPACE)) velocity.setMagnitude(Input.getMouseAdjustedPosition().minus(this.position).toPVector().getMagnitude() / 100);
+		
+		
 		super.updatePhysics();
 	}
 
