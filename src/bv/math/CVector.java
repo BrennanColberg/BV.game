@@ -22,7 +22,7 @@ public class CVector {
 	/* CONSTRUCTORS */
 	
 	public CVector() {
-		
+		//This is where I am just changing something to see if committing will work
 	}
 	
 	public CVector(double...newValues) {
