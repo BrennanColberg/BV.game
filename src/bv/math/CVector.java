@@ -22,7 +22,7 @@ public class CVector {
 	/* CONSTRUCTORS */
 	
 	public CVector() {
-		//This is where I am just changing something to see if committing will work
+
 	}
 	
 	public CVector(double...newValues) {
@@ -102,7 +102,9 @@ public class CVector {
 	public void setValue(int index, double newValue) {
 		this.values[index] = newValue;
 	}
-	
+	public void clear() {
+		this.setValues(0,0);
+	}
 	
 	/* CONVERTERS */
 	

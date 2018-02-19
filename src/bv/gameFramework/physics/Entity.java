@@ -18,6 +18,7 @@ public class Entity implements Tickable, Physics {
 	protected PVector velocity = new PVector(0,0);
 	protected PVector acceleration = new PVector(0,0);
 	
+	
 	public Entity() {
 		
 	}
@@ -70,6 +71,7 @@ public class Entity implements Tickable, Physics {
 	public void updatePhysics() {
 		velocity.add(acceleration);
 		position.add(velocity);
+		acceleration.clear();
 	}
 	
 	public void tick() {

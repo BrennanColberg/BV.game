@@ -116,7 +116,10 @@ public class PVector {
 		while (newAngle > BV.TAU) newAngle -= BV.TAU;
 		this.angle = newAngle;
 	}
-	
+	public void clear() {
+		this.setMagnitude(0);
+		this.setAngle(0);
+	}
 	
 	/* CONVERTERS */
 
