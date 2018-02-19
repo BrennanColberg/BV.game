@@ -41,10 +41,12 @@ public class Player extends Entity implements Renderable {
 		
 		if (Input.isKeyPressed(KeyEvent.VK_SPACE) && this.velocity.getMagnitude() < 5.0)
 			acceleration.setMagnitude(1);
-		else
-			acceleration.setMagnitude(0);
+		/* else
+			acceleration.setMagnitude(0); */
 		this.velocity.setMagnitude(this.velocity.getMagnitude() - this.drag);
-		System.out.println(this.acceleration);
+		
+		System.out.println(this.velocity.getAngle());
+		
 		super.updatePhysics();
 	}
 	
