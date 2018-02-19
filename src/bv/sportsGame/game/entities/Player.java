@@ -40,30 +40,27 @@ public class Player extends Entity implements Renderable {
 		velocity.setAngle(Math.atan2(target.getValue(1) - position.getValue(1), target.getValue(0) - position.getValue(0)));
 		
 		if (Input.isKeyPressed(KeyEvent.VK_SPACE) && this.velocity.getMagnitude() < 5.0)
-			acceleration.setMagnitude(1);
+			setAcceleration(new PVector(Math.atan2(target.getValue(0) - this.position.getValue(0), target.getValue(1) - this.position.getValue(1)), 1));
 		else
 			acceleration.setMagnitude(0);
-		this.velocity.setMagnitude(this.velocity.getMagnitude() - this.drag);
-		System.out.println(this.acceleration);
+		// TODO: Fix drag, as applying drag currently glitches out the player
+//		this.velocity.setMagnitude(this.velocity.getMagnitude() - this.drag);
 		super.updatePhysics();
 	}
 	
 	@Override
 	public void render(Renderer r) {
-		// TODO Auto-generated method stub
 		sprite.render(r, position, this.velocity.getAngle(), Color.blue);
 	}
 
 	@Override
 	public Rect rectBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite.get(0).rectBounds();
 	}
 
 	@Override
 	public Poly polyBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite.get(0);
 	}
 
 }

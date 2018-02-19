@@ -13,7 +13,7 @@ import bv.math.CVector;
  */
 public class Core {
 	
-	public static final CVector STARTING_SCREEN_SIZE = new CVector(960,540);
+	public static final CVector STARTING_SCREEN_SIZE = new CVector(1024,576);
 	
 	public static boolean printEngineUpdatesToConsole = true;
 	public static int engineUpdateDelay = 1000;
