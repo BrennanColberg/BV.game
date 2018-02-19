@@ -10,8 +10,6 @@ import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Entity;
-import bv.gameFramework.spritesCore.Sprite;
-import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;
@@ -21,15 +19,13 @@ import bv.math.Rect;
  * @since	Feb 18, 2018
  */
 public class PointHighlighter extends Entity implements Renderable {
-	//Sprite: Podracer
-	Sprite sprite = SpriteIO.get("podracer").scale(40);
 	
 	public void tick() {
 		this.setPosition(Input.getMouseAdjustedPosition());
 	}
 	
 	public void render(Renderer r) {
-		sprite.render(r, position, this.velocity.getAngle(), Color.RED);
+		r.fill(this.rectBounds(), Color.red);
 	}
 
 	public Rect rectBounds() {
