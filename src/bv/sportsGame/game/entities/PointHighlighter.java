@@ -6,7 +6,7 @@ package bv.sportsGame.game.entities;
 
 import java.awt.Color;
 
-import bv.gameFramework.core.Core;
+import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Entity;
@@ -25,7 +25,7 @@ public class PointHighlighter extends Entity implements Renderable {
 	Sprite sprite = SpriteIO.get("podracer").scale(40);
 	
 	public void tick() {
-		this.setPosition(Core.input.getMouseAdjustedPosition());
+		this.setPosition(Input.getMouseAdjustedPosition());
 	}
 	
 	public void render(Renderer r) {
