@@ -10,7 +10,6 @@ import bv.gameFramework.physics.Entity;
 import bv.gameFramework.spritesCore.Sprite;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
-import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
 /**
@@ -40,11 +39,21 @@ public class Player extends Entity implements Renderable {
 		velocity.setAngle(Math.atan2(target.getValue(1) - position.getValue(1), target.getValue(0) - position.getValue(0)));
 		
 		if (Input.isKeyPressed(KeyEvent.VK_SPACE) && this.velocity.getMagnitude() < 5.0)
+<<<<<<< HEAD
 			setAcceleration(new PVector(Math.atan2(target.getValue(0) - this.position.getValue(0), target.getValue(1) - this.position.getValue(1)), 1));
 		else
 			acceleration.setMagnitude(0);
 		// TODO: Fix drag, as applying drag currently glitches out the player
 //		this.velocity.setMagnitude(this.velocity.getMagnitude() - this.drag);
+=======
+			acceleration.setMagnitude(1);
+		/* else
+			acceleration.setMagnitude(0); */
+		this.velocity.setMagnitude(this.velocity.getMagnitude() - this.drag);
+		
+		System.out.println(this.velocity.getAngle());
+		
+>>>>>>> ed4c76f063e195a832959c859896cffc76a19963
 		super.updatePhysics();
 	}
 	
