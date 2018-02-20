@@ -3,6 +3,7 @@ package bv.sportsGame.game.entities;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
@@ -13,7 +14,6 @@ import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;
 import bv.sportsGame.game.entities.projectiles.Missile;
-import bv.sportsGame.gameStates.Game;
 /**
  * @author Aroosh Kumar
  * @since Sunday February 18, 2018
@@ -46,7 +46,7 @@ public class Player extends Entity implements Renderable {
 		// TODO: Fix drag, as applying drag currently glitches out the player
 //		this.velocity.setMagnitude(this.velocity.getMagnitude() - this.drag);
 		if (Input.isKeyPressed(KeyEvent.VK_W))
-			Game.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), 10, 10 + this.velocity.getMagnitude()));
+			Core.gameStateManager.currentState.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), 10, 10 + this.velocity.getMagnitude()));
 		super.updatePhysics();
 	}
 	

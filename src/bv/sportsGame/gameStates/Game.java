@@ -51,7 +51,7 @@ public class Game extends GameState {
 		if (Input.isKeyPressed(KeyEvent.VK_BACK_SPACE)){
 			for (Object o : objects){
 				if (o instanceof Missile){
-					objects.set(objects.indexOf(o), null);
+					objects.remove(o);
 				}
 			}
 		}

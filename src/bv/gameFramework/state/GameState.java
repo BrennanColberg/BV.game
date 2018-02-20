@@ -26,7 +26,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	
 	public double pixelsPerUnit = 1;
 	
-	public static ArrayList<Object> objects = new ArrayList<Object>();
+	public ArrayList<Object> objects = new ArrayList<Object>();
 
 	
 	/* CONSTRUCTORS */
