@@ -55,8 +55,9 @@ public class CVector {
 	}
 	public void clamp(double min, double max) {
 		PVector vector = new PVector(this);
-		if (vector.magnitude < min) vector.setMagnitude(min);
-		else if (vector.magnitude > max) vector.setMagnitude(max);
+		//if (vector.magnitude < min) vector.setMagnitude(min);
+		//else if (vector.magnitude > max) vector.setMagnitude(max);
+		vector.setMagnitude(Math.max(min, Math.min(max, vector.magnitude))); //This sets the magnitude within a range of values
 		this.setValues(vector.toCVector().values);
 	}
 
