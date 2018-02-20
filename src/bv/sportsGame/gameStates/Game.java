@@ -27,7 +27,6 @@ public class Game extends GameState {
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);
-		objects.add(new Missile(new CVector(0,0), Math.PI, 10, 1));
 		this.pixelsPerUnit = 0.5;
 	}
 	
