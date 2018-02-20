@@ -40,7 +40,7 @@ public class PVector {
 	// PVector operations
 	
 	public void add(PVector in) {
-		this.subtract(in.toCVector());
+		this.add(in.toCVector());
 	}
 	public void subtract(PVector in) {
 		this.subtract(in.toCVector());
@@ -100,7 +100,9 @@ public class PVector {
 		result.subtract(in);
 		return result;
 	}
-	
+	public void addMagnitude(double amount) {
+		this.setMagnitude(this.getMagnitude() + amount);
+	}
 	
 	/* GETTERS & SETTERS */
 	
