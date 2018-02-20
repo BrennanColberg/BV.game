@@ -59,6 +59,11 @@ public class PVector {
 	public void rotate(double in) {
 		this.angle += in;
 	}
+	public void clamp(double min, double max) {
+		//if (vector.magnitude < min) vector.setMagnitude(min);
+		//else if (vector.magnitude > max) vector.setMagnitude(max);
+		this.setMagnitude(Math.max(min, Math.min(max, this.magnitude))); //This sets the magnitude within a range of values
+	}
 
 	public PVector plus(PVector in) {
 		return this.plus(in.toCVector());

@@ -53,6 +53,12 @@ public class CVector {
 		for (int i = 0; i < 2; i++)
 			this.values[i] *= in;
 	}
+	public void clamp(double min, double max) {
+		PVector vector = new PVector(this);
+		if (vector.magnitude < min) vector.setMagnitude(min);
+		else if (vector.magnitude > max) vector.setMagnitude(max);
+		this.setValues(vector.toCVector().values);
+	}
 
 	public CVector plus(CVector in) {
 		CVector result = new CVector(this);

@@ -25,6 +25,7 @@ public class Player extends Entity implements Renderable {
 	protected double drag = 0.01;
 	public double mass = 1000;
 	Sprite sprite = SpriteIO.get("podracer").scale(50);
+	
 	public Player() {
 		
 	}
