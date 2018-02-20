@@ -14,6 +14,8 @@ import bv.gui.FieldObject;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.Player;
 import bv.sportsGame.game.entities.PointHighlighter;
+import bv.sportsGame.game.entities.SpeedsterClass;
+import bv.sportsGame.game.entities.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
@@ -23,8 +25,13 @@ import bv.sportsGame.game.entities.projectiles.Missile;
 public class Game extends GameState {
 	//Player player;
 	BasicClass player;
+	//TankClass player;
+	//SpeedsterClass player;
 	public void init() {
+		//player = new Player();
 		player = new BasicClass();
+		//player = new TankClass();
+		//player = new SpeedsterClass();
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);

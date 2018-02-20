@@ -64,7 +64,6 @@ public class Entity implements Tickable, Physics {
 	/* METHODS */
 	
 	public void updatePhysics() {
-		//acceleration.setAngle(velocity.getAngle());
 		velocity.add(acceleration);
 		position.add(velocity);
 		acceleration.clear();
