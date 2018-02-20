@@ -4,7 +4,6 @@
  */
 package bv.gameFramework.physics;
 
-import bv.gameFramework.spritesCore.RSprite;
 import bv.gameFramework.state.Tickable;
 import bv.math.CVector;
 import bv.math.PVector;
