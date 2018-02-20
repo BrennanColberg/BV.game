@@ -5,6 +5,7 @@
 package bv.gameFramework.core;
 
 import bv.gameFramework.spritesCore.SpriteIO;
+import bv.gameFramework.state.GameState;
 import bv.math.CVector;
 
 /** 
@@ -32,6 +33,10 @@ public class Core {
 		renderEngine.start();
 		tickEngine.start();
 		
+	}
+	
+	public static GameState state() {
+		return gameStateManager.currentState;
 	}
 	
 }
