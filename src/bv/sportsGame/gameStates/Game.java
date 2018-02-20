@@ -11,7 +11,6 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
-import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.Player;
 import bv.sportsGame.game.entities.PointHighlighter;
 import bv.sportsGame.game.entities.projectiles.Missile;
@@ -22,9 +21,9 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  */
 public class Game extends GameState {
 	//Player player;
-	BasicClass player;
+	Player player;
 	public void init() {
-		player = new BasicClass();
+		player = new Player();
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);
