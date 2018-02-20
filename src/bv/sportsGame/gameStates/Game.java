@@ -11,7 +11,6 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
-import bv.math.CVector;
 import bv.sportsGame.game.entities.Player;
 import bv.sportsGame.game.entities.PointHighlighter;
 import bv.sportsGame.game.entities.projectiles.Missile;
@@ -27,7 +26,7 @@ public class Game extends GameState {
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);
-		this.pixelsPerUnit = 0.5;
+		this.pixelsPerUnit = 0.25;
 	}
 	
 	public void updatePhysics() {
@@ -54,11 +53,17 @@ public class Game extends GameState {
 				}
 			}
 		}
+		
+		//TODO: For some reason this line of code locks up all key inputs after some time
+//		if (Input.isKeyPressed(KeyEvent.VK_A)){
+//			this.velocity.add(new PVector(-10, player.getVelocity().getAngle()));
+//		}
+		
 		super.updatePhysics();
 	}
 	
 	public void load() {
-		Core.renderEngine.renderer.setBackgroundColor(Color.lightGray);
+		Core.renderEngine.renderer.setBackgroundColor(Color.white);
 		
 	}
 	

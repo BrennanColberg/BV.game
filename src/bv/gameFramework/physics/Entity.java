@@ -4,6 +4,7 @@
  */
 package bv.gameFramework.physics;
 
+import bv.gameFramework.spritesCore.RSprite;
 import bv.gameFramework.state.Tickable;
 import bv.math.CVector;
 import bv.math.PVector;
@@ -17,15 +18,10 @@ public class Entity implements Tickable, Physics {
 	protected CVector position = new CVector(0,0);
 	protected PVector velocity = new PVector(0,0);
 	protected PVector acceleration = new PVector(0,0);
-	
-	
-	public Entity() {
-		
-	}
+	public Entity() {}
 	public Entity(CVector newPosition) {
 		setPosition(newPosition);
 	}
-	
 	
 	/* GETTERS & SETTERS */
 	
@@ -65,7 +61,6 @@ public class Entity implements Tickable, Physics {
 		PVector directionalVector = location.minus(this.position).toPVector();
 		this.acceleration.setAngle(directionalVector.getAngle());
 	}
-
 	/* METHODS */
 	
 	public void updatePhysics() {

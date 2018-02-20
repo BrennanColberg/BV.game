@@ -66,6 +66,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	public void render(Renderer r) {
 		for (int i = 0; i < objects.size(); i++) {
 			if (objects.get(i) instanceof Renderable) ((Renderable) objects.get(i)).render(r);
+
 		}
 	}
 	

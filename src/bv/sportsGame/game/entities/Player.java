@@ -21,9 +21,13 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  * The object which the player controls in the game
  */
 public class Player extends Entity implements Renderable {
-	Sprite sprite = SpriteIO.get("podracer").scale(50);
-	protected double drag = 0.01;
 	
+	protected double drag = 0.01;
+	public double mass = 1000;
+	Sprite sprite = SpriteIO.get("podracer").scale(50);
+	public Player() {
+		
+	}
 	/**
 	 * This method make the player follow the mouse and accelerates the player
 	 * when the space key is pressed. The player will also experience drag which will
@@ -49,20 +53,24 @@ public class Player extends Entity implements Renderable {
 			Core.gameStateManager.currentState.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), 10, 10 + this.velocity.getMagnitude()));
 		super.updatePhysics();
 	}
-	
+
+
 	@Override
 	public void render(Renderer r) {
-		sprite.render(r, position, this.velocity.getAngle(), Color.blue);
+		sprite.render(r, position, this.velocity.getAngle(), Color.black);
+		
 	}
+
 
 	@Override
 	public Rect rectBounds() {
 		return sprite.get(0).rectBounds();
 	}
 
+
 	@Override
 	public Poly polyBounds() {
-		return sprite.get(0);
+		return sprite.get(0).polyBounds();
 	}
-
+	
 }
