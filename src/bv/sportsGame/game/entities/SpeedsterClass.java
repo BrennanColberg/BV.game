@@ -18,7 +18,7 @@ public class SpeedsterClass extends BasicClass {
 		strength = 2;
 		shotSpeed = 5;
 		shotCountDown = 0;
-		weight = 75;
+		mass = 75;
 		maxVelocity = 7.5d;
 		accelAmount = 0.04d;
 	}

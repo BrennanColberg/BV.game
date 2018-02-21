@@ -18,7 +18,7 @@ public class FieldObject implements Renderable{
 	@Override
 	public void render(Renderer r) {
 		// renders the box around the goal, and the center
-		goalArea.render(r, new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 *4,0), 0.0, Color.white);
+		goalArea.render(r, new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4,0), 0.0, Color.white);
 		goalArea.render(r, new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4,0), Math.PI, Color.white);
 		center.render(r, new CVector(0,0), Math.PI/4, Color.white);
 	}
