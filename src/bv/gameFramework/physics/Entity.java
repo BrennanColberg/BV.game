@@ -14,9 +14,10 @@ import bv.math.PVector;
  */
 public class Entity implements Tickable, Physics {
 	
-	protected CVector position = new CVector(0,0);
-	protected PVector velocity = new PVector(0,0);
+	public CVector position = new CVector(0,0);
+	public PVector velocity = new PVector(0,0);
 	protected PVector acceleration = new PVector(0,0);
+	public double mass = 10;
 	public Entity() {}
 	public Entity(CVector newPosition) {
 		setPosition(newPosition);

@@ -18,7 +18,7 @@ public class TankClass extends BasicClass {
 		strength = 15;
 		shotSpeed = 250;
 		shotCountDown = 0;
-		weight = 150;
+		mass = 150;
 		maxVelocity = 2.25d;
 		accelAmount = 0.008d;
 	}

@@ -7,6 +7,7 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
+import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
 import bv.gameFramework.spritesCore.Sprite;
 import bv.gameFramework.spritesCore.SpriteIO;
@@ -25,7 +26,7 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  * 
  */
 
-public class BasicClass extends Entity implements Renderable {
+public class BasicClass extends Entity implements Renderable, Collidable {
 
 	protected static double dragConst = -0.0001d;
 	protected static double recoilConst = -0.1d;
@@ -34,7 +35,6 @@ public class BasicClass extends Entity implements Renderable {
 	protected int strength;
 	protected int shotSpeed; //a bit counter-intuitive; high value equals slower shot speed
 	protected int shotCountDown;
-	protected double weight;
 	protected double maxVelocity;
 	protected double accelAmount;
 	protected boolean isPlayer;
@@ -44,9 +44,10 @@ public class BasicClass extends Entity implements Renderable {
 		strength = 7;
 		shotSpeed = 50;
 		shotCountDown = 0;
-		weight = 100;
+		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
+		position = new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0),0);
 	}
 	public BasicClass(boolean isPlayer){
 		this();
@@ -54,7 +55,7 @@ public class BasicClass extends Entity implements Renderable {
 	}
 	
 	public double drag() {
-		return (weight != 0) ? velocity.getMagnitude() * dragConst * weight : -0.1d;
+		return (mass != 0) ? velocity.getMagnitude() * dragConst * mass : -0.1d;
 	}
 	
 	public double recoil() {
@@ -103,6 +104,10 @@ public class BasicClass extends Entity implements Renderable {
 	@Override
 	public Poly polyBounds() {
 		return sprite.get(0).polyBounds();
+	}
+	@Override
+	public void onCollision(Entity object) {
+		//This'll get interesting as well
 	}
 
 }

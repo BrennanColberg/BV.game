@@ -11,6 +11,7 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
+import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.PointHighlighter;
 import bv.sportsGame.game.entities.SpeedsterClass;
@@ -23,14 +24,17 @@ import bv.sportsGame.game.entities.projectiles.Missile;
 public class Game extends GameState {
 
 	BasicClass player;
+	Ball ball;
 	
 	public void init() {
 		//player = new Player();
-		//player = new BasicClass();
-		//player = new TankClass();
+		//player = new BasicClass(true);
+		//player = new TankClass(true);
 		player = new SpeedsterClass(true); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
+		ball = new Ball();
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
+		objects.add(ball);
 		objects.add(player);
 		
 		this.pixelsPerUnit = 0.25;
@@ -71,7 +75,6 @@ public class Game extends GameState {
 	
 	public void load() {
 		Core.renderEngine.renderer.setBackgroundColor(Color.white);
-		
 	}
 	
 }
