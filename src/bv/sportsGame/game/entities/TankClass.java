@@ -22,4 +22,8 @@ public class TankClass extends BasicClass {
 		maxVelocity = 2.25d;
 		accelAmount = 0.008d;
 	}
+	public TankClass(boolean isPlayer){
+		this();
+		this.isPlayer = isPlayer;
+	}
 }

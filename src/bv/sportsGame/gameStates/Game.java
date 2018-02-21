@@ -29,7 +29,7 @@ public class Game extends GameState {
 		//player = new Player();
 		//player = new BasicClass();
 		//player = new TankClass();
-		player = new SpeedsterClass(); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
+		player = new SpeedsterClass(true); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);

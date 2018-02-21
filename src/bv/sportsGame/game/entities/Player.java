@@ -20,6 +20,7 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  * 
  * The object which the player controls in the game
  */
+@Deprecated
 public class Player extends Entity implements Renderable {
 	
 	protected double drag = 0.01;

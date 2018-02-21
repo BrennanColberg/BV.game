@@ -37,7 +37,7 @@ public class BasicClass extends Entity implements Renderable {
 	protected double weight;
 	protected double maxVelocity;
 	protected double accelAmount;
-	
+	protected boolean isPlayer;
 	public BasicClass() {
 		sprite = SpriteIO.get("podracer").scale(50);
 		health = 125;
@@ -47,6 +47,10 @@ public class BasicClass extends Entity implements Renderable {
 		weight = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
+	}
+	public BasicClass(boolean isPlayer){
+		this();
+		this.isPlayer = isPlayer;
 	}
 	
 	public double drag() {
@@ -58,7 +62,7 @@ public class BasicClass extends Entity implements Renderable {
 	}
 	
 	public void updatePhysics() {
-		playerMovement();
+		if (isPlayer) playerMovement();
 		acceleration.setAngle(velocity.getAngle());
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();

@@ -22,4 +22,8 @@ public class SpeedsterClass extends BasicClass {
 		maxVelocity = 7.5d;
 		accelAmount = 0.04d;
 	}
+	public SpeedsterClass(boolean isPlayer){
+		this();
+		this.isPlayer = isPlayer;
+	}
 }
