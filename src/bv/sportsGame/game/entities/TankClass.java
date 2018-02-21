@@ -2,6 +2,15 @@ package bv.sportsGame.game.entities;
 
 import bv.gameFramework.spritesCore.SpriteIO;
 
+/**
+ * This is the Tank class that inherits from the Basic class.
+ * 
+ * @author Jonah Austin
+ * @since Tuesday February 20, 2018
+ * @param none
+ * 
+ */
+
 public class TankClass extends BasicClass {
 	public TankClass() {
 		sprite = SpriteIO.get("dualGunner").scale(75);

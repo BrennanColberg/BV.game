@@ -13,6 +13,8 @@ import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.PointHighlighter;
+import bv.sportsGame.game.entities.SpeedsterClass;
+import bv.sportsGame.game.entities.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
@@ -20,15 +22,14 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  * @since	Jan 17, 2018
  */
 public class Game extends GameState {
-	//Player player;
+
 	BasicClass player;
-	//TankClass player;
-	//SpeedsterClass player;
+	
 	public void init() {
 		//player = new Player();
-		player = new BasicClass();
+		//player = new BasicClass();
 		//player = new TankClass();
-		//player = new SpeedsterClass();
+		player = new SpeedsterClass(); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);
