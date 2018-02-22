@@ -14,5 +14,5 @@ import bv.math.Rect;
 
 public interface Collidable {
 	public abstract void onCollision(PVector newVelocity, Entity object);
-	public abstract Poly trigger();
+	public abstract Rect trigger();
 }

@@ -52,14 +52,14 @@ public class Ball extends Entity implements Renderable, Collidable {
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
 		//Set the final velocity of the object
-		velocity = new PVector(newVelocity);
+		//velocity = new PVector(newVelocity);
 		
 		//System.out.println("x: " + this.rectBounds().getPosition() + " c1: " + this.rectBounds().getCorner(0));
 		//System.out.println("Collision with " + object);
 	}
 	
 	@Override
-	public Poly trigger() {
-		return polyBounds();
+	public Rect trigger() {
+		return rectBounds();
 	}
 }

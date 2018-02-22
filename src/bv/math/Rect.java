@@ -21,7 +21,7 @@ public class Rect implements Renderable {
 
 	private CVector position = new CVector();
 	private CVector size = new CVector();
-
+	
 	
 	/* CONSTRUCTORS */
 
@@ -81,7 +81,6 @@ public class Rect implements Renderable {
 		return new Rectangle((int) position.values[0], (int) position.values[1], (int) size.values[0], (int) size.values[1]);
 	}
 	
-
 	
 	/* CALCULATORS */
 
@@ -109,17 +108,17 @@ public class Rect implements Renderable {
 
 	// if NOT inside NO dimensions, IS inside ALL -> TRUE
 	public boolean intersects(Rect rect) {
-//			 if (this.contains(rect.getCorner(0))) return true;
-//		else if (this.contains(rect.getCorner(1))) return true;
-//		else if (this.contains(rect.getCorner(2))) return true;
-//		else if (this.contains(rect.getCorner(3))) return true;
-//		else if (rect.contains(this.getCorner(0))) return true;
-//		else if (rect.contains(this.getCorner(1))) return true;
-//		else if (rect.contains(this.getCorner(2))) return true;
-//		else if (rect.contains(this.getCorner(3))) return true;
-//		else 									   return false;
+			 if (this.contains(rect.getCorner(0))) return true;
+		else if (this.contains(rect.getCorner(1))) return true;
+		else if (this.contains(rect.getCorner(2))) return true;
+		else if (this.contains(rect.getCorner(3))) return true;
+		else if (rect.contains(this.getCorner(0))) return true;
+		else if (rect.contains(this.getCorner(1))) return true;
+		else if (rect.contains(this.getCorner(2))) return true;
+		else if (rect.contains(this.getCorner(3))) return true;
+		else 									   return rect.contains(this.position);
 		
-		return this.toRectangle().intersects(rect.toRectangle()); // don't do this at home; ACTUALLY CALCULATE LATER
+		//return this.toRectangle().intersects(rect.toRectangle()); // don't do this at home; ACTUALLY CALCULATE LATER
 	}
 
 	public boolean encapsulates(Rect rect) {

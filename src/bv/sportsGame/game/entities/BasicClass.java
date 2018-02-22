@@ -92,6 +92,8 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 		
 		shotCountDown--;
+		
+		System.out.println(sprite.get(0).getPosition());
 	}
 	
 	@Override
@@ -116,7 +118,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	}
 	
 	@Override
-	public Poly trigger() {
-		return polyBounds();
+	public Rect trigger() {
+		return rectBounds();
 	}
 }

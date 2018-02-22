@@ -9,8 +9,10 @@ import java.awt.Color;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
+import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
 import bv.math.CVector;
+import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
 
@@ -18,7 +20,7 @@ import bv.math.Rect;
  * @author	Brennan Colberg
  * @since	Feb 18, 2018
  */
-public class PointHighlighter extends Entity implements Renderable {
+public class PointHighlighter extends Entity implements Renderable, Collidable {
 	
 	public void tick() {
 		this.setPosition(Input.getMouseAdjustedPosition());
@@ -39,6 +41,18 @@ public class PointHighlighter extends Entity implements Renderable {
 	public Poly polyBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void onCollision(PVector newVelocity, Entity object) {
+		// TODO Auto-generated method stub
+		//System.out.println("Collided with " + object);
+	}
+
+	@Override
+	public Rect trigger() {
+		// TODO Auto-generated method stub
+		return rectBounds();
 	}
 	
 }
