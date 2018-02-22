@@ -6,8 +6,6 @@ import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
-import bv.gameFramework.spritesCore.Sprite;
-import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
 import bv.math.PVector;
 import bv.math.Poly;
@@ -17,7 +15,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	private static double dragConst = -0.0001d;
 	private int size;
-	private Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
+	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
 	
 	public Ball() {
 		mass = 25;
