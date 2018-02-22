@@ -1,5 +1,9 @@
 package bv.gameFramework.physics;
 
+import bv.math.PVector;
+import bv.math.Poly;
+import bv.math.Rect;
+
 /** 
  * This will be used with game objects (projectiles, players, balls) and handled by
  * the scene in order to handle collisions.
@@ -9,5 +13,6 @@ package bv.gameFramework.physics;
  */
 
 public interface Collidable {
-	public abstract void onCollision(Entity object);
+	public abstract void onCollision(PVector newVelocity, Entity object);
+	public abstract Poly trigger();
 }

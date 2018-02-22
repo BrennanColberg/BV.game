@@ -5,8 +5,11 @@
 package bv.gameFramework.physics;
 
 import bv.gameFramework.state.Tickable;
+import bv.math.BMath;
 import bv.math.CVector;
 import bv.math.PVector;
+import bv.math.Poly;
+import bv.math.Rect;
 
 /** 
  * @author	Brennan Colberg
@@ -17,7 +20,9 @@ public class Entity implements Tickable, Physics {
 	public CVector position = new CVector(0,0);
 	public PVector velocity = new PVector(0,0);
 	protected PVector acceleration = new PVector(0,0);
+	protected boolean ifMoveable = false; //This is used in collisions in case something collides with an obstacle, its rebound will be calculated accordingly
 	public double mass = 10;
+	
 	public Entity() {}
 	public Entity(CVector newPosition) {
 		setPosition(newPosition);
@@ -61,6 +66,7 @@ public class Entity implements Tickable, Physics {
 		PVector directionalVector = location.minus(this.position).toPVector();
 		this.acceleration.setAngle(directionalVector.getAngle());
 	}
+	
 	/* METHODS */
 	
 	public void updatePhysics() {
@@ -73,5 +79,4 @@ public class Entity implements Tickable, Physics {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

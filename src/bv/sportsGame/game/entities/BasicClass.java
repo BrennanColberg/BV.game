@@ -12,6 +12,7 @@ import bv.gameFramework.physics.Entity;
 import bv.gameFramework.spritesCore.Sprite;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
+import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
 import bv.sportsGame.game.entities.projectiles.Missile;
@@ -38,6 +39,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected double maxVelocity;
 	protected double accelAmount;
 	protected boolean isPlayer;
+	
 	public BasicClass() {
 		sprite = SpriteIO.get("podracer").scale(50);
 		health = 125;
@@ -48,6 +50,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
 		position = new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0),0);
+		ifMoveable = true;
 	}
 	public BasicClass(boolean isPlayer){
 		this();
@@ -105,9 +108,15 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	public Poly polyBounds() {
 		return sprite.get(0).polyBounds();
 	}
+	
 	@Override
-	public void onCollision(Entity object) {
-		//This'll get interesting as well
+	public void onCollision(PVector newVelocity, Entity object) {
+		// TODO Auto-generated method stub
+		
 	}
-
+	
+	@Override
+	public Poly trigger() {
+		return polyBounds();
+	}
 }

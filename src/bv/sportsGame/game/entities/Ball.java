@@ -9,6 +9,7 @@ import bv.gameFramework.physics.Entity;
 import bv.gameFramework.spritesCore.Sprite;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
+import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
 
@@ -40,17 +41,25 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	@Override
 	public Rect rectBounds() {
-		return new Rect(this.position, new CVector(size,size));
+		return new Rect(this.position, new CVector(size, size));
 	}
 
 	@Override
 	public Poly polyBounds() {
-		//return sprite.get(0).polyBounds();
-		return null;
+		return this.rectBounds().polyBounds();
 	}
 
 	@Override
-	public void onCollision(Entity object) {
-		//Stuff will happen. This'll get interesting
+	public void onCollision(PVector newVelocity, Entity object) {
+		//Set the final velocity of the object
+		velocity = new PVector(newVelocity);
+		
+		//System.out.println("x: " + this.rectBounds().getPosition() + " c1: " + this.rectBounds().getCorner(0));
+		//System.out.println("Collision with " + object);
+	}
+	
+	@Override
+	public Poly trigger() {
+		return polyBounds();
 	}
 }

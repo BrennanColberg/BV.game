@@ -34,7 +34,6 @@ public class GameStateManager {
 	}
 	
 	public void tick() {
-		
 		if (currentState != game.peek())
 			loadGameState(game.peek());
 		

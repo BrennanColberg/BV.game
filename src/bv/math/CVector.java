@@ -74,6 +74,10 @@ public class CVector {
 		result.scale(in);
 		return result;
 	}
+	public CVector dot(CVector in) {
+		CVector result = new CVector(this.values[0] * in.values[0], this.values[1] * in.values[1]);
+		return result;
+	}
 	
 	// PVector operations
 	
