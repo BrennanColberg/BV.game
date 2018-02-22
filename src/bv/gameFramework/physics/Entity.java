@@ -5,11 +5,8 @@
 package bv.gameFramework.physics;
 
 import bv.gameFramework.state.Tickable;
-import bv.math.BMath;
 import bv.math.CVector;
 import bv.math.PVector;
-import bv.math.Poly;
-import bv.math.Rect;
 
 /** 
  * @author	Brennan Colberg
