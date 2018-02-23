@@ -19,6 +19,7 @@ public class Poly implements Renderable {
 	/* VARIABLES */
 	
 	private ArrayList<PVector> points = new ArrayList<PVector>();
+	private CVector worldPosition = new CVector(0, 0);
 	private CVector position;
 	
 	
@@ -78,6 +79,12 @@ public class Poly implements Renderable {
 	public void setPosition(CVector newPosition) {
 		this.position = newPosition;
 	}
+	public CVector getWorldPos() {
+		return worldPosition;
+	}
+	public void setWorldPos(CVector newWorldPos) {
+		this.worldPosition = newWorldPos;
+	}
 	
 	public ArrayList<PVector> getPoints() {
 		return points;
@@ -87,6 +94,11 @@ public class Poly implements Renderable {
 	}
 	public PVector getPoint(int index) {
 		return points.get(index);
+	}
+	public PVector getAdjustedPoint(int index) {
+		PVector point = new PVector(points.get(index));
+		point.add(worldPosition);
+		return point;
 	}
 	public void setPoint(int index, PVector newPoint) {
 		points.set(index, newPoint);
@@ -124,7 +136,15 @@ public class Poly implements Renderable {
 		}
 		return result;
 	}
-	
+	public Polygon toAdjustedPolygon() {
+		Polygon result = new Polygon();
+		for (int i = 0; i < points.size(); i++) {
+			CVector cartPoint = points.get(i).toCVector().plus(this.position);
+			cartPoint.add(worldPosition);
+			result.addPoint((int) cartPoint.getValue(0), (int) cartPoint.getValue(1)); 
+		}
+		return result;
+	}
 	
 	/* CALCULATORS */
 	
@@ -153,20 +173,20 @@ public class Poly implements Renderable {
 	}
 	
 	public boolean contains(Point value) {
-		return this.toPolygon().contains(value);
+		return this.toAdjustedPolygon().contains(value);
 	}
 	public boolean contains(CVector value) {
-		return this.toPolygon().contains(value.toPoint());
+		return this.toAdjustedPolygon().contains(value.toPoint());
 	}
 	
 	public boolean intersects(Poly poly) {
-		Polygon thisBounds = this.toPolygon();
+		Polygon thisBounds = this.toAdjustedPolygon();
 		for (int i = 0; i < poly.getPoints().size(); i++)
-			if (thisBounds.contains(poly.getPoint(i).toPoint()))
+			if (thisBounds.contains(poly.getAdjustedPoint(i).toPoint()))
 				return true;
-		Polygon polyBounds = poly.toPolygon();
+		Polygon polyBounds = poly.toAdjustedPolygon();
 		for (int i = 0; i < this.getPoints().size(); i++)
-			if (polyBounds.contains(this.getPoint(i).toPoint()))
+			if (polyBounds.contains(this.getAdjustedPoint(i).toPoint()))
 				return true;
 		return false;
 	}

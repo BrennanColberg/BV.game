@@ -20,7 +20,7 @@ import bv.math.Rect;
  * @author	Brennan Colberg
  * @since	Feb 18, 2018
  */
-public class PointHighlighter extends Entity implements Renderable, Collidable {
+public class PointHighlighter extends Entity implements Renderable {
 	
 	public void tick() {
 		this.setPosition(Input.getMouseAdjustedPosition());
@@ -41,18 +41,6 @@ public class PointHighlighter extends Entity implements Renderable, Collidable {
 	public Poly polyBounds() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void onCollision(PVector newVelocity, Entity object) {
-		// TODO Auto-generated method stub
-		//System.out.println("Collided with " + object);
-	}
-
-	@Override
-	public Rect trigger() {
-		// TODO Auto-generated method stub
-		return rectBounds();
 	}
 	
 }

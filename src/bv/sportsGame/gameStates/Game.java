@@ -21,6 +21,7 @@ import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.PointHighlighter;
 import bv.sportsGame.game.entities.SpeedsterClass;
+import bv.sportsGame.game.entities.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
@@ -35,7 +36,6 @@ public class Game extends GameState {
 	
 	public void init() {
 		collidableObj = new ArrayList<Collidable>();
-		//player = new Player();
 		player = new BasicClass(true);
 		//player = new TankClass(true);
 		//player = new SpeedsterClass(true); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
@@ -43,18 +43,14 @@ public class Game extends GameState {
 		
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
-		objects.add(ball);
 		objects.add(player);
-		
-		//collidableObj.add((Collidable)ball);
-		//collidableObj.add((Collidable)player);
+		objects.add(ball);
 		
 		for (Object o : objects) {
 			if (o instanceof Collidable) {
 				collidableObj.add((Collidable)o);
 			}
 		}
-		//System.out.println(collidableObj);
 		
 		this.pixelsPerUnit = 0.25;
 	}
@@ -97,7 +93,7 @@ public class Game extends GameState {
 	private void checkCollisions() {
 		//TODO: Collisions between the ball and the player are not being calculated correctly
 		for (int i = 0; i < collidableObj.size(); i++) {
-			for (int j = 0; j < collidableObj.size(); j++) {
+			for (int j = i; j < collidableObj.size(); j++) {
 				if (collidableObj.get(i).trigger().intersects(collidableObj.get(j).trigger()) && i != j) {
 					PVector[] velocities = collisionVelocity((Entity)collidableObj.get(i), (Entity)collidableObj.get(j));
 					collidableObj.get(i).onCollision(velocities[0], (Entity)collidableObj.get(j));
@@ -108,7 +104,7 @@ public class Game extends GameState {
 	}
 	
 	private PVector[] collisionVelocity(Entity object1, Entity object2) {
-		//This is the actual math for calculating velocities of objects after a collision. There are quite a few things wrong with this
+/*		//This is the actual math for calculating velocities of objects after a collision. There are quite a few things wrong with this
 		//One 'problem' being that the collision angle is calculated as if the two objects were circles
 		//In practice this may cause problems or just look weird
 		double m1 = object1.mass;
@@ -118,7 +114,7 @@ public class Game extends GameState {
 		double theta1 = object1.velocity.getAngle();
 		double theta2 = object2.velocity.getAngle();
 		double phi = object2.velocity.minus(object1.velocity).getAngle();
-				
+
 		//Rotate the cartesian plane so that it is a 1D collision problem
 		double v1x = v1 * Math.cos(theta1 - phi);
 		double v1y = v1 * Math.sin(theta1 - phi);
@@ -136,7 +132,9 @@ public class Game extends GameState {
 		double u2y = v2y;
 		CVector u2 = new CVector(u2x, u2y);
 		
-		return new PVector[] {u1.toPVector(), u2.toPVector()};
+		return new PVector[] {u1.toPVector(), u2.toPVector()};  //This doesn't quite work
+*/
+		return new PVector[] {new PVector(0, 0), new PVector(0, 0)};
 	}
 	
 	public void load() {

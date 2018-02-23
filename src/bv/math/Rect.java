@@ -62,7 +62,7 @@ public class Rect implements Renderable {
 			case 0: return getRawCorner(1, 1);
 			case 1: return getRawCorner(-1, 1);
 			case 2: return getRawCorner(-1, -1);
-			case 3:return getRawCorner(1, -1);
+			case 3: return getRawCorner(1, -1);
 		}
 		return null;
 	}

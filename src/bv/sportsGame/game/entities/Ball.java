@@ -13,13 +13,13 @@ import bv.math.Rect;
 
 public class Ball extends Entity implements Renderable, Collidable {
 
-	private static double dragConst = -0.0001d;
-	private int size;
+	private static double dragConst = -0.00001d;
+	public int size;
 	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
 	
 	public Ball() {
 		mass = 25;
-		size = 35;
+		size = 50;
 	}
 	
 	public double drag() {
@@ -27,7 +27,8 @@ public class Ball extends Entity implements Renderable, Collidable {
 	}
 	
 	public void updatePhysics() {
-		//acceleration.addMagnitude(drag());
+		polyBounds().setWorldPos(position);
+		acceleration.addMagnitude(drag());
 		acceleration.setAngle(velocity.getAngle());
 		super.updatePhysics();
 	}
@@ -39,7 +40,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	@Override
 	public Rect rectBounds() {
-		return new Rect(this.position, new CVector(size, size));
+		return new Rect(this.position, new CVector(size / 2, size / 2));
 	}
 
 	@Override
@@ -49,15 +50,12 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
-		//Set the final velocity of the object
 		//velocity = new PVector(newVelocity);
-		
-		//System.out.println("x: " + this.rectBounds().getPosition() + " c1: " + this.rectBounds().getCorner(0));
-		//System.out.println("Collision with " + object);
+		System.out.println("Collision with " + object); //To test that collisions actually happen between the ball and the player
 	}
 	
 	@Override
-	public Rect trigger() {
-		return rectBounds();
+	public Poly trigger() {
+		return polyBounds();
 	}
 }
