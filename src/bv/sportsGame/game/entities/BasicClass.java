@@ -67,7 +67,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
-		polyBounds().setWorldPos(position);
+		polyBounds().setPosition(position);
 		acceleration.setAngle(velocity.getAngle());
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();

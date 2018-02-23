@@ -27,7 +27,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	}
 	
 	public void updatePhysics() {
-		polyBounds().setWorldPos(position);
+		polyBounds().setPosition(position);
 		acceleration.addMagnitude(drag());
 		acceleration.setAngle(velocity.getAngle());
 		super.updatePhysics();

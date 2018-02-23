@@ -10,12 +10,10 @@ import java.awt.event.KeyEvent;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
-import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
 import bv.gameFramework.spritesCore.Sprite;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
-import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
 

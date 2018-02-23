@@ -19,8 +19,7 @@ public class Poly implements Renderable {
 	/* VARIABLES */
 	
 	private ArrayList<PVector> points = new ArrayList<PVector>();
-	private CVector worldPosition = new CVector(0, 0);
-	private CVector position;
+	private CVector position = new CVector(0, 0);
 	
 	
 	/* CONSTRUCTORS */
@@ -79,12 +78,6 @@ public class Poly implements Renderable {
 	public void setPosition(CVector newPosition) {
 		this.position = newPosition;
 	}
-	public CVector getWorldPos() {
-		return worldPosition;
-	}
-	public void setWorldPos(CVector newWorldPos) {
-		this.worldPosition = newWorldPos;
-	}
 	
 	public ArrayList<PVector> getPoints() {
 		return points;
@@ -97,7 +90,7 @@ public class Poly implements Renderable {
 	}
 	public PVector getAdjustedPoint(int index) {
 		PVector point = new PVector(points.get(index));
-		point.add(worldPosition);
+		point.add(position);
 		return point;
 	}
 	public void setPoint(int index, PVector newPoint) {
@@ -140,7 +133,7 @@ public class Poly implements Renderable {
 		Polygon result = new Polygon();
 		for (int i = 0; i < points.size(); i++) {
 			CVector cartPoint = points.get(i).toCVector().plus(this.position);
-			cartPoint.add(worldPosition);
+			cartPoint.add(position);
 			result.addPoint((int) cartPoint.getValue(0), (int) cartPoint.getValue(1)); 
 		}
 		return result;

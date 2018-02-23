@@ -14,14 +14,10 @@ import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
-import bv.math.BMath;
-import bv.math.CVector;
 import bv.math.PVector;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.PointHighlighter;
-import bv.sportsGame.game.entities.SpeedsterClass;
-import bv.sportsGame.game.entities.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
