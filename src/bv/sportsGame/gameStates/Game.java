@@ -14,6 +14,7 @@ import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
+import bv.math.CVector;
 import bv.math.PVector;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.BasicClass;

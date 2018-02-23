@@ -29,10 +29,6 @@ public class Ball extends Entity implements Renderable, Collidable {
 	}
 	
 	public void updatePhysics() {
-<<<<<<< HEAD
-=======
-		polyBounds().setPosition(position);
->>>>>>> branch 'master' of https://github.com/BrennanColberg/BV.game.git
 		acceleration.addMagnitude(drag());
 		acceleration.setAngle(velocity.getAngle());
 		velocity.clamp(-maxVelocity, maxVelocity);
@@ -62,7 +58,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	@Override
 	public Poly trigger() {
 		Poly poly = polyBounds();
-		poly.setWorldPos(position);
+		poly.setPosition(position);
 		return poly;
 	}
 }
