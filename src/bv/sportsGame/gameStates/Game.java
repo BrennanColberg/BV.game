@@ -91,10 +91,12 @@ public class Game extends GameState {
 		//TODO: Collisions between the ball and the player are not being calculated correctly
 		for (int i = 0; i < collidableObj.size(); i++) {
 			for (int j = i; j < collidableObj.size(); j++) {
-				if (i != j && collidableObj.get(i).trigger().intersects(collidableObj.get(j).trigger())) {
-					PVector[] velocities = collisionVelocity((Entity)collidableObj.get(i), (Entity)collidableObj.get(j));
-					collidableObj.get(i).onCollision(velocities[0], (Entity)collidableObj.get(j));
-					collidableObj.get(j).onCollision(velocities[1], (Entity)collidableObj.get(i));
+				if (i != j) { 
+					if (collidableObj.get(i).trigger().intersects(collidableObj.get(j).trigger())) {
+						PVector[] velocities = collisionVelocity((Entity)collidableObj.get(i), (Entity)collidableObj.get(j));
+						collidableObj.get(i).onCollision(velocities[0], (Entity)collidableObj.get(j));
+						collidableObj.get(j).onCollision(velocities[1], (Entity)collidableObj.get(i));
+					}
 				}
 			}
 		}

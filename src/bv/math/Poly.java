@@ -133,7 +133,6 @@ public class Poly implements Renderable {
 		Polygon result = new Polygon();
 		for (int i = 0; i < points.size(); i++) {
 			CVector cartPoint = points.get(i).toCVector().plus(this.position);
-			cartPoint.add(position);
 			result.addPoint((int) cartPoint.getValue(0), (int) cartPoint.getValue(1)); 
 		}
 		return result;
