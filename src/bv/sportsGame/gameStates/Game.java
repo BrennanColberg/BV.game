@@ -94,7 +94,7 @@ public class Game extends GameState {
 		//TODO: Collisions between the ball and the player are not being calculated correctly
 		for (int i = 0; i < collidableObj.size(); i++) {
 			for (int j = i; j < collidableObj.size(); j++) {
-				if (collidableObj.get(i).trigger().intersects(collidableObj.get(j).trigger()) && i != j) {
+				if (i != j && collidableObj.get(i).trigger().intersects(collidableObj.get(j).trigger())) {
 					PVector[] velocities = collisionVelocity((Entity)collidableObj.get(i), (Entity)collidableObj.get(j));
 					collidableObj.get(i).onCollision(velocities[0], (Entity)collidableObj.get(j));
 					collidableObj.get(j).onCollision(velocities[1], (Entity)collidableObj.get(i));
@@ -104,16 +104,18 @@ public class Game extends GameState {
 	}
 	
 	private PVector[] collisionVelocity(Entity object1, Entity object2) {
-/*		//This is the actual math for calculating velocities of objects after a collision. There are quite a few things wrong with this
+		//This is the actual math for calculating velocities of objects after a collision. There are quite a few things wrong with this
 		//One 'problem' being that the collision angle is calculated as if the two objects were circles
 		//In practice this may cause problems or just look weird
 		double m1 = object1.mass;
 		double m2 = object2.mass;
-		double v1 = BMath.hypot(object1.velocity.toCVector());
-		double v2 = BMath.hypot(object2.velocity.toCVector());
+		//double v1 = BMath.hypot(object1.velocity.toCVector());
+		//double v2 = BMath.hypot(object2.velocity.toCVector());
+		double v1 = object1.velocity.getMagnitude();
+		double v2 = object2.velocity.getMagnitude();
 		double theta1 = object1.velocity.getAngle();
 		double theta2 = object2.velocity.getAngle();
-		double phi = object2.velocity.minus(object1.velocity).getAngle();
+		double phi = object2.position.minus(object1.position).toPVector().getAngle();
 
 		//Rotate the cartesian plane so that it is a 1D collision problem
 		double v1x = v1 * Math.cos(theta1 - phi);
@@ -127,14 +129,16 @@ public class Game extends GameState {
 		double u1x = ((m1 - m2) * v1x + 2 * m2 * v2x) / (m1 + m2);
 		double u1y = v1y;
 		CVector u1 = new CVector(u1x, u1y);
+		PVector pu1 = u1.toPVector();
+		pu1.setAngle(pu1.getAngle() + phi);
 		
 		double u2x = ((m2 - m1) * v2x + 2 * m1 * v1x) / (m2 + m1);
 		double u2y = v2y;
 		CVector u2 = new CVector(u2x, u2y);
+		PVector pu2 = u2.toPVector();
+		pu2.setAngle(pu2.getAngle() + phi);
 		
-		return new PVector[] {u1.toPVector(), u2.toPVector()};  //This doesn't quite work
-*/
-		return new PVector[] {new PVector(0, 0), new PVector(0, 0)};
+		return new PVector[] {pu1, pu2};
 	}
 	
 	public void load() {

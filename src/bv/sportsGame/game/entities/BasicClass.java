@@ -67,7 +67,6 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
-		polyBounds().setWorldPos(position);
 		acceleration.setAngle(velocity.getAngle());
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();
@@ -112,11 +111,13 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
-		//velocity = new PVector(newVelocity);
+		velocity = new PVector(newVelocity);
 	}
 	
 	@Override
 	public Poly trigger() {
-		return polyBounds();
+		Poly poly = polyBounds();
+		poly.setWorldPos(position);
+		return poly;
 	}
 }

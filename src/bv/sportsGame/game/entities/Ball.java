@@ -13,13 +13,15 @@ import bv.math.Rect;
 
 public class Ball extends Entity implements Renderable, Collidable {
 
-	private static double dragConst = -0.00001d;
+	private static double dragConst = -0.001d;
 	public int size;
+	protected double maxVelocity;
 	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
 	
 	public Ball() {
-		mass = 25;
-		size = 50;
+		mass = 10;
+		size = 100;
+		maxVelocity = 10.0d;
 	}
 	
 	public double drag() {
@@ -27,9 +29,9 @@ public class Ball extends Entity implements Renderable, Collidable {
 	}
 	
 	public void updatePhysics() {
-		polyBounds().setWorldPos(position);
 		acceleration.addMagnitude(drag());
 		acceleration.setAngle(velocity.getAngle());
+		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();
 	}
 	
@@ -50,12 +52,13 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
-		//velocity = new PVector(newVelocity);
-		System.out.println("Collision with " + object); //To test that collisions actually happen between the ball and the player
+		velocity = new PVector(newVelocity);
 	}
 	
 	@Override
 	public Poly trigger() {
-		return polyBounds();
+		Poly poly = polyBounds();
+		poly.setWorldPos(position);
+		return poly;
 	}
 }
