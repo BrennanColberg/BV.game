@@ -13,7 +13,7 @@ import bv.math.Rect;
 
 public class Ball extends Entity implements Renderable, Collidable {
 
-	private static double dragConst = -0.001d;
+	private static double dragConst = -0.0007d;
 	public int size;
 	protected double maxVelocity;
 	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it

@@ -1,6 +1,7 @@
 package bv.sportsGame.game.entities;
 
 import bv.gameFramework.spritesCore.SpriteIO;
+import bv.math.CVector;
 
 /**
  * This is the Speedster class that inherits from the Basic class.
@@ -12,8 +13,9 @@ import bv.gameFramework.spritesCore.SpriteIO;
  */
 
 public class SpeedsterClass extends BasicClass {
-	public SpeedsterClass() {
-		sprite = SpriteIO.get("swarmV2").scale(50);
+	public SpeedsterClass(CVector pos) {
+		position = pos;
+		sprite = SpriteIO.get("swarmV2").scaleNew(50);
 		health = 75;
 		strength = 2;
 		shotSpeed = 5;
@@ -22,8 +24,8 @@ public class SpeedsterClass extends BasicClass {
 		maxVelocity = 7.5d;
 		accelAmount = 0.04d;
 	}
-	public SpeedsterClass(boolean isPlayer){
-		this();
+	public SpeedsterClass(CVector pos, boolean isPlayer){
+		this(pos);
 		this.isPlayer = isPlayer;
 	}
 }

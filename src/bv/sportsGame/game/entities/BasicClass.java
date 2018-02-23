@@ -41,7 +41,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected boolean isPlayer;
 	
 	public BasicClass() {
-		sprite = SpriteIO.get("podracer").scale(50);
+		sprite = SpriteIO.get("podracer").scaleNew(50);
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -49,11 +49,22 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
-		position = new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0),0);
 		ifMoveable = true;
 	}
-	public BasicClass(boolean isPlayer){
-		this();
+	public BasicClass(CVector pos) {
+		position = pos;
+		sprite = SpriteIO.get("podracer").scaleNew(50);
+		health = 125;
+		strength = 7;
+		shotSpeed = 50;
+		shotCountDown = 0;
+		mass = 100;
+		maxVelocity = 5.0d;
+		accelAmount = 0.05d;
+		ifMoveable = true;
+	}
+	public BasicClass(CVector pos, boolean isPlayer){
+		this(pos);
 		this.isPlayer = isPlayer;
 	}
 	

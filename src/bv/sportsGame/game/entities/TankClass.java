@@ -1,6 +1,7 @@
 package bv.sportsGame.game.entities;
 
 import bv.gameFramework.spritesCore.SpriteIO;
+import bv.math.CVector;
 
 /**
  * This is the Tank class that inherits from the Basic class.
@@ -12,8 +13,9 @@ import bv.gameFramework.spritesCore.SpriteIO;
  */
 
 public class TankClass extends BasicClass {
-	public TankClass() {
-		sprite = SpriteIO.get("dualGunner").scale(75);
+	public TankClass(CVector pos) {
+		position = pos;
+		sprite = SpriteIO.get("dualGunner").scaleNew(75);
 		health = 200;
 		strength = 15;
 		shotSpeed = 250;
@@ -22,8 +24,8 @@ public class TankClass extends BasicClass {
 		maxVelocity = 2.25d;
 		accelAmount = 0.008d;
 	}
-	public TankClass(boolean isPlayer){
-		this();
+	public TankClass(CVector pos, boolean isPlayer){
+		this(pos);
 		this.isPlayer = isPlayer;
 	}
 }

@@ -19,6 +19,8 @@ import bv.math.PVector;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.PointHighlighter;
+//import bv.sportsGame.game.entities.SpeedsterClass;
+import bv.sportsGame.game.entities.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
@@ -29,18 +31,21 @@ public class Game extends GameState {
 
 	ArrayList<Collidable> collidableObj;
 	BasicClass player;
+	BasicClass dummy;
 	Ball ball;
 	
 	public void init() {
 		collidableObj = new ArrayList<Collidable>();
-		player = new BasicClass(true);
+		player = new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), true);
 		//player = new TankClass(true);
 		//player = new SpeedsterClass(true); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
+		dummy = new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), false);
 		ball = new Ball();
 		
 		objects.add(new FieldObject());
 		objects.add(new PointHighlighter());
 		objects.add(player);
+		objects.add(dummy);
 		objects.add(ball);
 		
 		for (Object o : objects) {
