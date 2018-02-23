@@ -13,7 +13,7 @@ import bv.math.CVector;
  */
 
 public class TankClass extends BasicClass {
-	public TankClass(CVector pos) {
+	public TankClass(CVector pos, int team) {
 		position = pos;
 		sprite = SpriteIO.get("dualGunner").scaleNew(75);
 		health = 200;
@@ -23,9 +23,12 @@ public class TankClass extends BasicClass {
 		mass = 150;
 		maxVelocity = 2.25d;
 		accelAmount = 0.008d;
+		ifMoveable = true;
+		teamIndex = team;
+		teamColor = getTeamColor(teamIndex);
 	}
-	public TankClass(CVector pos, boolean isPlayer){
-		this(pos);
+	public TankClass(CVector pos, int team, boolean isPlayer){
+		this(pos, team);
 		this.isPlayer = isPlayer;
 	}
 }

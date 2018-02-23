@@ -16,6 +16,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	private static double dragConst = -0.0007d;
 	public int size;
 	protected double maxVelocity;
+	protected int teamLastHit;
 	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
 	
 	public Ball() {
@@ -35,6 +36,13 @@ public class Ball extends Entity implements Renderable, Collidable {
 		super.updatePhysics();
 	}
 	
+	//This is to be used when the ball was scored by a team and needs to be reset
+	public void reset() {
+		position.clear();
+		velocity.clear();
+		acceleration.clear();
+	}
+	
 	@Override
 	public void render(Renderer r) {
 		r.fill(this.rectBounds(), Color.white);
@@ -52,7 +60,17 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
-		velocity = new PVector(newVelocity);
+		if (object instanceof BasicClass) {
+			BasicClass player = (BasicClass)object; //For some reason, it wouldn't work when I tried to cast the object and call its .getTeamIndex method in one line
+			teamLastHit = player.getTeamIndex();
+		}
+		
+		if (object instanceof Goal) {
+			reset();
+		}
+		else {
+			velocity = new PVector(newVelocity);
+		}
 	}
 	
 	@Override

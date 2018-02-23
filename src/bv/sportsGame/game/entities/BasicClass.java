@@ -23,12 +23,12 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  * 
  * @author Jonah Austin
  * @since Tuesday February 20, 2018
- * @param none
  * 
  */
 
 public class BasicClass extends Entity implements Renderable, Collidable {
 
+	protected Color teamColor;
 	protected static double dragConst = -0.0001d;
 	protected static double recoilConst = -0.1d;
 	protected Sprite sprite;
@@ -36,6 +36,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected int strength;
 	protected int shotSpeed; //a bit counter-intuitive; high value equals slower shot speed
 	protected int shotCountDown;
+	public int teamIndex;
 	protected double maxVelocity;
 	protected double accelAmount;
 	protected boolean isPlayer;
@@ -50,8 +51,10 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
 		ifMoveable = true;
+		teamIndex = -1;
+		teamColor = getTeamColor(teamIndex);
 	}
-	public BasicClass(CVector pos) {
+	public BasicClass(CVector pos, int team) {
 		position = pos;
 		sprite = SpriteIO.get("podracer").scaleNew(50);
 		health = 125;
@@ -62,10 +65,16 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
 		ifMoveable = true;
+		teamIndex = team;
+		teamColor = getTeamColor(teamIndex);
 	}
-	public BasicClass(CVector pos, boolean isPlayer){
-		this(pos);
+	public BasicClass(CVector pos, int team, boolean isPlayer){
+		this(pos, team);
 		this.isPlayer = isPlayer;
+	}
+	
+	public int getTeamIndex() {
+		return teamIndex;
 	}
 	
 	public double drag() {
@@ -107,7 +116,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public void render(Renderer r) {
-		sprite.render(r, position, this.velocity.getAngle(), Color.black);
+		sprite.render(r, position, this.velocity.getAngle(), teamColor);
 	}
 
 	@Override

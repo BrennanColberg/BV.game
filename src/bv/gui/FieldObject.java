@@ -15,6 +15,7 @@ public class FieldObject implements Renderable{
 	//This sprite is the box around the goal.
 	Sprite goalArea = SpriteIO.get("square").scale(300);
 	Sprite center = SpriteIO.get("center").scale(50);
+	
 	@Override
 	public void render(Renderer r) {
 		// renders the box around the goal, and the center
