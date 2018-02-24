@@ -16,7 +16,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	private static double dragConst = -0.0007d;
 	public int size;
 	protected double maxVelocity;
-	protected int teamLastHit;
+	protected Team teamLastHit;
 	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
 	
 	public Ball() {
@@ -62,7 +62,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof BasicClass) {
 			BasicClass player = (BasicClass)object; //For some reason, it wouldn't work when I tried to cast the object and call its .getTeamIndex method in one line
-			teamLastHit = player.getTeamIndex();
+			teamLastHit = player.getTeam();
 		}
 		
 		if (object instanceof Goal) {

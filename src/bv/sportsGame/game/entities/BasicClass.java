@@ -1,6 +1,5 @@
 package bv.sportsGame.game.entities;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import bv.gameFramework.core.Core;
@@ -28,7 +27,6 @@ import bv.sportsGame.game.entities.projectiles.Missile;
 
 public class BasicClass extends Entity implements Renderable, Collidable {
 
-	protected Color teamColor;
 	protected static double dragConst = -0.0001d;
 	protected static double recoilConst = -0.1d;
 	protected Sprite sprite;
@@ -36,7 +34,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected int strength;
 	protected int shotSpeed; //a bit counter-intuitive; high value equals slower shot speed
 	protected int shotCountDown;
-	public int teamIndex;
+	public Team team;
 	protected double maxVelocity;
 	protected double accelAmount;
 	protected boolean isPlayer;
@@ -50,8 +48,6 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
-		teamIndex = -1;
-		teamColor = getTeamColor(teamIndex);
 	}
 	public BasicClass(CVector pos, int team) {
 		position = pos;
@@ -63,16 +59,14 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
-		teamIndex = team;
-		teamColor = getTeamColor(teamIndex);
 	}
 	public BasicClass(CVector pos, int team, boolean isPlayer){
 		this(pos, team);
 		this.isPlayer = isPlayer;
 	}
 	
-	public int getTeamIndex() {
-		return teamIndex;
+	public Team getTeam() {
+		return team;
 	}
 	
 	public double drag() {
@@ -114,7 +108,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public void render(Renderer r) {
-		sprite.render(r, position, this.velocity.getAngle(), teamColor);
+		sprite.render(r, position, this.velocity.getAngle(), team.color);
 	}
 
 	@Override
