@@ -6,7 +6,6 @@ package bv.sportsGame.gameStates;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
@@ -19,7 +18,6 @@ import bv.math.PVector;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.Goal;
-import bv.sportsGame.game.entities.PointHighlighter;
 //import bv.sportsGame.game.entities.SpeedsterClass;
 import bv.sportsGame.game.entities.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
@@ -30,40 +28,23 @@ import bv.sportsGame.game.entities.projectiles.Missile;
  */
 public class Game extends GameState {
 
-	ArrayList<Collidable> collidableObj;
-	Goal goal1;
-	Goal goal2;
+	Goal goal1, goal2;
 	BasicClass player;
 	BasicClass dummy;
 	Ball ball;
 	
 	public void init() {
-		collidableObj = new ArrayList<Collidable>();
-		
-		goal1 = new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), 0);
-		goal2 = new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), 1);
-		player = new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), 0, true);
-		//player = new TankClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), 0, true);
-		//player = new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), 0, true); //I forgot that this works but bc Speedster inherits from BasicClass (which is the type that this variable was defined as being) this actually works. This is mostly for me bc I had forgotten so leave this in just in case I forget. Sorry. I'll delete this later
-		dummy = new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), 1, false);
-		ball = new Ball();
 		
 		objects.add(new FieldObject());
 		
 		//This can be implemented in a better way later, I just wanted to get the functionality down
-		objects.add(goal1);
-		objects.add(goal2);
+		objects.add(goal1 	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), 0));
+		objects.add(goal2 	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), 1));
+		objects.add(player 	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), 0, true));
+		objects.add(dummy 	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), 1, false));
+		objects.add(ball 	= new Ball());
 		
-		objects.add(new PointHighlighter());
-		objects.add(player);
-		objects.add(dummy);
-		objects.add(ball);
-		
-		for (Object o : objects) {
-			if (o instanceof Collidable) {
-				collidableObj.add((Collidable)o);
-			}
-		}
+		// objects.add(new PointHighlighter()); // only used for debug
 		
 		this.pixelsPerUnit = 0.25;
 	}
@@ -105,13 +86,15 @@ public class Game extends GameState {
 	
 	private void checkCollisions() {
 		//TODO: Collisions between the ball and the player are not being calculated correctly
-		for (int i = 0; i < collidableObj.size(); i++) {
-			for (int j = i; j < collidableObj.size(); j++) {
-				if (i != j) { 
-					if (collidableObj.get(i).trigger().intersects(collidableObj.get(j).trigger())) {
-						PVector[] velocities = collisionVelocity((Entity)collidableObj.get(i), (Entity)collidableObj.get(j));
-						collidableObj.get(i).onCollision(velocities[0], (Entity)collidableObj.get(j));
-						collidableObj.get(j).onCollision(velocities[1], (Entity)collidableObj.get(i));
+		for (int i = 0; i < objects.size(); i++) if (objects.get(i) instanceof Collidable) {
+			Collidable objectI = (Collidable) objects.get(i);
+			for (int j = i; j < objects.size(); j++) if (objects.get(j) instanceof Collidable) {
+				Collidable objectJ = (Collidable) objects.get(j);
+				if (objectI != objectJ) { 
+					if (objectI.trigger().intersects(objectJ.trigger())) {
+						PVector[] velocities = collisionVelocity((Entity)objectI, (Entity)objectJ);
+						objectI.onCollision(velocities[0], (Entity)objectJ);
+						objectJ.onCollision(velocities[1], (Entity)objectI);
 					}
 				}
 			}
