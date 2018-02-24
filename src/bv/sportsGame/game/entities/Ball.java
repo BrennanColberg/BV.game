@@ -10,6 +10,8 @@ import bv.math.CVector;
 import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
+import bv.sportsGame.game.entities.classes.BasicClass;
+import bv.sportsGame.game.entities.classes.Team;
 
 public class Ball extends Entity implements Renderable, Collidable {
 

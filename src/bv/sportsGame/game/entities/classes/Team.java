@@ -1,4 +1,4 @@
-package bv.sportsGame.game.entities;
+package bv.sportsGame.game.entities.classes;
 
 import java.awt.Color;
 

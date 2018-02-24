@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Feb 18, 2018
  */
-package bv.sportsGame.game.entities;
+package bv.sportsGame.game.entities.debug;
 
 import java.awt.Color;
 

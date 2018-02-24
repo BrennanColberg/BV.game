@@ -16,10 +16,9 @@ import bv.gui.FieldObject;
 import bv.math.CVector;
 import bv.math.PVector;
 import bv.sportsGame.game.entities.Ball;
-import bv.sportsGame.game.entities.BasicClass;
 import bv.sportsGame.game.entities.Goal;
-//import bv.sportsGame.game.entities.SpeedsterClass;
-import bv.sportsGame.game.entities.TankClass;
+import bv.sportsGame.game.entities.classes.BasicClass;
+import bv.sportsGame.game.entities.classes.TankClass;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
