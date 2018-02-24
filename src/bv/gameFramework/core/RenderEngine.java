@@ -76,7 +76,7 @@ public class RenderEngine extends Thread {
 		
 		renderer.setGraphics(bs.getDrawGraphics());
 		renderer.updateBackground();
-		Core.gameStateManager.currentState.render(renderer);
+		Core.gameStateManager.render(renderer);
 
 		renderer.getGraphics().dispose();
 		bs.show();

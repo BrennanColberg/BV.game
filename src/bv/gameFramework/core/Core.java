@@ -36,7 +36,7 @@ public class Core {
 	}
 	
 	public static GameState state() {
-		return gameStateManager.currentState;
+		return GameStateManager.currentState;
 	}
 	
 }

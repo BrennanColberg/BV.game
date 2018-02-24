@@ -6,44 +6,59 @@ package bv.gameFramework.core;
 
 import java.util.Stack;
 
+import bv.gameFramework.graphics.Renderable;
+import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.state.GameState;
-import bv.sportsGame.gameStates.Game;
+import bv.gameFramework.state.Tickable;
+import bv.math.Poly;
+import bv.math.Rect;
+import bv.sportsGame.gameStates.Menu;
 
 /** 
  * @author	Brennan Colberg
  * @since	Dec 7, 2017
  */
-public class GameStateManager {
+public class GameStateManager implements Tickable, Renderable {
 	
 	/* VARIABLES */
 	
-	public static final GameState STARTING_GAME_STATE = new Game();
+	public static final GameState STARTING_GAME_STATE = new Menu();
 	
-	public Stack<GameState> game;
-	public GameState currentState;
+	// for some reason making these non-static screws stuff up, no idea ... don't touch it
+	// probably has to do with multithreaded approach of tick and render
+	private static Stack<GameState> stateStack;
+	public static GameState currentState;
 	
 	public GameStateManager() {
-		game = new Stack<GameState>();
+		stateStack = new Stack<GameState>();
 		loadGameState(STARTING_GAME_STATE);
 	}
 	
 	public void loadGameState(GameState target) {
-		if (!game.contains(target)) game.push(target);
+		if (!stateStack.contains(target)) stateStack.push(target);
 		currentState = target;
 		target.load();
 	}
 	
+	public GameState gameStateLast() {
+		return stateStack.elementAt(stateStack.size()-2);
+	}
+
+	
 	public void tick() {
-		if (currentState != game.peek())
-			loadGameState(game.peek());
+		if (currentState != stateStack.peek())
+			loadGameState(stateStack.peek());
 		
 		Input.tick();
 		currentState.tick();
 		currentState.updatePhysics();
 	}
 	
-	public GameState gameStateLast() {
-		return game.elementAt(game.size()-2);
+	public void render(Renderer r) {
+		currentState.render(r);
 	}
+
+	public Rect rectBounds() { return null; }
+	public Poly polyBounds() { return null; }
 	
 }
