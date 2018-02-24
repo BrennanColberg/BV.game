@@ -23,7 +23,6 @@ public class TankClass extends BasicClass {
 		mass = 150;
 		maxVelocity = 2.25d;
 		accelAmount = 0.008d;
-		ifMoveable = true;
 		teamIndex = team;
 		teamColor = getTeamColor(teamIndex);
 	}

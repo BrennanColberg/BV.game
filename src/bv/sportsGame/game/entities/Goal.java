@@ -1,7 +1,5 @@
 package bv.sportsGame.game.entities;
 
-import java.awt.Color;
-
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Collidable;
@@ -30,7 +28,6 @@ public class Goal extends Entity implements Renderable, Collidable {
 		size = new CVector(165, 500);
 		teamIndex = team;
 		position = pos.plus(new CVector((teamIndex == 0) ? size.getValue(0) : -size.getValue(0), 0)); //This is temporary, based off of a 2-team set up
-		ifMoveable = false;
 	}
 	
 	@Override

@@ -22,7 +22,6 @@ public class Entity implements Tickable, Physics {
 	public CVector position = new CVector(0,0);
 	public PVector velocity = new PVector(0,0);
 	protected PVector acceleration = new PVector(0,0);
-	protected boolean ifMoveable = false; //This is used in collisions in case something collides with an obstacle, its rebound will be calculated accordingly
 	public double mass = 10;
 	
 	public Entity() {}

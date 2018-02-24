@@ -1,7 +1,5 @@
 package bv.sportsGame.game.entities;
 
-import java.awt.Color;
-
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.math.CVector;
 
@@ -25,7 +23,6 @@ public class SpeedsterClass extends BasicClass {
 		mass = 75;
 		maxVelocity = 7.5d;
 		accelAmount = 0.04d;
-		ifMoveable = true;
 		teamIndex = team;
 		teamColor = getTeamColor(teamIndex);
 	}

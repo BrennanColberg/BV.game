@@ -50,7 +50,6 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
-		ifMoveable = true;
 		teamIndex = -1;
 		teamColor = getTeamColor(teamIndex);
 	}
@@ -64,7 +63,6 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.05d;
-		ifMoveable = true;
 		teamIndex = team;
 		teamColor = getTeamColor(teamIndex);
 	}
