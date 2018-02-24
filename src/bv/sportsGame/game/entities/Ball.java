@@ -63,8 +63,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof BasicClass) {
-			BasicClass player = (BasicClass)object; //For some reason, it wouldn't work when I tried to cast the object and call its .getTeamIndex method in one line
-			teamLastHit = player.getTeam();
+			teamLastHit = ((BasicClass)object).getTeam();
 		}
 		
 		if (object instanceof Goal) {
