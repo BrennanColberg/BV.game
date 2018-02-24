@@ -1,5 +1,6 @@
 package bv.sportsGame.game.entities.classes;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import bv.gameFramework.core.Core;
@@ -108,7 +109,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public void render(Renderer r) {
-		sprite.render(r, position, this.velocity.getAngle(), team.color);
+		sprite.render(r, position, this.velocity.getAngle(), team != null ? team.color : Color.magenta);
 	}
 
 	@Override
