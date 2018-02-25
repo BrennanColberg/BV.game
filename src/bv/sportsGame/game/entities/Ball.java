@@ -16,6 +16,7 @@ import bv.sportsGame.game.entities.classes.Team;
 public class Ball extends Entity implements Renderable, Collidable {
 
 	private static double dragConst = -0.0007d;
+	private static double bouncinessConst = 1.5d;
 	public int size;
 	protected double maxVelocity;
 	protected Team teamLastHit;
@@ -24,7 +25,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	public Ball() {
 		mass = 10;
 		size = 100;
-		maxVelocity = 10.0d;
+		maxVelocity = 12.5d;
 	}
 	
 	public double drag() {
@@ -72,7 +73,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 			reset();
 		}
 		else {
-			velocity = new PVector(newVelocity);
+			velocity = new PVector(newVelocity.scaledBy(bouncinessConst));
 		}
 	}
 	
