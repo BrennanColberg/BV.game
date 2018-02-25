@@ -99,7 +99,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 		
 		if (Input.isKeyPressed(KeyEvent.VK_W) && shotCountDown <= 0) {
-			GameStateManager.currentState.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude())); //size of projectile is equal to its strength
+			GameStateManager.currentState.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude(),(Collidable)this)); //size of projectile is equal to its strength
 			acceleration.addMagnitude(recoil());
 			shotCountDown = shotSpeed;
 		}
