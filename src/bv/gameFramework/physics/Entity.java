@@ -4,10 +4,6 @@
  */
 package bv.gameFramework.physics;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import bv.gameFramework.state.Tickable;
 import bv.math.CVector;
 import bv.math.PVector;
@@ -18,7 +14,7 @@ import bv.math.PVector;
  */
 public class Entity implements Tickable, Physics {
 	
-	protected static ArrayList<Color> teamColors = new ArrayList<Color>(Arrays.asList(Color.black, Color.magenta, Color.cyan, Color.green, Color.yellow));
+	// protected static ArrayList<Color> teamColors = new ArrayList<Color>(Arrays.asList(Color.black, Color.magenta, Color.cyan, Color.green, Color.yellow));
 	public CVector position = new CVector(0,0);
 	public PVector velocity = new PVector(0,0);
 	protected PVector acceleration = new PVector(0,0);
@@ -30,10 +26,6 @@ public class Entity implements Tickable, Physics {
 	}
 	
 	/* GETTERS & SETTERS */
-	
-	public static Color getTeamColor(int teamIndex) {
-		return teamColors.get(teamIndex + 1); //This is done bc a team of index -1 is supposed to be not really a team. Team's start at index 0 (or index 1 in the color list)
-	}
 	
 	public CVector getPosition() {
 		return this.position.clone();
