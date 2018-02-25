@@ -1,10 +1,8 @@
-package bv.gameFramework.graphics;
+package bv.syntax;
 
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Random;
-
-import bv.syntax.BV;
 
 public abstract class BColor {
 	

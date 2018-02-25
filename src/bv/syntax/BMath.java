@@ -2,10 +2,11 @@
  * @author	Brennan Colberg
  * @since	Dec 19, 2017
  */
-package bv.math;
+package bv.syntax;
 
 import bv.gameFramework.physics.Entity;
-import bv.syntax.BV;
+import bv.math.CVector;
+import bv.math.PVector;
 
 /** 
  * @author	Brennan Colberg

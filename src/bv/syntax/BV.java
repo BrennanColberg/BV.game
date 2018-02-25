@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Nov 25, 2017
  */
-package bv.gameFramework.core;
+package bv.syntax;
 
 import java.util.List;
 

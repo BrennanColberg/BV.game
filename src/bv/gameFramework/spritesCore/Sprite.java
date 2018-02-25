@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import bv.gameFramework.graphics.BColor;
 import bv.gameFramework.graphics.Renderer;
 import bv.math.CVector;
 import bv.math.Poly;
+import bv.syntax.BColor;
 import bv.syntax.BV;
 
 public class Sprite extends ArrayList<Poly> {

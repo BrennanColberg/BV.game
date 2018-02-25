@@ -6,6 +6,7 @@ package bv.math;
 
 import java.awt.Point;
 
+import bv.syntax.BMath;
 import bv.syntax.BV;
 
 /** 
