@@ -133,7 +133,7 @@ public class Renderer {
 	
 	/* DRAWING */
 	
-	// resets background
+	// resets background	
 	public void updateBackground() {
 		Core.renderEngine.getDisplay().getCanvas().setBackground(this.getBackgroundColor());
 		graphics.setColor(this.getBackgroundColor());
