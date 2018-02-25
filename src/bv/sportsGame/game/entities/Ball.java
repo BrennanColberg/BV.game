@@ -64,6 +64,8 @@ public class Ball extends Entity implements Renderable, Collidable {
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof BasicClass) {
 			teamLastHit = ((BasicClass)object).getTeam();
+		} else if (object instanceof Projectile){
+			teamLastHit = ((BasicClass)((Projectile)object).parent).getTeam();
 		}
 		
 		if (object instanceof Goal) {
