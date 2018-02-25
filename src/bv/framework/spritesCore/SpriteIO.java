@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import bv.math.CVector;
-import bv.math.Poly;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
 
 public class SpriteIO {
 	

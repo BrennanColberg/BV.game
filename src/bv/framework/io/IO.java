@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Nov 25, 2017
  */
-package bv.io;
+package bv.framework.io;
 
 /** A command class containing various commands used in BV.io for general IO.
  * @author	Brennan Colberg

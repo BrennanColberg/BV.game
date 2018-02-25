@@ -1,7 +1,7 @@
 package bv.sportsGame.game.entities.classes;
 
+import bv.framework.math.CVector;
 import bv.framework.spritesCore.SpriteIO;
-import bv.math.CVector;
 
 /**
  * This is the Speedster class that inherits from the Basic class.

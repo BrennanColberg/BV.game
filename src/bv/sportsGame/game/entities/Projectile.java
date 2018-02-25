@@ -3,12 +3,12 @@ package bv.sportsGame.game.entities;
 import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.math.PVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
 import bv.framework.spritesCore.RSprite;
-import bv.math.PVector;
-import bv.math.Poly;
-import bv.math.Rect;
 /**
  * An abstract class for all projectiles to extend
  * 

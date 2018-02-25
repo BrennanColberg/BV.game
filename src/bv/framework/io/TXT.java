@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Nov 25, 2017
  */
-package bv.io;
+package bv.framework.io;
  
 import java.io.BufferedReader;
 import java.io.FileReader;

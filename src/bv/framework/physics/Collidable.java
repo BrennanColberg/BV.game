@@ -1,7 +1,7 @@
 package bv.framework.physics;
 
-import bv.math.PVector;
-import bv.math.Poly;
+import bv.framework.math.PVector;
+import bv.framework.math.Poly;
 
 /** 
  * This will be used with game objects (projectiles, players, balls) and handled by

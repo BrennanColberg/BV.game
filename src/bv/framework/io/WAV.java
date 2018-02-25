@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Nov 28, 2017
  */
-package bv.io;
+package bv.framework.io;
 
 /** A command class designed to read from, write to, and generally manage audio files.
  * 	Use {@link FileType}.AudioWAV to reference the corresponding file type.

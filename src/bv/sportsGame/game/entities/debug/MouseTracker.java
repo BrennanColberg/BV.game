@@ -10,12 +10,12 @@ import java.awt.event.KeyEvent;
 import bv.framework.core.Input;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
 import bv.framework.spritesCore.Sprite;
 import bv.framework.spritesCore.SpriteIO;
-import bv.math.CVector;
-import bv.math.Poly;
-import bv.math.Rect;
 
 /** 
  * @author	Brennan Colberg

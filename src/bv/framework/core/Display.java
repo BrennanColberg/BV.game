@@ -6,8 +6,8 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 
-import bv.math.CVector;
-import bv.math.Rect;
+import bv.framework.math.CVector;
+import bv.framework.math.Rect;
 
 /** A class which consolidates all processes necessary to manage and display a computer window.
  * @author	Brennan Colberg

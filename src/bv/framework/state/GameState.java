@@ -10,13 +10,13 @@ import bv.framework.core.Core;
 import bv.framework.core.GameStateManager;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.math.CVector;
+import bv.framework.math.PVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
 import bv.framework.physics.Physics;
-import bv.math.CVector;
-import bv.math.PVector;
-import bv.math.Poly;
-import bv.math.Rect;
 import bv.syntax.BMath;
 
 /** 

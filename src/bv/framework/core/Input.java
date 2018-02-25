@@ -14,7 +14,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.HashMap;
 
-import bv.math.CVector;
+import bv.framework.math.CVector;
 
 /** 
  * @author	Brennan Colberg

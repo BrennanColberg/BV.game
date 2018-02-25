@@ -9,10 +9,10 @@ import java.awt.Color;
 import bv.framework.core.Input;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
-import bv.math.CVector;
-import bv.math.Poly;
-import bv.math.Rect;
 
 /** 
  * @author	Brennan Colberg

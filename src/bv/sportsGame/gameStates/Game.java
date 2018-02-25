@@ -9,9 +9,9 @@ import java.awt.event.KeyEvent;
 
 import bv.framework.core.Core;
 import bv.framework.core.Input;
+import bv.framework.gui.FieldObject;
+import bv.framework.math.CVector;
 import bv.framework.state.GameState;
-import bv.gui.FieldObject;
-import bv.math.CVector;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.Goal;
 import bv.sportsGame.game.entities.classes.BasicClass;

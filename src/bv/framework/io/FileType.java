@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Nov 28, 2017
  */
-package bv.io;
+package bv.framework.io;
 
 /** An enum designed to facilitate IO coding; enhances the code readability of path and extension management.
  * @author	Brennan Colberg

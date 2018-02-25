@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import bv.framework.core.Core;
 import bv.framework.core.Input;
+import bv.framework.math.CVector;
 import bv.framework.spritesCore.SpriteIO;
 import bv.framework.state.GameState;
-import bv.math.CVector;
 import bv.sportsGame.menu.entities.Button;
 
 public class Menu extends GameState {

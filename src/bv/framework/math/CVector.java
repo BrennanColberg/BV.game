@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Dec 17, 2017
  */
-package bv.math;
+package bv.framework.math;
 
 import java.awt.Dimension;
 import java.awt.Point;

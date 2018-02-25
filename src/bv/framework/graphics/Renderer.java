@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import bv.framework.core.Core;
-import bv.math.CVector;
-import bv.math.Poly;
-import bv.math.Rect;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 
 public class Renderer {
 	

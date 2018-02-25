@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import bv.framework.graphics.Renderer;
-import bv.math.CVector;
-import bv.math.Poly;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
 import bv.syntax.BColor;
 import bv.syntax.BV;
 

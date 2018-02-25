@@ -2,11 +2,11 @@ package bv.sportsGame.game.entities.projectiles;
 
 import java.awt.Color;
 
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
 import bv.framework.physics.Collidable;
 import bv.framework.spritesCore.RSprite;
 import bv.framework.spritesCore.SpriteIO;
-import bv.math.CVector;
-import bv.math.Poly;
 import bv.sportsGame.game.entities.Projectile;
 /**
  * A projectile in the form of a missile

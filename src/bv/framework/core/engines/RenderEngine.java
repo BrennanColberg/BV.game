@@ -10,7 +10,7 @@ import java.awt.image.BufferStrategy;
 import bv.framework.core.Core;
 import bv.framework.core.Display;
 import bv.framework.graphics.Renderer;
-import bv.math.CVector;
+import bv.framework.math.CVector;
 
 /** 
  * @author	Brennan Colberg

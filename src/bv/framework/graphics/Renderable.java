@@ -1,7 +1,7 @@
 package bv.framework.graphics;
 
-import bv.math.Poly;
-import bv.math.Rect;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 
 public interface Renderable {
 	public void render(Renderer r);

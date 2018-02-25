@@ -1,4 +1,4 @@
-package bv.math;
+package bv.framework.math;
 
 import java.awt.Color;
 import java.awt.Point;

@@ -8,9 +8,9 @@ import java.awt.Color;
 
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
-import bv.math.CVector;
-import bv.math.Poly;
-import bv.math.Rect;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 
 /** 
  * @author	Brennan Colberg
@@ -39,20 +39,11 @@ public class RSprite implements Renderable {
 		// TODO Auto-generated method stub
 		sprite.scaleNew(scale).render(r, position, heading, color);
 	}
-	/* (non-Javadoc)
-	 * @see bv.gameFramework.v0.graphics.Renderable#rectBounds()
-	 */
-	@Override
+	
 	public Rect rectBounds() {
-		// TODO Auto-generated method stub
 		return sprite.get(0).rectBounds();
 	}
-	/* (non-Javadoc)
-	 * @see bv.gameFramework.v0.graphics.Renderable#polyBounds()
-	 */
-	@Override
 	public Poly polyBounds() {
-		// TODO Auto-generated method stub
 		return sprite.get(0);
 	}
 

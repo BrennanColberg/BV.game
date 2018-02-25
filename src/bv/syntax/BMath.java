@@ -4,9 +4,9 @@
  */
 package bv.syntax;
 
+import bv.framework.math.CVector;
+import bv.framework.math.PVector;
 import bv.framework.physics.Entity;
-import bv.math.CVector;
-import bv.math.PVector;
 
 /** 
  * @author	Brennan Colberg

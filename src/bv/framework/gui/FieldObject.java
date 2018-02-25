@@ -1,15 +1,15 @@
-package bv.gui;
+package bv.framework.gui;
 
 import java.awt.Color;
 
 import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.math.CVector;
+import bv.framework.math.Poly;
+import bv.framework.math.Rect;
 import bv.framework.spritesCore.Sprite;
 import bv.framework.spritesCore.SpriteIO;
-import bv.math.CVector;
-import bv.math.Poly;
-import bv.math.Rect;
 
 public class FieldObject implements Renderable{
 	//This sprite is the box around the goal.
