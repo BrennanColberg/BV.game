@@ -1,5 +1,6 @@
 package bv.sportsGame.game.entities;
 
+import bv.gameFramework.core.Core;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
 import bv.gameFramework.physics.Collidable;
@@ -42,7 +43,9 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 	}
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
-		if ((!(((Collidable)object) == this.parent)) && !(object instanceof Projectile))
+		if ((!(((Collidable)object) == this.parent)) && !(object instanceof Projectile)){
 			velocity = new PVector(newVelocity);
+			Core.state().objects.remove(Core.state().objects.indexOf(this));
+		}
 	}
 }
