@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import bv.gameFramework.core.Core;
+import bv.gameFramework.core.GameStateManager;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
@@ -99,11 +100,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 		
 		if (Input.isKeyPressed(KeyEvent.VK_W) && shotCountDown <= 0) {
-<<<<<<< HEAD
-			GameStateManager.currentState.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude(),(Collidable)this)); //size of projectile is equal to its strength
-=======
-			Core.state().objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude())); //size of projectile is equal to its strength
->>>>>>> 53a6a40db4bc202b32f06dd1178d70c0097ec25c
+			Core.state().objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
 			acceleration.addMagnitude(recoil());
 			shotCountDown = shotSpeed;
 		}
