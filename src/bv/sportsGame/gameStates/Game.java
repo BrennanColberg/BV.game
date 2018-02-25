@@ -102,7 +102,7 @@ public class Game extends GameState {
 	}
 	
 	public void load() {
-		Core.renderEngine.renderer.setBackgroundColor(Color.white);
+		Core.renderEngine.renderer.setBackgroundColor(new Color(46, 163, 31));
 	}
 	
 }
