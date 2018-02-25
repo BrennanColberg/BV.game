@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import bv.gameFramework.core.Core;
-import bv.gameFramework.core.GameStateManager;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
