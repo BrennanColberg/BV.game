@@ -14,8 +14,8 @@ import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
-import bv.framework.spritesCore.Sprite;
-import bv.framework.spritesCore.SpriteIO;
+import bv.framework.sprites.Sprite;
+import bv.framework.sprites.SpriteIO;
 
 /** 
  * @author	Brennan Colberg

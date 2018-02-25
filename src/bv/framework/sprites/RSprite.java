@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Jan 20, 2018
  */
-package bv.framework.spritesCore;
+package bv.framework.sprites;
 
 import java.awt.Color;
 

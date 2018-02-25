@@ -13,8 +13,8 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
-import bv.framework.spritesCore.Sprite;
-import bv.framework.spritesCore.SpriteIO;
+import bv.framework.sprites.Sprite;
+import bv.framework.sprites.SpriteIO;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /**

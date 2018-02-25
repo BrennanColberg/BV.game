@@ -1,4 +1,4 @@
-package bv.framework.spritesCore;
+package bv.framework.sprites;
 
 import java.io.BufferedReader;
 import java.io.IOException;

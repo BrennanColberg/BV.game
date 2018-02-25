@@ -1,4 +1,4 @@
-package bv.framework.spritesCore;
+package bv.framework.sprites;
 
 import java.awt.Color;
 import java.util.ArrayList;

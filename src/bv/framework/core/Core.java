@@ -8,7 +8,7 @@ import bv.framework.core.engines.CollisionEngine;
 import bv.framework.core.engines.RenderEngine;
 import bv.framework.core.engines.TickEngine;
 import bv.framework.math.CVector;
-import bv.framework.spritesCore.SpriteIO;
+import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
 
 /** 

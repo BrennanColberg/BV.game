@@ -5,7 +5,7 @@ import java.awt.Color;
 import bv.framework.core.Core;
 import bv.framework.core.Input;
 import bv.framework.math.CVector;
-import bv.framework.spritesCore.SpriteIO;
+import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
 import bv.sportsGame.menu.entities.Button;
 

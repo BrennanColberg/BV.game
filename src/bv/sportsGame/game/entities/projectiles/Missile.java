@@ -5,8 +5,8 @@ import java.awt.Color;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.physics.Collidable;
-import bv.framework.spritesCore.RSprite;
-import bv.framework.spritesCore.SpriteIO;
+import bv.framework.sprites.RSprite;
+import bv.framework.sprites.SpriteIO;
 import bv.sportsGame.game.entities.Projectile;
 /**
  * A projectile in the form of a missile

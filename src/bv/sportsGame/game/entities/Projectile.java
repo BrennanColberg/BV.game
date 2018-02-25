@@ -8,7 +8,7 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
-import bv.framework.spritesCore.RSprite;
+import bv.framework.sprites.RSprite;
 /**
  * An abstract class for all projectiles to extend
  * 
