@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
 
 /**
  * A class which represents a geometric rectangle, storing two {@link CVector}

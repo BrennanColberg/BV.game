@@ -2,10 +2,10 @@ package bv.sportsGame.menu.entities;
 
 import java.awt.Color;
 
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
-import bv.gameFramework.physics.Entity;
-import bv.gameFramework.spritesCore.Sprite;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
+import bv.framework.physics.Entity;
+import bv.framework.spritesCore.Sprite;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;

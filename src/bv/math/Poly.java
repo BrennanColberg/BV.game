@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
 
 /** A class which represents a geometric polygon, stored by a list of {@link PVector} vertices.
  * @author	Brennan Colberg

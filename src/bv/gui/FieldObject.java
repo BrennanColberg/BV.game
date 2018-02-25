@@ -2,11 +2,11 @@ package bv.gui;
 
 import java.awt.Color;
 
-import bv.gameFramework.core.Core;
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
-import bv.gameFramework.spritesCore.Sprite;
-import bv.gameFramework.spritesCore.SpriteIO;
+import bv.framework.core.Core;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
+import bv.framework.spritesCore.Sprite;
+import bv.framework.spritesCore.SpriteIO;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;

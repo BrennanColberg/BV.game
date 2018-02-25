@@ -7,12 +7,12 @@ package bv.sportsGame.game.entities.debug;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import bv.gameFramework.core.Input;
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
-import bv.gameFramework.physics.Entity;
-import bv.gameFramework.spritesCore.Sprite;
-import bv.gameFramework.spritesCore.SpriteIO;
+import bv.framework.core.Input;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
+import bv.framework.physics.Entity;
+import bv.framework.spritesCore.Sprite;
+import bv.framework.spritesCore.SpriteIO;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;

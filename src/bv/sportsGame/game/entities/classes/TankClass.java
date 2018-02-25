@@ -1,6 +1,6 @@
 package bv.sportsGame.game.entities.classes;
 
-import bv.gameFramework.spritesCore.SpriteIO;
+import bv.framework.spritesCore.SpriteIO;
 import bv.math.CVector;
 
 /**

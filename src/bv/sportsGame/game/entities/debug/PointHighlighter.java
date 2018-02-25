@@ -6,10 +6,10 @@ package bv.sportsGame.game.entities.debug;
 
 import java.awt.Color;
 
-import bv.gameFramework.core.Input;
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
-import bv.gameFramework.physics.Entity;
+import bv.framework.core.Input;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
+import bv.framework.physics.Entity;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;

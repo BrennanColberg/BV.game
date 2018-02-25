@@ -2,9 +2,9 @@ package bv.sportsGame.game.entities.projectiles;
 
 import java.awt.Color;
 
-import bv.gameFramework.physics.Collidable;
-import bv.gameFramework.spritesCore.RSprite;
-import bv.gameFramework.spritesCore.SpriteIO;
+import bv.framework.physics.Collidable;
+import bv.framework.spritesCore.RSprite;
+import bv.framework.spritesCore.SpriteIO;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.sportsGame.game.entities.Projectile;

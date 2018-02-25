@@ -4,7 +4,7 @@
  */
 package bv.syntax;
 
-import bv.gameFramework.physics.Entity;
+import bv.framework.physics.Entity;
 import bv.math.CVector;
 import bv.math.PVector;
 

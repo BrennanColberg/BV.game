@@ -7,9 +7,9 @@ package bv.sportsGame.gameStates;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import bv.gameFramework.core.Core;
-import bv.gameFramework.core.Input;
-import bv.gameFramework.state.GameState;
+import bv.framework.core.Core;
+import bv.framework.core.Input;
+import bv.framework.state.GameState;
 import bv.gui.FieldObject;
 import bv.math.CVector;
 import bv.sportsGame.game.entities.Ball;

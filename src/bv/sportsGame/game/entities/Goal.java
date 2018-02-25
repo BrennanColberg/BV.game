@@ -1,9 +1,9 @@
 package bv.sportsGame.game.entities;
 
-import bv.gameFramework.graphics.Renderable;
-import bv.gameFramework.graphics.Renderer;
-import bv.gameFramework.physics.Collidable;
-import bv.gameFramework.physics.Entity;
+import bv.framework.graphics.Renderable;
+import bv.framework.graphics.Renderer;
+import bv.framework.physics.Collidable;
+import bv.framework.physics.Entity;
 import bv.math.CVector;
 import bv.math.PVector;
 import bv.math.Poly;
