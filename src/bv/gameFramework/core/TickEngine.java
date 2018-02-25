@@ -56,36 +56,8 @@ public class TickEngine extends Thread {
 		}
 	}
 	public void tick() {
-
 		/* UPDATING CURRENT STATE */
 		stateManager.tick();
-//		try {
-//			currentState = stateStack.peek();
-//		} catch (EmptyStackException e) {
-//			System.exit(0);
-//		}
-//
-//		if (lastState != currentState) {
-//			System.out.println(String.format("Switching states from '%s' to '%s", lastState, currentState));
-//			Resources.stopAll();
-//
-//			if (lastState != null) lastState.unfocus();
-//			
-//			if (!initiatedStates.contains(currentState)) {
-//				currentState.init();
-//				currentState.add(new ControlInput());
-//				initiatedStates.add(currentState);
-//			} else if (currentState.resetting()) {
-////				currentState.reset();
-//			}
-//
-//			lastState = currentState;
-//			
-//			currentState.focus();
-//		}
-//		
-//		Display.input.tick();
-//		currentState.tick();
 	}
 	
 	

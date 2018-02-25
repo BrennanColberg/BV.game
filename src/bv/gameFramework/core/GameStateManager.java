@@ -43,7 +43,6 @@ public class GameStateManager implements Tickable, Renderable {
 	public GameState gameStateLast() {
 		return stateStack.elementAt(stateStack.size()-2);
 	}
-
 	
 	public void tick() {
 		if (currentState != stateStack.peek())
@@ -53,9 +52,11 @@ public class GameStateManager implements Tickable, Renderable {
 		currentState.tick();
 		currentState.updatePhysics();
 	}
-	
 	public void render(Renderer r) {
 		currentState.render(r);
+	}
+	public void calculateCollisions() {
+		currentState.calculateCollisions();
 	}
 
 	public Rect rectBounds() { return null; }

@@ -9,19 +9,15 @@ import java.awt.event.KeyEvent;
 
 import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
-import bv.gameFramework.physics.Collidable;
-import bv.gameFramework.physics.Entity;
 import bv.gameFramework.state.GameState;
 import bv.gui.FieldObject;
 import bv.math.CVector;
-import bv.math.PVector;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.Goal;
 import bv.sportsGame.game.entities.classes.BasicClass;
 import bv.sportsGame.game.entities.classes.TankClass;
 import bv.sportsGame.game.entities.classes.Team;
 import bv.sportsGame.game.entities.projectiles.Missile;
-import bv.syntax.BMath;
 
 /** 
  * @author	Brennan Colberg
@@ -81,24 +77,6 @@ public class Game extends GameState {
 		// updates physics for all contained entities
 		super.updatePhysics();
 		
-		checkCollisions();
-	}
-	
-	private void checkCollisions() {
-		//TODO: Collisions between the ball and the player are not being calculated correctly (??)
-		for (int i = 0; i < objects.size(); i++) if (objects.get(i) instanceof Collidable) {
-			Collidable objectI = (Collidable) objects.get(i);
-			for (int j = i; j < objects.size(); j++) if (objects.get(j) instanceof Collidable) {
-				Collidable objectJ = (Collidable) objects.get(j);
-				if (objectI != objectJ) { 
-					if (objectI.trigger().intersects(objectJ.trigger())) {
-						PVector[] velocities = BMath.collisionVelocity((Entity)objectI, (Entity)objectJ);
-						objectI.onCollision(velocities[0], (Entity)objectJ);
-						objectJ.onCollision(velocities[1], (Entity)objectI);
-					}
-				}
-			}
-		}
 	}
 	
 	public void load() {

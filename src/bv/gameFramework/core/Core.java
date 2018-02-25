@@ -4,6 +4,7 @@
  */
 package bv.gameFramework.core;
 
+import bv.gameFramework.physics.CollisionEngine;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.gameFramework.state.GameState;
 import bv.math.CVector;
@@ -23,6 +24,7 @@ public class Core {
 	public static GameStateManager gameStateManager;
 	public static TickEngine tickEngine;
 	public static RenderEngine renderEngine;
+	public static CollisionEngine collisionEngine;
 	public static void main(String[] args) {
 		
 		SpriteIO.load();
@@ -30,8 +32,10 @@ public class Core {
 		renderEngine = new RenderEngine(120, STARTING_SCREEN_SIZE);
 		gameStateManager = new GameStateManager();
 		tickEngine = new TickEngine(100);
+		collisionEngine = new CollisionEngine(30);
 		renderEngine.start();
 		tickEngine.start();
+		collisionEngine.start();
 		
 	}
 	

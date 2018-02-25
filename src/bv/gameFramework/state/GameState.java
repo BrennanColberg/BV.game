@@ -10,11 +10,14 @@ import bv.gameFramework.core.Core;
 import bv.gameFramework.core.GameStateManager;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
+import bv.gameFramework.physics.Collidable;
 import bv.gameFramework.physics.Entity;
 import bv.gameFramework.physics.Physics;
 import bv.math.CVector;
+import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
+import bv.syntax.BMath;
 
 /** 
  * @author	Brennan Colberg
@@ -66,6 +69,22 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 		for (int i = 0; i < objects.size(); i++) {
 			if (objects.get(i) instanceof Renderable) ((Renderable) objects.get(i)).render(r);
 
+		}
+	}
+	
+	public void calculateCollisions() {
+		for (int i = 0; i < objects.size(); i++) if (objects.get(i) instanceof Collidable) {
+			Collidable objectI = (Collidable) objects.get(i);
+			for (int j = i; j < objects.size(); j++) if (objects.get(j) instanceof Collidable) {
+				Collidable objectJ = (Collidable) objects.get(j);
+				if (objectI != objectJ) { 
+					if (objectI.trigger().intersects(objectJ.trigger())) {
+						PVector[] velocities = BMath.collisionVelocity((Entity)objectI, (Entity)objectJ);
+						objectI.onCollision(velocities[0], (Entity)objectJ);
+						objectJ.onCollision(velocities[1], (Entity)objectI);
+					}
+				}
+			}
 		}
 	}
 	
