@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import bv.gameFramework.core.Core;
-import bv.gameFramework.core.GameStateManager;
 import bv.math.CVector;
 import bv.math.Poly;
 import bv.math.Rect;
@@ -28,21 +27,21 @@ public class Renderer {
 		return (CVector) Core.renderEngine.getDisplay().getSize().scaledBy(.5);
 	}
 	public CVector getDisplaySize() {
-		return GameStateManager.currentState.getSize();
+		return Core.state().getSize();
 	}
 	
 	public Rect getCameraBounds() {
-		return GameStateManager.currentState.rectBounds();
+		return Core.state().rectBounds();
 	}
 	public CVector getCameraPosition() {
-		return GameStateManager.currentState.getPosition();
+		return Core.state().getPosition();
 	}
 	public CVector getCameraSize() {
-		return GameStateManager.currentState.getSize();
+		return Core.state().getSize();
 	}
 	
 	public double getPixelsPerUnit() {
-		return GameStateManager.currentState.pixelsPerUnit;
+		return Core.state().pixelsPerUnit;
 	}
 	
 	

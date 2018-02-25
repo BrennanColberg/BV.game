@@ -3,7 +3,7 @@ package bv.sportsGame.game.entities.classes;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import bv.gameFramework.core.GameStateManager;
+import bv.gameFramework.core.Core;
 import bv.gameFramework.core.Input;
 import bv.gameFramework.graphics.Renderable;
 import bv.gameFramework.graphics.Renderer;
@@ -99,7 +99,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 		
 		if (Input.isKeyPressed(KeyEvent.VK_W) && shotCountDown <= 0) {
-			GameStateManager.currentState.objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude())); //size of projectile is equal to its strength
+			Core.state().objects.add(new Missile(this.getPosition(), this.velocity.getAngle(), strength * 2, 10 + this.velocity.getMagnitude())); //size of projectile is equal to its strength
 			acceleration.addMagnitude(recoil());
 			shotCountDown = shotSpeed;
 		}

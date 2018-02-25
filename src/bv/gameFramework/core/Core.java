@@ -4,7 +4,9 @@
  */
 package bv.gameFramework.core;
 
-import bv.gameFramework.physics.CollisionEngine;
+import bv.gameFramework.core.engines.CollisionEngine;
+import bv.gameFramework.core.engines.RenderEngine;
+import bv.gameFramework.core.engines.TickEngine;
 import bv.gameFramework.spritesCore.SpriteIO;
 import bv.gameFramework.state.GameState;
 import bv.math.CVector;
@@ -31,8 +33,8 @@ public class Core {
 		
 		renderEngine = new RenderEngine(120, STARTING_SCREEN_SIZE);
 		gameStateManager = new GameStateManager();
-		tickEngine = new TickEngine(100);
-		collisionEngine = new CollisionEngine(30);
+		tickEngine = new TickEngine(100.0);
+		collisionEngine = new CollisionEngine(30.0);
 		renderEngine.start();
 		tickEngine.start();
 		collisionEngine.start();
@@ -40,7 +42,7 @@ public class Core {
 	}
 	
 	public static GameState state() {
-		return GameStateManager.currentState;
+		return gameStateManager.currentState;
 	}
 	
 }
