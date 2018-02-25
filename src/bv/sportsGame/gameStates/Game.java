@@ -11,6 +11,7 @@ import bv.framework.core.Core;
 import bv.framework.core.Input;
 import bv.framework.gui.FieldObject;
 import bv.framework.math.CVector;
+import bv.framework.math.Rect;
 import bv.framework.state.GameState;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.Goal;
@@ -29,6 +30,7 @@ public class Game extends GameState {
 	BasicClass player;
 	BasicClass dummy;
 	Ball ball;
+	public Rect gamefield = new Rect(new CVector(0,0), Core.STARTING_SCREEN_SIZE);
 	
 	public void init() {
 		
@@ -80,7 +82,7 @@ public class Game extends GameState {
 	}
 	
 	public void load() {
-		Core.renderEngine.renderer.setBackgroundColor(new Color(46, 163, 31));
+		Core.renderEngine.renderer.setBackgroundColor(Color.BLACK);
 	}
 	
 }

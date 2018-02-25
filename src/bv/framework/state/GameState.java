@@ -28,9 +28,9 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	/* VARIABLES */
 	
 	public double pixelsPerUnit = 1;
-	
 	public ArrayList<Object> objects = new ArrayList<Object>();
-	
+	public CVector maxBounds = new CVector(Core.STARTING_SCREEN_SIZE.getValue(0) * 2, Core.STARTING_SCREEN_SIZE.getValue(1) * 2);
+	public CVector minBounds = new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0) * 2, -Core.STARTING_SCREEN_SIZE.getValue(1) * 2);
 	/* CONSTRUCTORS */
 	
 	public GameState() {
@@ -113,5 +113,11 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	public Poly polyBounds() {
 		return rectBounds().polyBounds();
 	}	
-	
+	public boolean inBounds(CVector position) {
+		
+		return ((position.getValue(0) > minBounds.getValue(0)) &&
+				(position.getValue(1) > minBounds.getValue(1)) &&
+				(position.getValue(0) < maxBounds.getValue(0)) &&
+				(position.getValue(1) < maxBounds.getValue(1)));
+	}
 }

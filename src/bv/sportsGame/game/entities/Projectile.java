@@ -3,6 +3,7 @@ package bv.sportsGame.game.entities;
 import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.math.CVector;
 import bv.framework.math.PVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
@@ -19,6 +20,8 @@ import bv.framework.sprites.RSprite;
 public abstract class Projectile extends Entity implements Renderable, Collidable {
 	public RSprite projectileSprite;
 	public Collidable parent;
+	public Rect bounds = new Rect(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0),-Core.STARTING_SCREEN_SIZE.getValue(1)),
+			new CVector(Core.STARTING_SCREEN_SIZE.getValue(0),Core.STARTING_SCREEN_SIZE.getValue(1)));
 	public Projectile(RSprite sprite, double speed, Collidable parent){
 		this.projectileSprite = sprite;
 		this.velocity.setMagnitude(speed);
@@ -27,10 +30,15 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 		this.parent = parent;
 	}
 	public void updatePhysics() {
+		if (!Core.gameStateManager.currentState.inBounds(this.position)){
+			die();
+		}
+		System.out.println(this.position);
 		super.updatePhysics();
 	}
 	public void render(Renderer r){
 		projectileSprite.render(r);
+		
 	}
 	@Override
 	public Rect rectBounds() {
@@ -45,7 +53,10 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 	public void onCollision(PVector newVelocity, Entity object) {
 		if ((!(((Collidable)object) == this.parent)) && !(object instanceof Projectile)){
 			velocity = new PVector(newVelocity);
-			Core.state().objects.remove(Core.state().objects.indexOf(this));
+			die();
 		}
+	}
+	public void die() {
+		Core.state().objects.remove(Core.state().objects.indexOf(this));
 	}
 }

@@ -15,19 +15,24 @@ public class FieldObject implements Renderable{
 	//This sprite is the box around the goal.
 	Sprite goalArea = SpriteIO.get("square").scale(300);
 	Sprite center = SpriteIO.get("center").scale(50);
+	Color fieldColor = new Color(46, 163, 31);
+	Sprite gamefield = SpriteIO.get("gamefield").scale(128);
 	
 	@Override
 	public void render(Renderer r) {
 		// renders the box around the goal, and the center
-		goalArea.render(r, new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4,0), 0.0, Color.white);
-		goalArea.render(r, new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4,0), Math.PI, Color.white);
+		gamefield.render(r, new CVector(0,0), 0.0, fieldColor);
+		goalArea.render(r, new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0) * 2,0), 0.0, Color.white);
+		goalArea.render(r, new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)* 2,0), Math.PI, Color.white);
 		center.render(r, new CVector(0,0), Math.PI/4, Color.white);
+	}
+	public void init() {
+		
 	}
 
 	@Override
 	public Rect rectBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Rect(new CVector(0,0), Core.STARTING_SCREEN_SIZE);
 	}
 
 	@Override

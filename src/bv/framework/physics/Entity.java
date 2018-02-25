@@ -4,9 +4,11 @@
  */
 package bv.framework.physics;
 
+import bv.framework.core.Core;
 import bv.framework.math.CVector;
 import bv.framework.math.PVector;
 import bv.framework.state.Tickable;
+import bv.sportsGame.game.entities.classes.BasicClass;
 
 /** 
  * @author	Brennan Colberg
@@ -70,10 +72,24 @@ public class Entity implements Tickable, Physics {
 		velocity.add(acceleration);
 		position.add(velocity);
 		acceleration.clear();
+		doWallBounce(this.velocity, this.position);
+
 	}
 	
 	public void tick() {
 		// TODO Auto-generated method stub
+		
+	}
+	public void doWallBounce(PVector oldVelocity, CVector position){
+		CVector cOldVelocity = oldVelocity.toCVector();
+		CVector max = Core.gameStateManager.currentState.maxBounds;
+		CVector min = Core.gameStateManager.currentState.minBounds;
+
+		if (position.getValue(1) < min.getValue(1) || position.getValue(1) > max.getValue(1))
+			this.velocity = (new PVector((new CVector(cOldVelocity.getValue(0), -cOldVelocity.getValue(1)).toPVector())));
+		else if (position.getValue(0) < min.getValue(0) || position.getValue(0) > max.getValue(0))
+			this.velocity = (new PVector((new CVector(-cOldVelocity.getValue(0), cOldVelocity.getValue(1)).toPVector())));
+
 		
 	}
 }
