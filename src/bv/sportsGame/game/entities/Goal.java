@@ -8,6 +8,7 @@ import bv.math.CVector;
 import bv.math.PVector;
 import bv.math.Poly;
 import bv.math.Rect;
+import bv.sportsGame.game.entities.classes.Team;
 
 
 /**
@@ -21,13 +22,13 @@ import bv.math.Rect;
 
 public class Goal extends Entity implements Renderable, Collidable {
 
-	protected int teamIndex; //We can implement for checking it against a team index using int rather than a bool for the possibility of having more than 2 teams in the future
+	protected Team team; //We can implement for checking it against a team index using int rather than a bool for the possibility of having more than 2 teams in the future
 	protected CVector size;
 	
-	public Goal(CVector pos, int team) {
+	public Goal(CVector pos, Team team) {
 		size = new CVector(165, 500);
-		teamIndex = team;
-		position = pos.plus(new CVector((teamIndex == 0) ? size.getValue(0) : -size.getValue(0), 0)); //This is temporary, based off of a 2-team set up
+		this.team = team;
+		position = pos.plus(new CVector((team == Team.RIGHT) ? size.getValue(0) : -size.getValue(0), 0)); //This is temporary, based off of a 2-team set up
 	}
 	
 	@Override
@@ -49,7 +50,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof Ball) {
 			Ball ball = (Ball)object;
-			System.out.println("Team " + teamIndex + " was just scored on by a player from Team " + ball.teamLastHit);
+			System.out.println("Team " + team + " was just scored on by a player from Team " + ball.teamLastHit);
 		}
 	}
 

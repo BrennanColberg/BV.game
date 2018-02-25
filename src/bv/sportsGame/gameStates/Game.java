@@ -20,6 +20,7 @@ import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.Goal;
 import bv.sportsGame.game.entities.classes.BasicClass;
 import bv.sportsGame.game.entities.classes.TankClass;
+import bv.sportsGame.game.entities.classes.Team;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
@@ -38,8 +39,8 @@ public class Game extends GameState {
 		objects.add(new FieldObject());
 		
 		//This can be implemented in a better way later, I just wanted to get the functionality down
-		objects.add(goal1 	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), 0));
-		objects.add(goal2 	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), 1));
+		objects.add(goal1 	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
+		objects.add(goal2 	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
 		objects.add(player 	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), 0, true));
 		objects.add(dummy 	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), 1, false));
 		objects.add(ball 	= new Ball());
