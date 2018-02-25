@@ -137,10 +137,7 @@ public class Renderer {
 	// resets background
 	public void updateBackground() {
 		Core.renderEngine.getDisplay().getCanvas().setBackground(this.getBackgroundColor());
-		graphics.setColor(new Color(46, 163, 31));
 		graphics.fillRect(0, 0, (int) getDisplaySize().getValue(0), (int) getDisplaySize().getValue(1));
-		graphics.setColor(Color.red);
-		
 	}
 	
 	// draws outline of given shape
