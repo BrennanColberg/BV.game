@@ -17,7 +17,7 @@ import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
 import bv.framework.physics.Physics;
-import bv.syntax.BMath;
+import bv.framework.syntax.BMath;
 
 /** 
  * @author	Brennan Colberg

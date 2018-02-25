@@ -7,8 +7,8 @@ import java.util.HashMap;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
-import bv.syntax.BColor;
-import bv.syntax.BV;
+import bv.framework.syntax.BColor;
+import bv.framework.syntax.BV;
 
 public class Sprite extends ArrayList<Poly> {
 	private static final long serialVersionUID = -8587874606082995609L;

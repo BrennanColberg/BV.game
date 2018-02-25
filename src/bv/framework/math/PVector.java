@@ -6,8 +6,8 @@ package bv.framework.math;
 
 import java.awt.Point;
 
-import bv.syntax.BMath;
-import bv.syntax.BV;
+import bv.framework.syntax.BMath;
+import bv.framework.syntax.BV;
 
 /** 
  * @author	Brennan Colberg

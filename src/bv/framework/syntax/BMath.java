@@ -2,7 +2,7 @@
  * @author	Brennan Colberg
  * @since	Dec 19, 2017
  */
-package bv.syntax;
+package bv.framework.syntax;
 
 import bv.framework.math.CVector;
 import bv.framework.math.PVector;

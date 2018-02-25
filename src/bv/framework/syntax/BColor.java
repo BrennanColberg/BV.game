@@ -1,4 +1,4 @@
-package bv.syntax;
+package bv.framework.syntax;
 
 import java.awt.Color;
 import java.util.HashMap;
