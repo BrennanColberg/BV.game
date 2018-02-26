@@ -67,14 +67,6 @@ public class Game extends GameState {
 		this.velocity.setAngle(Math.atan2(player.getPosition().getValue(1) - position.getValue(1), player.getPosition().getValue(0) - position.getValue(0)));
 		this.velocity.setMagnitude(player.getPosition().minus(this.position).toPVector().getMagnitude() / (50 * this.pixelsPerUnit));
 		
-		// A very hacky way of deleting all projectiles fired. Press backspace to delete the missiles
-		if (Input.isKeyPressed(KeyEvent.VK_BACK_SPACE)){
-			for (Object o : objects){
-				if (o instanceof Missile){
-					objects.set(objects.indexOf(o), null);
-				}
-			}
-		}
 		
 		// updates physics for all contained entities
 		super.updatePhysics();
