@@ -70,10 +70,9 @@ public class Entity implements Tickable, Physics {
 	
 	public void updatePhysics() {
 		velocity.add(acceleration);
+		doWallBounce(this.velocity, this.position);
 		position.add(velocity);
 		acceleration.clear();
-		doWallBounce(this.velocity, this.position);
-
 	}
 	
 	public void tick() {
@@ -89,7 +88,5 @@ public class Entity implements Tickable, Physics {
 			this.velocity = (new PVector((new CVector(cOldVelocity.getValue(0), -cOldVelocity.getValue(1)).toPVector())));
 		else if (position.getValue(0) < min.getValue(0) || position.getValue(0) > max.getValue(0))
 			this.velocity = (new PVector((new CVector(-cOldVelocity.getValue(0), cOldVelocity.getValue(1)).toPVector())));
-
-		
 	}
 }
