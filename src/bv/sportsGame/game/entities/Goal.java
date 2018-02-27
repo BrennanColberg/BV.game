@@ -50,7 +50,6 @@ public class Goal extends Entity implements Renderable, Collidable {
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof Ball) {
 			Ball ball = (Ball)object;
-			System.out.println("Team " + team + " was just scored on by a player from Team " + ball.teamLastHit);
 		}
 	}
 

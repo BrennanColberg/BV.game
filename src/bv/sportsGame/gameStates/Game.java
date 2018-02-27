@@ -67,7 +67,6 @@ public class Game extends GameState {
 		this.velocity.setAngle(Math.atan2(player.getPosition().getValue(1) - position.getValue(1), player.getPosition().getValue(0) - position.getValue(0)));
 		this.velocity.setMagnitude(player.getPosition().minus(this.position).toPVector().getMagnitude() / (50 * this.pixelsPerUnit));
 		
-		
 		// updates physics for all contained entities
 		super.updatePhysics();
 		
