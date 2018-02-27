@@ -33,7 +33,6 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 		if (!Core.gameStateManager.currentState.inBounds(this.position)){
 			die();
 		}
-		System.out.println(this.position);
 		super.updatePhysics();
 	}
 	public void render(Renderer r){
