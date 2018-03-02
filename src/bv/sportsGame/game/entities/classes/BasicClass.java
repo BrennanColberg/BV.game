@@ -31,6 +31,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 
 	protected static double dragConst = 0.0005d;
 	protected static double recoilConst = 0.15d;
+	protected static double velocityCutOff = 0.005d; //This is in an attempt to get rid off the jittering when the player isn't moving
 	protected Sprite sprite;
 	protected int health;
 	protected int strength;
@@ -86,12 +87,15 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		return Math.atan2(Input.getMouseAdjustedPosition().getValue(1) - position.getValue(1), Input.getMouseAdjustedPosition().getValue(0) - position.getValue(0));
 	}
 	private double playerAngle() {
-		return (isWASD) ? mouseAngle() : this.velocity.getAngle();
+		return (isPlayer) ? mouseAngle() : this.velocity.getAngle();
 	}
 	
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
+		checkDrag();
 		velocity.clamp(-maxVelocity, maxVelocity);
+		
+		shotCountDown--;
 		super.updatePhysics();
 	}
 	
@@ -117,20 +121,25 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		else {
 			if (Input.isKeyPressed(KeyEvent.VK_SPACE) && this.velocity.getMagnitude() < maxVelocity)
 				acceleration.add(new PVector(accelAmount, mouseAngle()));
-			velocity.setAngle(mouseAngle());
-		}
-		
-		if (acceleration.getMagnitude() == 0) {
-			acceleration.add(drag());
 		}
 		
 		if (Input.isMousePressed() && shotCountDown <= 0) {
-			Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
-			acceleration.add(recoil());
-			shotCountDown = shotSpeed;
+			shoot();
 		}
-		
-		shotCountDown--;
+	}
+	
+	//Like shoot, moved to accommodate for implementation of bots in future
+	public void checkDrag() {
+		if (acceleration.getMagnitude() == 0 && velocity.getMagnitude() > velocityCutOff) {
+			acceleration.add(drag());
+		}
+	}
+	
+	//Moved in order to accommodate for implementation of bots in future (possibly) as this will be reused
+	public void shoot() {
+		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
+		acceleration.add(recoil());
+		shotCountDown = shotSpeed;
 	}
 	
 	@Override
