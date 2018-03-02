@@ -94,9 +94,8 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		if (isPlayer) playerMovement();
 		checkDrag();
 		velocity.clamp(-maxVelocity, maxVelocity);
-		
-		shotCountDown--;
 		super.updatePhysics();
+		shotCountDown--;
 	}
 	
 	/*I made this a separate method that is called within updatePhysics so that
