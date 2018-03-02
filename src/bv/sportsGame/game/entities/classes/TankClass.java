@@ -23,6 +23,7 @@ public class TankClass extends BasicClass {
 		mass = 150;
 		maxVelocity = 2.25d;
 		accelAmount = 0.008d;
+		isWASD = false;
 	}
 	public TankClass(CVector pos, int team, boolean isPlayer){
 		this(pos, team);

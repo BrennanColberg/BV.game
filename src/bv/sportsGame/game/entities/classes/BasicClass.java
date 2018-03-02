@@ -40,6 +40,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected double maxVelocity;
 	protected double accelAmount;
 	protected boolean isPlayer;
+	protected boolean isWASD;
 	
 	public BasicClass() {
 		sprite = SpriteIO.get("podracer").scaleNew(50);
@@ -50,6 +51,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.15d;
+		isWASD = false;
 	}
 	public BasicClass(CVector pos, int team) {
 		position = pos;
@@ -61,6 +63,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.15d; //This basically just controls how easily the player is to change direction at this point (WASD controls)
+		isWASD = false;
 	}
 	public BasicClass(CVector pos, int team, boolean isPlayer){
 		this(pos, team);
@@ -83,12 +86,11 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		return Math.atan2(Input.getMouseAdjustedPosition().getValue(1) - position.getValue(1), Input.getMouseAdjustedPosition().getValue(0) - position.getValue(0));
 	}
 	private double playerAngle() {
-		return (isPlayer) ? mouseAngle() : this.velocity.getAngle();
+		return (isWASD) ? mouseAngle() : this.velocity.getAngle();
 	}
 	
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
-		//acceleration.setAngle(velocity.getAngle());
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();
 	}
@@ -97,25 +99,27 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	 *if we wanted to add bots, then this could be overridden in order to do that.
 	 */
 	public void playerMovement() {
-		//velocity.setAngle(mouseAngle());
+		//Player control between WASD and mouse
+		if (isWASD) {
+			if (Input.isKeyPressed(KeyEvent.VK_A)) {
+				acceleration.add(new CVector(-accelAmount, 0));
+			}
+			else if (Input.isKeyPressed(KeyEvent.VK_D)) {
+				acceleration.add(new CVector(accelAmount, 0));
+			}
+			if (Input.isKeyPressed(KeyEvent.VK_W)) {
+				acceleration.add(new CVector(0, -accelAmount));
+			}
+			else if (Input.isKeyPressed(KeyEvent.VK_S)) {
+				acceleration.add(new CVector(0, accelAmount));
+			}
+		}
+		else {
+			if (Input.isKeyPressed(KeyEvent.VK_SPACE) && this.velocity.getMagnitude() < maxVelocity)
+				acceleration.add(new PVector(accelAmount, mouseAngle()));
+			velocity.setAngle(mouseAngle());
+		}
 		
-		//if (Input.isKeyPressed(KeyEvent.VK_SPACE) && this.velocity.getMagnitude() < maxVelocity)
-			//acceleration.addMagnitude(accelAmount);
-		
-		if (Input.isKeyPressed(KeyEvent.VK_A)) {
-			acceleration.add(new CVector(-accelAmount, 0));
-		}
-		else if (Input.isKeyPressed(KeyEvent.VK_D)) {
-			acceleration.add(new CVector(accelAmount, 0));
-		}
-		if (Input.isKeyPressed(KeyEvent.VK_W)) {
-			acceleration.add(new CVector(0, -accelAmount));
-		}
-		else if (Input.isKeyPressed(KeyEvent.VK_S)) {
-			acceleration.add(new CVector(0, accelAmount));
-		}
-		
-		//If no acceleration has been added via keypresses, then apply drag
 		if (acceleration.getMagnitude() == 0) {
 			acceleration.add(drag());
 		}
