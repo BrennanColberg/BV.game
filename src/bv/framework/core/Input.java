@@ -27,6 +27,8 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	
 	protected static Long lastMousePress = 0L;
 	protected static Long lastMouseRelease = 0L;
+	protected static Long lastRightMousePress = 0L;
+	protected static Long lastRightMouseRelease = 0L;
 	protected static CVector lastMousePressPosition = new CVector(0,0);
 	protected static CVector lastMousePressAdjustedPosition = new CVector(0,0);
 	protected static CVector mousePosition = new CVector(0,0);
@@ -36,6 +38,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	public static Long getLastMousePress() { return lastMousePress; }
 	public static Long getLastMouseRelease() { return lastMouseRelease; }
 	public static boolean isMousePressed() { return lastMouseRelease < lastMousePress; }
+	public static boolean isRightMousePressed() { return lastRightMouseRelease < lastRightMousePress; }
 	public static boolean wasMousePressedRecently() { return recentMousePress; }
 	
 	public static CVector getLastMousePressPosition() { return lastMousePressPosition; }
@@ -54,8 +57,8 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	
 	@Deprecated public void mouseWheelMoved(MouseWheelEvent e) {}
 	@Deprecated public void mouseMoved(MouseEvent e) {}
-	@Deprecated public void mousePressed(MouseEvent e) { lastMousePress = e.getWhen(); lastMousePressPosition = new CVector(e.getX(), e.getY()); lastMousePressAdjustedPosition = Core.renderEngine.renderer.normalize(lastMousePressPosition); }
-	@Deprecated public void mouseReleased(MouseEvent e) { lastMouseRelease = e.getWhen(); }
+	@Deprecated public void mousePressed(MouseEvent e) { if(e.getButton() == MouseEvent.BUTTON3) { lastRightMousePress = e.getWhen(); } else { lastMousePress = e.getWhen(); }; lastMousePressPosition = new CVector(e.getX(), e.getY()); lastMousePressAdjustedPosition = Core.renderEngine.renderer.normalize(lastMousePressPosition); }
+	@Deprecated public void mouseReleased(MouseEvent e) { lastMouseRelease = e.getWhen(); lastRightMouseRelease = e.getWhen(); }
 	@Deprecated public void keyTyped(KeyEvent e) {}
 	@Deprecated public void keyPressed(KeyEvent e) { lastKeyPress.put(e.getKeyCode(), e.getWhen()); }
 	@Deprecated public void keyReleased(KeyEvent e) { lastKeyRelease.put(e.getKeyCode(), e.getWhen()); }

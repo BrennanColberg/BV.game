@@ -37,6 +37,8 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected int strength;
 	protected int shotSpeed; //a bit counter-intuitive; high value equals slower shot speed
 	protected int shotCountDown;
+	protected int specialSpeed; //similar to shotSpeed
+	protected int specialCountDown;
 	public Team team;
 	protected double maxVelocity;
 	protected double accelAmount;
@@ -49,6 +51,8 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		strength = 7;
 		shotSpeed = 50;
 		shotCountDown = 0;
+		specialSpeed = 300;
+		specialCountDown = 0;
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.15d;
@@ -61,6 +65,8 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		strength = 7;
 		shotSpeed = 50;
 		shotCountDown = 0;
+		specialSpeed = 300;
+		specialCountDown = 0;
 		mass = 100;
 		maxVelocity = 5.0d;
 		accelAmount = 0.15d; //This basically just controls how easily the player is to change direction at this point (WASD controls)
@@ -82,7 +88,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	public PVector recoil() {
 		return new PVector((strength != 0) ? recoilConst * strength : -0.1d, playerAngle() + BMath.PI);
 	}
-	
+
 	private double mouseAngle() {
 		return Math.atan2(Input.getMouseAdjustedPosition().getValue(1) - position.getValue(1), Input.getMouseAdjustedPosition().getValue(0) - position.getValue(0));
 	}
@@ -96,6 +102,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();
 		shotCountDown--;
+		specialCountDown--;
 	}
 	
 	/*I made this a separate method that is called within updatePhysics so that
@@ -125,6 +132,10 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		if (Input.isMousePressed() && shotCountDown <= 0) {
 			shoot();
 		}
+		
+		if (Input.isRightMousePressed() && specialCountDown <= 0) {
+			useSpecial();
+		}
 	}
 	
 	//Like shoot, moved to accommodate for implementation of bots in future
@@ -139,6 +150,12 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
 		acceleration.add(recoil());
 		shotCountDown = shotSpeed;
+	}
+	
+	public void useSpecial() {
+		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 8, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
+		acceleration.add(recoil().scaledBy(4d));
+		specialCountDown = specialSpeed;
 	}
 	
 	@Override
