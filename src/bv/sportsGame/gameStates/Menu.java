@@ -5,6 +5,7 @@ import java.awt.Color;
 import bv.framework.core.Core;
 import bv.framework.core.Input;
 import bv.framework.math.CVector;
+import bv.framework.sprites.Sprite;
 import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
 import bv.sportsGame.menu.entities.Button;
@@ -14,7 +15,6 @@ public class Menu extends GameState {
 	public void init() {
 		
 		objects.add(new Button(new CVector(0,0),SpriteIO.get("drone").scaleNew(100),0,Color.red) {
-
 			public void clicked() {
 				Core.gameStateManager.loadGameState(new Game());
 			}
