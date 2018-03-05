@@ -2,6 +2,7 @@ package bv.sportsGame.game.entities;
 
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
+import bv.framework.gui.HUD;
 import bv.framework.math.CVector;
 import bv.framework.math.PVector;
 import bv.framework.math.Poly;
@@ -50,6 +51,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof Ball) {
 			Ball ball = (Ball)object;
+			//add a point to the correct team
 		}
 	}
 
