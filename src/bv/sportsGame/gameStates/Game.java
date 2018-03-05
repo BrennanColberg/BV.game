@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import bv.framework.core.Core;
 import bv.framework.core.Input;
 import bv.framework.gui.FieldObject;
+import bv.framework.gui.HUD;
 import bv.framework.math.CVector;
 import bv.framework.math.Rect;
 import bv.framework.state.GameState;
@@ -31,6 +32,7 @@ public class Game extends GameState {
 	BasicClass dummy;
 	Ball ball;
 	public Rect gamefield = new Rect(new CVector(0,0), Core.STARTING_SCREEN_SIZE);
+	public HUD hud;
 	
 	public void init() {
 		
@@ -44,6 +46,7 @@ public class Game extends GameState {
 		objects.add(ball 	= new Ball());
 		
 		// objects.add(new PointHighlighter()); // only used for debug
+		objects.add(hud     = new HUD());
 		
 		this.pixelsPerUnit = 0.25;
 	}
