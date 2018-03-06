@@ -9,8 +9,6 @@ import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
-import bv.framework.sprites.Sprite;
-import bv.framework.sprites.SpriteIO;
 
 public class HUD implements Renderable {
 

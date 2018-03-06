@@ -19,7 +19,6 @@ import bv.sportsGame.game.entities.Goal;
 import bv.sportsGame.game.entities.classes.BasicClass;
 import bv.sportsGame.game.entities.classes.TankClass;
 import bv.sportsGame.game.entities.classes.Team;
-import bv.sportsGame.game.entities.projectiles.Missile;
 
 /** 
  * @author	Brennan Colberg

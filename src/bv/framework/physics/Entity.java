@@ -8,7 +8,6 @@ import bv.framework.core.Core;
 import bv.framework.math.CVector;
 import bv.framework.math.PVector;
 import bv.framework.state.Tickable;
-import bv.sportsGame.game.entities.classes.BasicClass;
 
 /** 
  * @author	Brennan Colberg

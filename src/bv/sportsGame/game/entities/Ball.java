@@ -2,7 +2,6 @@ package bv.sportsGame.game.entities;
 
 import java.awt.Color;
 
-import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
