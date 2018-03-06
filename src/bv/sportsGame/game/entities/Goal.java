@@ -23,7 +23,7 @@ import bv.sportsGame.game.entities.classes.Team;
 
 public class Goal extends Entity implements Renderable, Collidable {
 
-	protected Team team; //We can implement for checking it against a team index using int rather than a bool for the possibility of having more than 2 teams in the future
+	protected Team team;
 	protected CVector size;
 	
 	public Goal(CVector pos, Team team) {
@@ -50,8 +50,8 @@ public class Goal extends Entity implements Renderable, Collidable {
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof Ball) {
-			Ball ball = (Ball)object;
-			//add a point to the correct team
+			//Ball ball = (Ball)object;
+			HUD.addPoint(team.ordinal());
 		}
 	}
 
@@ -61,4 +61,5 @@ public class Goal extends Entity implements Renderable, Collidable {
 		poly.setPosition(position);
 		return poly;
 	}
+	
 }

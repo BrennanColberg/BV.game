@@ -27,6 +27,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 		mass = 10;
 		size = 100;
 		maxVelocity = 12.5d;
+		teamLastHit = Team.LEFT;
 	}
 	
 	public double drag() {

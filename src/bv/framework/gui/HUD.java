@@ -19,8 +19,8 @@ public class HUD implements Renderable {
 	private CVector gamePosition = new CVector(0, 0);
 	private GameTimer gameTimer = new GameTimer(screenPosition(), 300);
 	
-	private Rect scoreBack = new Rect(scoreBackPos(), new CVector(500, 70));
-	private Rect timerBack = new Rect(timerBackPos(), new CVector(300, 100));
+	private Rect scoreBack = new Rect(screenPosition(), new CVector(500, 70));
+	private Rect timerBack = new Rect(screenPosition(), new CVector(300, 100));
 	
 	public HUD() {
 		scores.clear();
@@ -31,26 +31,18 @@ public class HUD implements Renderable {
 		gameTimer = new GameTimer(screenPosition(), 300);
 	}
 	
-	private CVector scoreBackPos() {
-		return screenPosition().plus(new CVector(-10, 0));
-	}
-	
-	private CVector timerBackPos() {
-		return screenPosition().plus(new CVector(-10, 0));
-	}
-	
 	public static void addPoint(int team) {
 		scores.set(team, scores.get(team) + 1);
 	}
 	
 	public CVector screenPosition() {
-		return new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1) * 2 + 100).plus(gamePosition);
+		return new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1) * 2 + 125).plus(gamePosition);
 	}
 	
 	public void updateGamePosition(CVector position) {
 		gamePosition = position;
-		scoreBack.setPosition(scoreBackPos());
-		timerBack.setPosition(timerBackPos());
+		scoreBack.setPosition(screenPosition());
+		timerBack.setPosition(screenPosition());
 		gameTimer.updatePosition(screenPosition());
 	}
 	
@@ -72,20 +64,20 @@ public class HUD implements Renderable {
 		//Team one
 		ArrayList<NumberCharacters> teamOne = teamScore(0); //Right
 		for (int i = 0; i < teamOne.size(); i++) {
-			teamOne.get(i).sprite.scaleNew(0.75).render(r, screenPosition().plus(new CVector(390, 0)), 0, Color.white);
+			teamOne.get(i).sprite.scaleNew(0.75).render(r, screenPosition().plus(new CVector(400, 0)), 0, Color.white);
 		}
 		
 		//Team two
 		ArrayList<NumberCharacters> teamTwo = teamScore(1); //Left
-		for (int i = 0; i < teamOne.size(); i++) {
-			teamOne.get(i).sprite.scaleNew(0.75).render(r, screenPosition().plus(new CVector(-410, 0)), 0, Color.white);
+		for (int i = 0; i < teamTwo.size(); i++) {
+			teamTwo.get(i).sprite.scaleNew(0.75).render(r, screenPosition().plus(new CVector(-400, 0)), 0, Color.white);
 		}
 	}
 	
 	@Override
 	public void render(Renderer r) {
 		r.fill(scoreBack.rectBounds(), Color.black);
-		r.fill(timerBack.rectBounds(), Color.blue);
+		r.fill(timerBack.rectBounds(), Color.darkGray);
 		gameTimer.renderDigits(r);
 		renderScore(r);
 	}

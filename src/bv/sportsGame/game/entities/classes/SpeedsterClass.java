@@ -13,8 +13,9 @@ import bv.framework.sprites.SpriteIO;
  */
 
 public class SpeedsterClass extends BasicClass {
-	public SpeedsterClass(CVector pos, int team) {
+	public SpeedsterClass(CVector pos, Team team) {
 		position = pos;
+		this.team = team;
 		sprite = SpriteIO.get("swarmV2").scaleNew(50);
 		health = 75;
 		strength = 2;
@@ -25,7 +26,7 @@ public class SpeedsterClass extends BasicClass {
 		accelAmount = 0.04d;
 		isWASD = false;
 	}
-	public SpeedsterClass(CVector pos, int team, boolean isPlayer){
+	public SpeedsterClass(CVector pos, Team team, boolean isPlayer){
 		this(pos, team);
 		this.isPlayer = isPlayer;
 	}

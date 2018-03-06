@@ -13,8 +13,9 @@ import bv.framework.sprites.SpriteIO;
  */
 
 public class TankClass extends BasicClass {
-	public TankClass(CVector pos, int team) {
+	public TankClass(CVector pos, Team team) {
 		position = pos;
+		this.team = team;
 		sprite = SpriteIO.get("dualGunner").scaleNew(75);
 		health = 200;
 		strength = 15;
@@ -25,7 +26,7 @@ public class TankClass extends BasicClass {
 		accelAmount = 0.008d;
 		isWASD = false;
 	}
-	public TankClass(CVector pos, int team, boolean isPlayer){
+	public TankClass(CVector pos, Team team, boolean isPlayer){
 		this(pos, team);
 		this.isPlayer = isPlayer;
 	}

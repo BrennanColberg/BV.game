@@ -41,9 +41,10 @@ public class Game extends GameState {
 		//This can be implemented in a better way later, I just wanted to get the functionality down
 		objects.add(goal1 	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
 		objects.add(goal2 	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
-		objects.add(player 	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), 0, true));
-		objects.add(dummy 	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), 1, false));
+		objects.add(player 	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.LEFT, true));
+		objects.add(dummy 	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.RIGHT, false));
 		objects.add(ball 	= new Ball());
+		
 		
 		// objects.add(new PointHighlighter()); // only used for debug
 		objects.add(hud     = new HUD());

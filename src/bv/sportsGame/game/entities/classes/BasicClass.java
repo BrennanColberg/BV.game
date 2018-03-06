@@ -58,8 +58,9 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		accelAmount = 0.15d;
 		isWASD = false;
 	}
-	public BasicClass(CVector pos, int team) {
+	public BasicClass(CVector pos, Team team) {
 		position = pos;
+		this.team = team;
 		sprite = SpriteIO.get("podracer").scaleNew(50);
 		health = 125;
 		strength = 7;
@@ -72,7 +73,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		accelAmount = 0.15d; //This basically just controls how easily the player is to change direction at this point (WASD controls)
 		isWASD = false;
 	}
-	public BasicClass(CVector pos, int team, boolean isPlayer){
+	public BasicClass(CVector pos, Team team, boolean isPlayer){
 		this(pos, team);
 		this.isPlayer = isPlayer;
 	}

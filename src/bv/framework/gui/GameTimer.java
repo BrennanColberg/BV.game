@@ -30,7 +30,7 @@ public class GameTimer implements ActionListener {
 	
 	//This is just used for centering the digits on the screen
 	private CVector leftBoundPosition() {
-		int digitsWidth = 45; //The starting amount for this is equal to the number of paces inbetween the digits times the amount of space between them in order to get the total space between digits
+		int digitsWidth = 45; //The starting amount for this is equal to the number of spaces in between the digits times the amount of space between them in order to get the total space between digits
 		for (NumberCharacters n : digits) {
 			digitsWidth += n.width;
 		}
@@ -38,8 +38,11 @@ public class GameTimer implements ActionListener {
 	}
 	
 	public void renderDigits(Renderer r) {
+		CVector posAdjustment = new CVector(0, 0);
 		for (int i = 0; i < 4; i++) {
-			digits[i].sprite.render(r, leftBoundPosition().plus(new CVector(120 * i)), 0, Color.white);
+			posAdjustment.add(new CVector(digits[i].width / 2, 0));
+			digits[i].sprite.render(r, leftBoundPosition().plus(posAdjustment), 0, Color.white);
+			posAdjustment.add(new CVector(digits[i].width / 2 + 15, 0));
 		}
 	}
 	
