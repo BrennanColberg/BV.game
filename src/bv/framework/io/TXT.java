@@ -29,7 +29,7 @@ public abstract class TXT {
 	public static String[] read(String path) { 
 		try {
 			
-			path = IO.correctPath(path, FileType.RawText);
+			path = IO.correctPath(path, FileType.TXT);
 			
 			BufferedReader reader = new BufferedReader(new FileReader(path));
 			ArrayList<String> text = new ArrayList<String>();
@@ -50,7 +50,7 @@ public abstract class TXT {
 	public static void write(String path, String...input) {
 		try {
 			
-			path = IO.correctPath(path, FileType.RawText);
+			path = IO.correctPath(path, FileType.TXT);
 			Files.write(Paths.get(path), Arrays.asList(input), Charset.forName("UTF-8"));
 			
 		} catch (IOException e) { }
