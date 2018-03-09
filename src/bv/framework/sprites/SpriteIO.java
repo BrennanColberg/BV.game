@@ -23,27 +23,29 @@ public class SpriteIO {
 			String SPRITE_PATH = files[i];
 			switch (IO.fileTypeOf(SPRITE_PATH)) {
 				case FOLDER: spriteLibrary.put(SPRITE_PATH, loadSprite(BASE_PATH + "/" + SPRITE_PATH)); break;
-				case TXT: BV.println("Sorry! Can't load this TXT file: " + SPRITE_PATH); break;
+				case TXT: 
+//					BV.println("Sorry! Can't load this TXT file: " + SPRITE_PATH); 
+					break;
 				default: break;
 			}
 		}
 	}
 	private static Sprite loadSprite(String SPRITE_PATH) {
-		BV.println("> Loading Sprite: " + SPRITE_PATH);
+		BV.println(SPRITE_PATH + " [Sprite]");
 		Sprite result = new Sprite();
 		String[] frames = FOLDER.read(SPRITE_PATH);
 		for (int i = 0; i < frames.length; i++) {
 			String FRAME_PATH = frames[i];
 			switch (IO.fileTypeOf(FRAME_PATH)) {
 				case FOLDER: result.add(loadSpriteFrame(SPRITE_PATH + "/" + FRAME_PATH)); break;
-				case TXT: BV.println(">+ Loading Sprite Settings: " + FRAME_PATH); break;
+				case TXT: BV.println(SPRITE_PATH + "/" + FRAME_PATH + " [Sprite Settings]"); break;
 				default: break;
 			}
 		}
 		return result;
 	}
 	private static SpriteFrame loadSpriteFrame(String FRAME_PATH) {
-		BV.println(">> Loading Sprite Frame: " + FRAME_PATH);
+		BV.println(FRAME_PATH + " [Frame]");
 		SpriteFrame result = new SpriteFrame();
 		String[] polies = FOLDER.read(FRAME_PATH);
 		for (int i = 0; i < polies.length; i++) {
@@ -57,7 +59,7 @@ public class SpriteIO {
 		return result;
 	}
 	private static Poly loadPoly(String POLY_PATH) {
-		BV.println(">>> Loading Poly: " + POLY_PATH);
+		BV.println(POLY_PATH + " [Poly]");
 		Poly result = new Poly();
 		String[] lines = TXT.read(POLY_PATH);
 		for (int i = 0; i < lines.length; i++) {

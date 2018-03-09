@@ -26,13 +26,10 @@ public abstract class TXT {
 	 * @author	Brennan Colberg
 	 * @since	Nov 26, 2017
 	 */
-	@SuppressWarnings("deprecation")
 	public static String[] read(String path) { 
 		try {
 			
-			path = IO.correctPath(path, FileType.TXT);
-			
-			BufferedReader reader = new BufferedReader(new FileReader(path));
+			BufferedReader reader = new BufferedReader(new FileReader("src/" + path));
 			ArrayList<String> text = new ArrayList<String>();
 			
 			while (reader.ready()) text.add(reader.readLine());
@@ -40,7 +37,7 @@ public abstract class TXT {
 			reader.close();
 			return text.toArray(new String[]{});
 		
-		} catch (IOException e) { return null; } 
+		} catch (IOException e) { e.printStackTrace(); return null; } 
 	}
 	
 	/** A static method used to clear all the lines of, and then write to, a designated raw text (".txt") file.
@@ -48,11 +45,9 @@ public abstract class TXT {
 	 * @author	Brennan Colberg
 	 * @since	Nov 26, 2017
 	 */
-	@SuppressWarnings("deprecation")
 	public static void write(String path, String...input) {
 		try {
 			
-			path = IO.correctPath(path, FileType.TXT);
 			Files.write(Paths.get(path), Arrays.asList(input), Charset.forName("UTF-8"));
 			
 		} catch (IOException e) { }
