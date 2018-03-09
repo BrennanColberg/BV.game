@@ -17,7 +17,7 @@ public abstract class IO {
 	 * @author	Brennan Colberg
 	 * @since	Nov 26, 2017
 	 */
-	static String correctPath(String path, String suffix) { 
+	@Deprecated static String correctPath(String path, String suffix) { 
 		if (path.split("/")[0] != "src") 
 			path = "src/" + path;
 		if (!suffix.startsWith("."))
@@ -35,8 +35,25 @@ public abstract class IO {
 	 * @author	Brennan Colberg
 	 * @since	Nov 28, 2017
 	 */
-	public static String correctPath(String path, FileType fileType) { 
+	@Deprecated public static String correctPath(String path, FileType fileType) { 
 		return correctPath(path, fileType.suffix);
+	}
+	
+	public static String trimFileName(String path) {
+		String[] slashParse = path.split("/");
+		path = slashParse[slashParse.length - 1];
+		String[] dotParse = path.split(".");
+		path = dotParse[0];
+		return path;
+	}
+	
+	public static FileType fileTypeOf(String path) {
+		for (FileType type : FileType.values()) {
+			if (path.endsWith(type.suffix)) {
+				return type;
+			}
+		}
+		return null;
 	}
 	
 }

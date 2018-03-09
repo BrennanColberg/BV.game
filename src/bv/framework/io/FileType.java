@@ -22,7 +22,9 @@ public enum FileType {
 	 * @author Brennan Colberg
 	 * @since Nov 28, 2017
 	 */
-	AudioWAV(".wav");
+	WAV(".wav"),
+	
+	FOLDER("");
 	
 	public String suffix;
 	private FileType(String suffix) {

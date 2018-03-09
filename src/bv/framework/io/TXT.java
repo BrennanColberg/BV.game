@@ -26,6 +26,7 @@ public abstract class TXT {
 	 * @author	Brennan Colberg
 	 * @since	Nov 26, 2017
 	 */
+	@SuppressWarnings("deprecation")
 	public static String[] read(String path) { 
 		try {
 			
@@ -47,6 +48,7 @@ public abstract class TXT {
 	 * @author	Brennan Colberg
 	 * @since	Nov 26, 2017
 	 */
+	@SuppressWarnings("deprecation")
 	public static void write(String path, String...input) {
 		try {
 			
