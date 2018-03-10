@@ -73,9 +73,6 @@ public class Game extends GameState {
 		//Gives the HUD this position so that it is able to stay in a static position on the screen
 //		hud.updateGamePosition(position.plus(velocity));
 		
-		// updates physics for all contained entities
-		super.updatePhysics();
-		
 	}
 	
 	public void load() {

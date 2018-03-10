@@ -45,11 +45,11 @@ public class GameStateManager {
 			loadGameState(stateStack.peek());
 		
 		Input.tick();
-		currentState.tick();
-		currentState.updatePhysics();
+		currentState.tickObjects();
+		currentState.updateObjectPhysics();
 	}
 	public void render(Renderer r) {
-		currentState.render(r);
+		currentState.renderObjects(r);
 	}
 	public void calculateCollisions() {
 		currentState.calculateCollisions();
