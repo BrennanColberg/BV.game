@@ -8,7 +8,7 @@ import java.util.Stack;
 
 import bv.framework.graphics.Renderer;
 import bv.framework.state.GameState;
-import bv.sportsGame.gameStates.Menu;
+import bv.sportsGame.gameStates.Game;
 
 /** 
  * @author	Brennan Colberg
@@ -18,7 +18,7 @@ public class GameStateManager {
 	
 	/* VARIABLES */
 	
-	public static final GameState STARTING_GAME_STATE = new Menu();
+	public static final GameState STARTING_GAME_STATE = new Game();
 	
 	// for some reason making these non-static screws stuff up, no idea ... don't touch it
 	// probably has to do with multithreaded approach of tick and render

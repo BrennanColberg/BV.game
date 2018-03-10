@@ -1,11 +1,8 @@
 package bv.sportsGame.game.entities.projectiles;
 
-import java.awt.Color;
-
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.physics.Collidable;
-import bv.framework.sprites.RSprite;
 import bv.framework.sprites.SpriteIO;
 import bv.sportsGame.game.entities.Projectile;
 /**
@@ -15,7 +12,7 @@ import bv.sportsGame.game.entities.Projectile;
  */
 public class Missile extends Projectile {
 	public Missile(CVector position, double heading, double scale, double speed, Collidable parent) {
-		super(new RSprite(SpriteIO.get("Missile"), position, scale, heading, Color.blue ), speed, parent);
+		super(SpriteIO.get("missile"), speed, parent);
 		
 	}
 

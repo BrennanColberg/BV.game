@@ -14,7 +14,7 @@ import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
-import bv.framework.sprites.Sprite;
+import bv.framework.sprites.AnimatedSprite;
 import bv.framework.sprites.SpriteIO;
 
 /** 
@@ -42,7 +42,7 @@ public class MouseTracker extends Entity implements Renderable {
 		super.updatePhysics();
 	}
 
-	Sprite sprite = SpriteIO.get("drone").scale(25);
+	AnimatedSprite sprite = SpriteIO.get("drone").scale(25);
 	public void render(Renderer r) {
 		sprite.render(r, this.position, this.velocity.getAngle(), Color.black);
 	}

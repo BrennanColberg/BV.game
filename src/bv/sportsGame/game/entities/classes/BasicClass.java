@@ -13,7 +13,7 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
-import bv.framework.sprites.Sprite;
+import bv.framework.sprites.AnimatedSprite;
 import bv.framework.sprites.SpriteIO;
 import bv.framework.syntax.BMath;
 import bv.sportsGame.game.entities.projectiles.Missile;
@@ -32,7 +32,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected static double dragConst = 0.0005d;
 	protected static double recoilConst = 0.15d;
 	protected static double velocityCutOff = 0.005d; //This is in an attempt to get rid off the jittering when the player isn't moving
-	protected Sprite sprite;
+	protected AnimatedSprite sprite;
 	protected int health;
 	protected int strength;
 	protected int shotSpeed; //a bit counter-intuitive; high value equals slower shot speed

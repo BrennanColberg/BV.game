@@ -9,7 +9,7 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
-import bv.framework.sprites.RSprite;
+import bv.framework.sprites.AnimatedSprite;
 /**
  * An abstract class for all projectiles to extend
  * 
@@ -18,15 +18,17 @@ import bv.framework.sprites.RSprite;
  * .
  */
 public abstract class Projectile extends Entity implements Renderable, Collidable {
-	public RSprite projectileSprite;
+	
+	public AnimatedSprite projectileSprite;
 	public Collidable parent;
 	public Rect bounds = new Rect(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0),-Core.STARTING_SCREEN_SIZE.getValue(1)),
 			new CVector(Core.STARTING_SCREEN_SIZE.getValue(0),Core.STARTING_SCREEN_SIZE.getValue(1)));
-	public Projectile(RSprite sprite, double speed, Collidable parent){
+	
+	public Projectile(AnimatedSprite sprite, double speed, Collidable parent){
 		this.projectileSprite = sprite;
 		this.velocity.setMagnitude(speed);
 		this.velocity.setAngle(sprite.heading);
-		this.position = sprite.position;
+//		this.position = sprite.position;
 		this.parent = parent;
 	}
 	public void updatePhysics() {

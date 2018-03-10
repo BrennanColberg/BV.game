@@ -1,141 +1,150 @@
 package bv.framework.sprites;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+import bv.framework.io.FOLDER;
+import bv.framework.io.IO;
+import bv.framework.io.TXT;
 import bv.framework.math.CVector;
+import bv.framework.math.PVector;
 import bv.framework.math.Poly;
+import bv.framework.syntax.BV;
 
 public class SpriteIO {
 	
+	private static final String BASE_PATH = "sprites";
 	
-	/* VARIABLES */
-	
-	private static HashMap<String, Sprite> sprites = new HashMap<String,Sprite>();
-	
-	
-	/* GETTERS & SETTERS */
-	
-	public static Sprite get(String key) {
-		return sprites.get(key);
-	}
-	public static Sprite get(int index) {
-		return get(sprites.keySet().toArray(new String[]{})[index]);
-	}
-	public static HashMap<String, Sprite> sprites() {
-		return sprites;
-	}
-	
-	public static int quantity() {
-		return sprites.size();
-	}
-	
-	public static String[] keys() {
-		return sprites.keySet().toArray(new String[]{});
-	}
-	
-	
-	/* METHODS */
-	
+	private static HashMap<String,AnimatedSprite> spriteLibrary = new HashMap<String,AnimatedSprite>();
+
 	public static void load() {
-		System.out.println("> Loading Sprites from 'sprites' package");
-		try {
-			String name;
-			BufferedReader br = new BufferedReader(new InputStreamReader(SpriteIO.class.getClassLoader().getResourceAsStream("sprites")));
-			while ((name = br.readLine()) != null) {
-				if (name.endsWith(".txt")) {
-					String title = name.substring(0, name.length() - 4);
-					sprites.put(title, read(name));
-					System.out.println(" + Sprite Loaded: " + title);
-				}
+		BV.println("Loading Sprites!");
+		String[] files = FOLDER.read(BASE_PATH);
+		for (int i = 0; i < files.length; i++) {
+			String path = files[i];
+			switch (IO.fileTypeOf(path)) {
+				case FOLDER: spriteLibrary.put(path, loadSprite(BASE_PATH + "/" + path)); break;
+				case TXT: 
+					spriteLibrary.put(path.substring(0, path.length()-4), new AnimatedSprite(new Sprite(loadPoly(BASE_PATH + "/" + path))));
+					break;
+				default: break;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NullPointerException e) {
-			System.out.println(" * Missing 'sprites' package");
 		}
+	}
+	private static AnimatedSprite loadSprite(String path) {
+		BV.println(path);
+		AnimatedSprite result = new AnimatedSprite();
+		String[] frames = FOLDER.read(path);
+		for (int i = 0; i < frames.length; i++) {
+			String file = frames[i];
+			switch (IO.fileTypeOf(file)) {
+				case FOLDER: result.add(loadSpriteFrame(path + "/" + file)); break;
+				case TXT: 
+					if (file.equals("settings.txt"));
+//						BV.println(path + "/" + file); 
+					else result.add(new Sprite(loadPoly(path + "/" + file)));
+					break;
+				default: break;
+			}
+		}
+		return result;
+	}
+	private static Sprite loadSpriteFrame(String path) {
+		BV.println(path);
+		Sprite result = new Sprite();
+		String[] polies = FOLDER.read(path);
+		for (int i = 0; i < polies.length; i++) {
+			String file = polies[i];
+			switch (IO.fileTypeOf(file)) {
+				case FOLDER: break;
+				case TXT: result.add(loadPoly(path + "/" + file)); break;
+				default: break;
+			}
+		}
+		return result;
+	}
+	private static Poly[] loadPoly(String path) {
+		BV.println(path);
+		ArrayList<Poly> result = new ArrayList<Poly>();
+		Poly poly = new Poly();
+		String[] lines = TXT.read(path);
+		for (int i = 0; i < lines.length; i++) {
+			String line = lines[i].toUpperCase();
+			String[] word = line.split(" ");
+			switch (word[0]) {
+			
+				case "NEW":
+					if (poly.getPoints().size() == 0) break;
+					else {
+						result.add(poly);
+						poly = new Poly();
+					}
+					break;
+			
+				case "POSITION":
+					if (word.length < 3) break;
+					poly.setPosition(new CVector(Double.parseDouble(word[1]), Double.parseDouble(word[2])));
+					break;
+			
+				case "POINT":
+				case "CVECTOR":
+				case "C":
+					if (word.length < 3) break;
+					poly.addPoint(new CVector(Double.parseDouble(word[1]), Double.parseDouble(word[2])));
+					break;
+					
+				case "PVECTOR":
+				case "P":
+					if (word.length < 3) break;
+					poly.addPoint(new PVector(Double.parseDouble(word[1]), Double.parseDouble(word[2])));
+					break;
+					
+				case "SCALE":
+					if (word.length < 2) break;
+					poly.scale(Double.parseDouble(word[1]));
+					break;
+					
+				case "ROTATE":
+					if (word.length < 2) break;
+					if (word.length < 3) { poly.rotate(Double.parseDouble(word[1])); break; }
+					switch (word[2]) {
+						case "RAD":
+						case "RADIANS":
+							poly.rotate(Double.parseDouble(word[1]));
+							break;
+						case "DEG":
+						case "DEGREES":
+							poly.rotate(Double.parseDouble(word[1]) * BV.PI / 180.0);
+							break;
+						case "P":
+						case "PI":
+							poly.rotate(Double.parseDouble(word[1]) * BV.PI);
+							break;
+						case "2P":
+						case "2PI":
+						case "T":
+						case "TAU":
+						case "R":
+						case "ROTATION":
+						case "ROTATIONS":
+							poly.rotate(Double.parseDouble(word[1]) * BV.TAU);
+							break;
+						default: break;
+					}
+					break;
+					
+				case "SHADE":
+					break;
+					
+				default: break;
+			}
+		}
+		result.add(poly);
+		return result.toArray(new Poly[]{});
 	}
 	
-	public static Sprite read(String file) {
-		BufferedReader parser = new BufferedReader(new InputStreamReader(SpriteIO.class.getClassLoader().getResourceAsStream("sprites/" + file)));
-		Sprite sprite = new Sprite();
-		String text;
-		String[] splitText;
-		Poly currentPoly = null;
-		
-		try {
-			while ((text = parser.readLine()) != null) {
-				if (text != "") {
-					splitText = text.split(" ");
-					switch(splitText[0].toUpperCase()) {
-					case "NEW":
-						if (currentPoly != null && !sprite.contains(currentPoly)) { currentPoly.setPosition(new CVector(0,0)); sprite.add(currentPoly); }
-						break;
-					case "IMPORT":
-						if (currentPoly != null && !sprite.contains(currentPoly)) { currentPoly.setPosition(new CVector(0,0)); sprite.add(currentPoly); }
-						try { currentPoly = read(splitText[1]).get(splitText.length > 2 ? Integer.parseInt(splitText[2]) : 0); }
-						catch (Exception e) { System.err.println(String.format("%s during import from %s to %s", e.getClass().getName(), splitText[1], file)); }
-						break;
-					case "POINT":
-						if (currentPoly == null || sprite.contains(currentPoly)) currentPoly = new Poly(new CVector(0,0));
-						currentPoly.addPoint(new CVector(
-								Double.parseDouble(splitText[1]),
-								Double.parseDouble(splitText[2])));
-						break;
-					case "SCALE":
-						currentPoly.scale(Double.parseDouble(splitText[1]));
-						break;
-					case "ROTATE":
-						currentPoly.rotate(Double.parseDouble(splitText[1]));
-						break;
-					case "ROTATE_PI":
-						currentPoly.rotate(Double.parseDouble(splitText[1]) * Math.PI);
-						break;
-					case "POSITION":
-						try { currentPoly.setPosition(new CVector(Double.parseDouble(splitText[1]), Double.parseDouble(splitText[2]))); }
-						catch (Exception e) { currentPoly.setPosition(new CVector(0,0)); }
-						break;
-					case "SHOW_HEALTH":
-					case "HEALTH":
-						sprite.showHealth(sprite.size(), Boolean.parseBoolean(splitText[1]));
-						System.out.println("put health " + sprite.showHealth(sprite.size()) + " for " + sprite + " layer " + sprite.size());
-						break;
-					case "SHADE":
-						sprite.shade(sprite.size(), Double.parseDouble(splitText[1]));
-						break;
-					}
-				}
-			}
-		} catch (NumberFormatException | IOException e) {
-			e.printStackTrace();
-		}
-		
-		if (currentPoly != null && !sprite.contains(currentPoly)) { currentPoly.setPosition(new CVector(0,0)); sprite.add(currentPoly); }
-		
-		return sprite;
+	public static AnimatedSprite get(String path) {
+		return spriteLibrary.get(path).clone();
 	}
-	@Deprecated public static void write(Sprite sprite) {
-		System.out.println(String.format("Printing %s", sprite));
-		List<String> writingQueue = new ArrayList<String>();
-		for (int i = 0; i < sprite.size(); i++) {
-			writingQueue.add("NEW");
-			for (int v = 0; v < sprite.get(i).getPoints().size(); v++) {
-				CVector point = sprite.get(i).getPoint(v).toCVector();
-				writingQueue.add(String.format("POINT %s %s", point.getValue(0), point.getValue(1)));
-			}
-		}
-		
-		for (String line:writingQueue) System.out.println(line);
-		
-		System.out.println(String.format("Finished printing %s", sprite));
-	}
-	@Deprecated public static void write(Poly poly) {
-		Sprite drawable = new Sprite();
-		drawable.add(poly);
-		write(drawable);
-	}
+	
 }
