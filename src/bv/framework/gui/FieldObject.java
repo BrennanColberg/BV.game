@@ -8,15 +8,15 @@ import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
-import bv.framework.sprites.Sprite;
+import bv.framework.sprites.AnimatedSprite;
 import bv.framework.sprites.SpriteIO;
 
 public class FieldObject implements Renderable{
 	//This sprite is the box around the goal.
-	Sprite goalArea = SpriteIO.get("square").scale(300);
-	Sprite center = SpriteIO.get("center").scale(50);
+	AnimatedSprite goalArea = SpriteIO.get("square").scale(300);
+	AnimatedSprite center = SpriteIO.get("center").scale(50);
 	Color fieldColor = new Color(46, 163, 31);
-	Sprite gamefield = SpriteIO.get("gamefield").scale(128);
+	AnimatedSprite gamefield = SpriteIO.get("gamefield").scale(128);
 	
 	@Override
 	public void render(Renderer r) {

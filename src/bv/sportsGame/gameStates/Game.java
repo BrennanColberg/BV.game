@@ -46,7 +46,7 @@ public class Game extends GameState {
 		
 		
 		// objects.add(new PointHighlighter()); // only used for debug
-		objects.add(hud     = new HUD());
+//		objects.add(hud     = new HUD());
 		
 		this.pixelsPerUnit = 0.25;
 	}
@@ -71,7 +71,7 @@ public class Game extends GameState {
 		this.velocity.setMagnitude(player.getPosition().minus(this.position).toPVector().getMagnitude() / (50 * this.pixelsPerUnit));
 		
 		//Gives the HUD this position so that it is able to stay in a static position on the screen
-		hud.updateGamePosition(position.plus(velocity));
+//		hud.updateGamePosition(position.plus(velocity));
 		
 		// updates physics for all contained entities
 		super.updatePhysics();

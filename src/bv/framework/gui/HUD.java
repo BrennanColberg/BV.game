@@ -1,7 +1,7 @@
 package bv.framework.gui;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
@@ -9,70 +9,89 @@ import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
+import bv.framework.sprites.SpriteFrame;
+import bv.sportsGame.game.entities.classes.Team;
 
 public class HUD implements Renderable {
 
-	public static ArrayList<Integer> scores = new ArrayList<Integer>(); //I'm sure there's a better way to implement this
+	/* VARIABLES */
+	public static HashMap<Team,Integer> scores = new HashMap<Team,Integer>();
 	
 	private CVector gamePosition = new CVector(0, 0);
 	private GameTimer gameTimer = new GameTimer(screenPosition(), 300);
-	
 	private Rect scoreBack = new Rect(screenPosition(), new CVector(500, 70));
 	private Rect timerBack = new Rect(screenPosition(), new CVector(300, 100));
 	
+	
+	/* CONSTRUCTOR */
 	public HUD() {
 		scores.clear();
-		scores.add(0);
-		scores.add(0);
+		scores.put(Team.LEFT, 0);
+		scores.put(Team.RIGHT, 0);
 		
 		gamePosition = new CVector(0, 0);
 		gameTimer = new GameTimer(screenPosition(), 300);
 	}
 	
-	public static void addPoint(int team) {
-		scores.set(team, scores.get(team) + 1);
+	// point incrementer
+	public static void incrementScore(Team team) {
+		scores.put(team, scores.get(team) + 1);
 	}
 	
+	// positioning algorithms
 	public CVector screenPosition() {
 		return new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1) * 2 + 125).plus(gamePosition);
 	}
-	
 	public void updateGamePosition(CVector position) {
 		gamePosition = position;
 		scoreBack.setPosition(screenPosition());
 		timerBack.setPosition(screenPosition());
-		gameTimer.updatePosition(screenPosition());
+		gameTimer.setPosition(screenPosition());
 	}
 	
-	private ArrayList<NumberCharacters> teamScore(int team) {
-		int points = scores.get(team);
-		ArrayList<NumberCharacters> output = new ArrayList<NumberCharacters>();
-		if (points > 10) {
-			output.add(NumberCharacters.getCharacter(Math.floorDiv(points, 10)));
-			output.add(NumberCharacters.getCharacter(points - Math.floorDiv(points,  10) * 10));
-		}
-		else {
-			output.add(NumberCharacters.getCharacter(points));
-		}
+	private SpriteFrame teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
 		
-		return output;
+		/* turning number into a string, then using that string to find chars from each place */
+		String scoreString = scores.get(team).toString();
+		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
+		char scoreTensChar = scoreString.length() < 2 ? 0 : scoreString.charAt(scoreString.length() - 2);
+		char scoreOnesChar = scoreString.charAt(scoreString.length() - 1);
+		
+		Poly[] digit = new Poly[] {
+				Number.fromCharacter(scoreTensChar).size(height).get(0),
+				Number.fromCharacter(scoreOnesChar).size(height).get(0)
+		};
+		Double[] width = new Double[] {
+				Number.fromCharacter(scoreTensChar).width(height),
+				Number.fromCharacter(scoreOnesChar).width(height)
+		};
+		
+		// setting up variables for spriteFrame creation
+		SpriteFrame result = new SpriteFrame();
+		final double SPACE_DISTANCE = height * 0.25;
+		
+		// offsets 
+		digit[0].setPosition(new CVector(0, -0.5 * (width[0] + SPACE_DISTANCE)));
+		digit[1].setPosition(new CVector(0, +0.5 * (width[1] + SPACE_DISTANCE)));
+		
+		// result formatting
+		result.add(digit[0]);
+		result.add(digit[1]);
+		
+		return result;
 	}
 	
 	private void renderScore(Renderer r) {
-		//Team one
-		ArrayList<NumberCharacters> teamOne = teamScore(0); //Right
-		for (int i = 0; i < teamOne.size(); i++) {
-			teamOne.get(i).sprite.scaleNew(0.75).render(r, screenPosition().plus(new CVector(400, 0)), 0, Color.white);
-		}
 		
-		//Team two
-		ArrayList<NumberCharacters> teamTwo = teamScore(1); //Left
-		for (int i = 0; i < teamTwo.size(); i++) {
-			teamTwo.get(i).sprite.scaleNew(0.75).render(r, screenPosition().plus(new CVector(-400, 0)), 0, Color.white);
-		}
+		final int SCORE_SIZE = 10;
+		
+		SpriteFrame rightScore 	= teamScoreSprite(Team.RIGHT, SCORE_SIZE);
+		SpriteFrame leftScore	= teamScoreSprite(Team.LEFT, SCORE_SIZE);
+		
+		rightScore	.render(r, screenPosition().plus(new CVector(400, 0)), Color.white);
+		leftScore	.render(r, screenPosition().plus(new CVector(-400, 0)), Color.white);
 	}
 	
-	@Override
 	public void render(Renderer r) {
 		r.fill(scoreBack.rectBounds(), Color.black);
 		r.fill(timerBack.rectBounds(), Color.darkGray);
@@ -80,16 +99,7 @@ public class HUD implements Renderable {
 		renderScore(r);
 	}
 
-	@Override
-	public Rect rectBounds() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Poly polyBounds() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Rect rectBounds() { return null; }
+	public Poly polyBounds() { return null; }
 
 }

@@ -11,27 +11,27 @@ import bv.framework.math.Rect;
 import bv.framework.state.Tickable;
 
 @SuppressWarnings("serial")
-public class Sprite extends ArrayList<SpriteFrame> implements Cloneable, Tickable, Renderable {
+public class AnimatedSprite extends ArrayList<SpriteFrame> implements Cloneable, Tickable, Renderable {
 
 	public int index = 0;
 	public double scale = 1;
 	public double heading = 0;
 	public Color color = Color.MAGENTA;
 	
-	public Sprite(SpriteFrame...frames) {
+	public AnimatedSprite(SpriteFrame...frames) {
 		for (SpriteFrame sf:frames) {
 			this.add(sf);
 		}
 	}
-	public Sprite(Sprite template) {
+	public AnimatedSprite(AnimatedSprite template) {
 		this(template.toArray(new SpriteFrame[]{}));
 		this.index = template.index;
 		this.scale = template.scale;
 		this.heading = template.heading;
 		this.color = template.color;
 	}
-	public Sprite clone() {
-		return new Sprite(this);
+	public AnimatedSprite clone() {
+		return new AnimatedSprite(this);
 	}
 	
 	public void tick() {
@@ -63,11 +63,15 @@ public class Sprite extends ArrayList<SpriteFrame> implements Cloneable, Tickabl
 		this.render(r, new CVector(0,0), 1.0, 0.0, this.color);
 	}
 	
-	public Sprite scale(double factor) {
+	public void add(SpriteFrame...frames) {
+		for (SpriteFrame f : frames) super.add(f);
+	}
+	
+	public AnimatedSprite scale(double factor) {
 		this.scale = factor;
 		return this;
 	}
-	public Sprite scaleNew(double factor) {
+	public AnimatedSprite scaleNew(double factor) {
 		return this.clone().scale(factor);
 	}
 	

@@ -51,6 +51,18 @@ public class SpriteFrame extends ArrayList<Poly> implements Cloneable, Renderabl
 		this.render(r, new CVector(0,0), 1.0, 0.0, this.color);
 	}
 	
+	public void add(Poly...polies) {
+		for (Poly p : polies) super.add(p);
+	}
+	
+	public SpriteFrame scale(double factor) {
+		this.scale = factor;
+		return this;
+	}
+	public SpriteFrame scaleNew(double factor) {
+		return this.clone().scale(factor);
+	}
+	
 	public Rect rectBounds() {
 		return this.polyBounds().rectBounds();
 	}
