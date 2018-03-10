@@ -9,7 +9,7 @@ import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
-import bv.framework.sprites.SpriteFrame;
+import bv.framework.sprites.Sprite;
 import bv.sportsGame.game.entities.classes.Team;
 
 public class HUD implements Renderable {
@@ -49,7 +49,7 @@ public class HUD implements Renderable {
 		gameTimer.setPosition(screenPosition());
 	}
 	
-	private SpriteFrame teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
+	private Sprite teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
 		
 		/* turning number into a string, then using that string to find chars from each place */
 		String scoreString = scores.get(team).toString();
@@ -67,7 +67,7 @@ public class HUD implements Renderable {
 		};
 		
 		// setting up variables for spriteFrame creation
-		SpriteFrame result = new SpriteFrame();
+		Sprite result = new Sprite();
 		final double SPACE_DISTANCE = height * 0.25;
 		
 		// offsets 
@@ -85,8 +85,8 @@ public class HUD implements Renderable {
 		
 		final int SCORE_SIZE = 10;
 		
-		SpriteFrame rightScore 	= teamScoreSprite(Team.RIGHT, SCORE_SIZE);
-		SpriteFrame leftScore	= teamScoreSprite(Team.LEFT, SCORE_SIZE);
+		Sprite rightScore 	= teamScoreSprite(Team.RIGHT, SCORE_SIZE);
+		Sprite leftScore	= teamScoreSprite(Team.LEFT, SCORE_SIZE);
 		
 		rightScore	.render(r, screenPosition().plus(new CVector(400, 0)), Color.white);
 		leftScore	.render(r, screenPosition().plus(new CVector(-400, 0)), Color.white);

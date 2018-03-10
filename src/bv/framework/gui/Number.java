@@ -2,7 +2,7 @@ package bv.framework.gui;
 
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
-import bv.framework.sprites.SpriteFrame;
+import bv.framework.sprites.Sprite;
 import bv.framework.sprites.SpriteIO;
 
 public enum Number {
@@ -22,11 +22,11 @@ public enum Number {
 	
 	public static final double SPACE_TO_HEIGHT_RATIO = 0.25;
 	
-	private SpriteFrame sprite;
+	private Sprite sprite;
 	private double width;
 	private char character;
 	
-	public SpriteFrame size(double size) { return sprite.scaleNew(size); }
+	public Sprite size(double size) { return sprite.scaleNew(size); }
 	public double width(double size) { return width * size; }
 	
 	private Number(int index, char character) {
@@ -42,9 +42,9 @@ public enum Number {
 		return null;
 	}
 	
-	public static SpriteFrame fromString(String string, double size) {
+	public static Sprite fromString(String string, double size) {
 		char[] chars = string.toCharArray();
-		SpriteFrame result = new SpriteFrame();
+		Sprite result = new Sprite();
 //		double width = 0;
 		
 //		for (char c:chars) {

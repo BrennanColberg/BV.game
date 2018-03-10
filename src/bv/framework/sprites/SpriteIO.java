@@ -25,7 +25,7 @@ public class SpriteIO {
 			switch (IO.fileTypeOf(path)) {
 				case FOLDER: spriteLibrary.put(path, loadSprite(BASE_PATH + "/" + path)); break;
 				case TXT: 
-					spriteLibrary.put(path.substring(0, path.length()-4), new AnimatedSprite(new SpriteFrame(loadPoly(BASE_PATH + "/" + path))));
+					spriteLibrary.put(path.substring(0, path.length()-4), new AnimatedSprite(new Sprite(loadPoly(BASE_PATH + "/" + path))));
 					break;
 				default: break;
 			}
@@ -42,16 +42,16 @@ public class SpriteIO {
 				case TXT: 
 					if (file.equals("settings.txt"));
 //						BV.println(path + "/" + file); 
-					else result.add(new SpriteFrame(loadPoly(path + "/" + file)));
+					else result.add(new Sprite(loadPoly(path + "/" + file)));
 					break;
 				default: break;
 			}
 		}
 		return result;
 	}
-	private static SpriteFrame loadSpriteFrame(String path) {
+	private static Sprite loadSpriteFrame(String path) {
 		BV.println(path);
-		SpriteFrame result = new SpriteFrame();
+		Sprite result = new Sprite();
 		String[] polies = FOLDER.read(path);
 		for (int i = 0; i < polies.length; i++) {
 			String file = polies[i];

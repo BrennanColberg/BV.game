@@ -10,25 +10,25 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 
 @SuppressWarnings("serial")
-public class SpriteFrame extends ArrayList<Poly> implements Cloneable, Renderable {
+public class Sprite extends ArrayList<Poly> implements Cloneable, Renderable {
 
 	public double scale = 1;
 	public double heading = 0;
 	public Color color = Color.MAGENTA;
 	
-	public SpriteFrame(Poly...polies) {
+	public Sprite(Poly...polies) {
 		for (Poly p:polies) {
 			this.add(p);
 		}
 	}
-	public SpriteFrame(SpriteFrame template) {
+	public Sprite(Sprite template) {
 		this(template.toArray(new Poly[]{}));
 		this.scale = template.scale;
 		this.heading = template.heading;
 		this.color = template.color;
 	}
-	public SpriteFrame clone() {
-		return new SpriteFrame(this);
+	public Sprite clone() {
+		return new Sprite(this);
 	}
 	
 	public void render(Renderer r, CVector position, double scale, double heading, Color color) {
@@ -55,11 +55,11 @@ public class SpriteFrame extends ArrayList<Poly> implements Cloneable, Renderabl
 		for (Poly p : polies) super.add(p);
 	}
 	
-	public SpriteFrame scale(double factor) {
+	public Sprite scale(double factor) {
 		this.scale = factor;
 		return this;
 	}
-	public SpriteFrame scaleNew(double factor) {
+	public Sprite scaleNew(double factor) {
 		return this.clone().scale(factor);
 	}
 	
