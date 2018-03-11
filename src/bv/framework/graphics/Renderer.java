@@ -13,39 +13,48 @@ public class Renderer {
 	
 	/* VARIABLES */
 
+	/** The {@link Graphics} object referring to the frame being currently drawn. */
 	private Graphics graphics = null;
 	
+	/** The {@link Color} displayed when no {@link Renderable} object is drawn on a portion of screen. */
 	private Color backgroundColor = Color.lightGray;
 	
 	
 	/* GETTERS & SETTERS */
 	
+	// display (raw pixel dimensions, etc)
+	
 	public Rect getDisplayBounds() {
 		return Core.renderEngine.getDisplay().rectBounds();
 	}
-	public CVector getDisplayCenter() {
-		return (CVector) Core.renderEngine.getDisplay().getSize().scaledBy(.5);
-	}
 	public CVector getDisplaySize() {
-		return Core.state().getSize();
+		return this.getDisplayBounds().getSize();
+	}
+	public CVector getDisplayCenter() {
+		return this.getDisplaySize().scaledBy(0.5);
 	}
 	
-	public Rect getCameraBounds() {
+	// window (actualized, from GameState)
+	
+	public Rect getWindowBounds() {
 		return Core.state().rectBounds();
 	}
-	public CVector getCameraPosition() {
+	public CVector getWindowPosition() {
 		return Core.state().getPosition();
 	}
-	public CVector getCameraSize() {
+	public CVector getWindowSize() {
 		return Core.state().getSize();
 	}
 	
-	public double getPixelsPerUnit() {
+	// zoom
+	
+	public double getZoom() {
 		return Core.state().pixelsPerUnit;
 	}
 	
 	
 	// graphics
+	
 	public Graphics getGraphics() {
 		return graphics;
 	}
@@ -54,6 +63,7 @@ public class Renderer {
 	}
 	
 	// drawing color
+	
 	public Color getDrawingColor() {
 		return graphics.getColor();
 	}
@@ -87,16 +97,16 @@ public class Renderer {
 	
 	public CVector adjust(CVector point) {
 		CVector result = new CVector(point);
-		result.subtract(getCameraPosition());
-		result.scale(getPixelsPerUnit());
+		result.subtract(getWindowPosition());
+		result.scale(getZoom());
 		result.add(getDisplayCenter());
 		return result;
 	}
 	public CVector normalize(CVector point) {
 		CVector result = new CVector(point);
 		result.subtract(getDisplayCenter());
-		result.scale(1d / getPixelsPerUnit());
-		result.add(getCameraPosition());
+		result.scale(1d / getZoom());
+		result.add(getWindowPosition());
 		return result;
 	}
 	
@@ -105,13 +115,13 @@ public class Renderer {
 	public Rect adjust(Rect rect) {
 		Rect result = rect.clone();
 		result.setPosition(adjust(rect.getPosition()));
-		result.getSize().scale(getPixelsPerUnit());
+		result.getSize().scale(getZoom());
 		return result;
 	}
 	public Rect normalize(Rect rect) {
 		Rect result = rect.clone();
 		result.setPosition(normalize(rect.getPosition()));
-		result.getSize().scale(1d / getPixelsPerUnit());
+		result.getSize().scale(1d / getZoom());
 		return result;
 	}
 	
@@ -120,13 +130,13 @@ public class Renderer {
 	public Poly adjust(Poly poly) {
 		Poly result = new Poly(poly);
 		result.setPosition(adjust(poly.getPosition()));
-		result.scale(getPixelsPerUnit());
+		result.scale(getZoom());
 		return result;
 	}
 	public Poly normalize(Poly poly) {
 		Poly result = new Poly(poly);
 		result.setPosition(normalize(poly.getPosition()));
-		result.scale(1 / getPixelsPerUnit());
+		result.scale(1 / getZoom());
 		return result;
 	}
 
@@ -137,7 +147,7 @@ public class Renderer {
 	public void updateBackground() {
 		Core.renderEngine.getDisplay().getCanvas().setBackground(this.getBackgroundColor());
 		graphics.setColor(this.getBackgroundColor());
-		graphics.fillRect(0, 0, (int) getDisplaySize().getValue(0), (int) getDisplaySize().getValue(1));
+		graphics.fillRect(0, 0, (int) getWindowSize().getValue(0), (int) getWindowSize().getValue(1));
 	}
 	
 	// draws outline of given shape
