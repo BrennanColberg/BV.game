@@ -9,8 +9,8 @@ import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
-import bv.framework.sprites.CharSprite;
 import bv.framework.sprites.Sprite;
+import bv.framework.sprites.TextSprite;
 import bv.sportsGame.game.entities.classes.Team;
 
 public class HUD extends Entity implements Renderable {
@@ -28,12 +28,12 @@ public class HUD extends Entity implements Renderable {
 		char scoreOnesChar = scoreString.charAt(scoreString.length() - 1);
 		
 		Poly[] digit = new Poly[] {
-				CharSprite.fromCharacter(scoreTensChar).size(height).get(0),
-				CharSprite.fromCharacter(scoreOnesChar).size(height).get(0)
+				TextSprite.fromCharacter(scoreTensChar).size(height).get(0),
+				TextSprite.fromCharacter(scoreOnesChar).size(height).get(0)
 		};
 		Double[] width = new Double[] {
-				CharSprite.fromCharacter(scoreTensChar).width(height),
-				CharSprite.fromCharacter(scoreOnesChar).width(height)
+				TextSprite.fromCharacter(scoreTensChar).width(height),
+				TextSprite.fromCharacter(scoreOnesChar).width(height)
 		};
 		
 		// setting up variables for spriteFrame creation

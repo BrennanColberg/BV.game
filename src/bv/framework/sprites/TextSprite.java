@@ -3,7 +3,8 @@ package bv.framework.sprites;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 
-public enum CharSprite {
+public enum TextSprite {
+	
 	ZERO	(0, '0'),
 	ONE		(1, '1'),
 	TWO		(2, '2'),
@@ -27,14 +28,14 @@ public enum CharSprite {
 	public Sprite size(double size) { return sprite.scaleNew(size); }
 	public double width(double size) { return width * size; }
 	
-	private CharSprite(int index, char character) {
+	private TextSprite(int index, char character) {
 		this.sprite = SpriteIO.get("numberCharacters").get(index);
 		this.width = sprite.rectBounds().getSize().getValue(0);
 		this.character = character;
 	}
 	
-	public static CharSprite fromCharacter(char character) {
-		for (CharSprite n:CharSprite.values()) 
+	public static TextSprite fromCharacter(char character) {
+		for (TextSprite n:TextSprite.values()) 
 			if (n.character == character)
 				return n;
 		return null;

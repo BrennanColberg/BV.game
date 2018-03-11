@@ -6,17 +6,17 @@ import bv.framework.core.Core;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.physics.Entity;
-import bv.framework.sprites.CharSprite;
+import bv.framework.sprites.TextSprite;
 import bv.framework.state.Tickable;
 
 public class TimerDisplayer extends Entity implements Tickable {
 	
-	private CharSprite[] digits; //B- not good to have this as global variable
+	private TextSprite[] digits; //B- not good to have this as global variable
 	private double secondsLeft; //This is what is specifically counted down
 	
 	public TimerDisplayer(CVector position, int startingTime) {
 		this.position = position;
-		this.digits = new CharSprite[5];
+		this.digits = new TextSprite[5];
 		this.secondsLeft = startingTime;
 		updateDigits();
 	}
@@ -24,7 +24,7 @@ public class TimerDisplayer extends Entity implements Tickable {
 	//This is just used for centering the digits on the screen
 	private CVector leftBoundPosition() {
 		int digitsWidth = 45; //The starting amount for this is equal to the CharSprite of spaces in between the digits times the amount of space between them in order to get the total space between digits
-		for (CharSprite n : digits) {
+		for (TextSprite n : digits) {
 			digitsWidth += n.width(1);
 		}
 		return new CVector(position.getValue(0) - digitsWidth / 2, position.getValue(1));
@@ -63,11 +63,11 @@ public class TimerDisplayer extends Entity implements Tickable {
 		
 		// getting CharSprite class for each calculated character
 		// will display...  MM:SS  ...where M is a min digit and S is a sec digit
-		digits[0] = CharSprite.fromCharacter(minuteTensChar);
-		digits[1] = CharSprite.fromCharacter(minuteOnesChar);
-		digits[2] = CharSprite.fromCharacter(':');
-		digits[3] = CharSprite.fromCharacter(secondTensChar);
-		digits[4] = CharSprite.fromCharacter(secondOnesChar);
+		digits[0] = TextSprite.fromCharacter(minuteTensChar);
+		digits[1] = TextSprite.fromCharacter(minuteOnesChar);
+		digits[2] = TextSprite.fromCharacter(':');
+		digits[3] = TextSprite.fromCharacter(secondTensChar);
+		digits[4] = TextSprite.fromCharacter(secondOnesChar);
 	}
 	
 	//This method is what is called every second by the timer in order to update the game timer
