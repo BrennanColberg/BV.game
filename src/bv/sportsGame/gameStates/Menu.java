@@ -28,11 +28,11 @@ public class Menu extends GameState {
 	
 	Long lastClick = System.currentTimeMillis();
 	public void tick() {
-		if (Input.getLastMousePress() > lastClick) {
-			lastClick = Input.getLastMousePress();
+		if (Input.getLastClickTime() > lastClick) {
+			lastClick = Input.getLastClickTime();
 			for (int i = 0; i < objects.size(); i++) if (objects.get(i) instanceof Button) {
 				Button button = (Button) objects.get(i);
-				if (button.polyBounds().contains(Input.getLastMousePressAdjustedPosition()))
+				if (button.polyBounds().contains(Input.getLastClickAdjustedPosition()))
 					button.clicked();
 			}
 		}

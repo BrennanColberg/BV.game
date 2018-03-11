@@ -24,8 +24,8 @@ public class RenderEngine extends Engine {
 	public Renderer renderer;
 	
 	/* CONSTRUCTORS */
-	public RenderEngine(double newTargetFrequency, CVector displaySize) {
-		super(newTargetFrequency);
+	public RenderEngine(double newTargetFrequency, String title, CVector displaySize) {
+		super(newTargetFrequency, title);
 		canvas = new Canvas();
 		renderer = new Renderer();
 		display = new Display(displaySize, this.canvas);
