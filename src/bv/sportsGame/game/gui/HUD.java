@@ -1,4 +1,4 @@
-package bv.framework.gui;
+package bv.sportsGame.game.gui;
 
 import java.awt.Color;
 
@@ -10,20 +10,21 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
 import bv.framework.physics.Physics;
+import bv.framework.sprites.CharSprite;
 import bv.framework.sprites.Sprite;
+import bv.sportsGame.game.entities.GameTimer;
 import bv.sportsGame.game.entities.classes.Team;
 
 public class HUD extends Entity implements Renderable, Physics {
 
-	/* VARIABLES */
-	private GameTimer gameTimer = new GameTimer(screenPosition(), 300);
+	/* VARIABLES */	public GameTimer gameTimer = new GameTimer(300);
 	private Rect scoreBack = new Rect(screenPosition(), new CVector(500, 70));
 	private Rect timerBack = new Rect(screenPosition(), new CVector(300, 100));
 	
 	
 	/* CONSTRUCTOR */
 	public HUD() {
-		gameTimer = new GameTimer(screenPosition(), 300);
+		gameTimer = new GameTimer(300);
 	}
 	
 	// positioning algorithms
@@ -32,9 +33,6 @@ public class HUD extends Entity implements Renderable, Physics {
 	}
 	public void setPosition(CVector position) {
 		super.setPosition(position);
-		scoreBack.setPosition(screenPosition());
-		timerBack.setPosition(screenPosition());
-		gameTimer.setPosition(screenPosition());
 	}
 	
 	private Sprite teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
@@ -46,12 +44,12 @@ public class HUD extends Entity implements Renderable, Physics {
 		char scoreOnesChar = scoreString.charAt(scoreString.length() - 1);
 		
 		Poly[] digit = new Poly[] {
-				Number.fromCharacter(scoreTensChar).size(height).get(0),
-				Number.fromCharacter(scoreOnesChar).size(height).get(0)
+				CharSprite.fromCharacter(scoreTensChar).size(height).get(0),
+				CharSprite.fromCharacter(scoreOnesChar).size(height).get(0)
 		};
 		Double[] width = new Double[] {
-				Number.fromCharacter(scoreTensChar).width(height),
-				Number.fromCharacter(scoreOnesChar).width(height)
+				CharSprite.fromCharacter(scoreTensChar).width(height),
+				CharSprite.fromCharacter(scoreOnesChar).width(height)
 		};
 		
 		// setting up variables for spriteFrame creation

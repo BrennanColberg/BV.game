@@ -1,4 +1,4 @@
-package bv.framework.gui;
+package bv.sportsGame.game.gui;
 
 import java.awt.Color;
 
@@ -6,24 +6,25 @@ import bv.framework.core.Core;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.physics.Entity;
+import bv.framework.sprites.CharSprite;
 import bv.framework.state.Tickable;
 
 public class TimerDisplayer extends Entity implements Tickable {
 	
-	private Number[] digits; //B- not good to have this as global variable
+	private CharSprite[] digits; //B- not good to have this as global variable
 	private double secondsLeft; //This is what is specifically counted down
 	
 	public TimerDisplayer(CVector position, int startingTime) {
 		this.position = position;
-		this.digits = new Number[5];
+		this.digits = new CharSprite[5];
 		this.secondsLeft = startingTime;
 		updateDigits();
 	}
 	
 	//This is just used for centering the digits on the screen
 	private CVector leftBoundPosition() {
-		int digitsWidth = 45; //The starting amount for this is equal to the number of spaces in between the digits times the amount of space between them in order to get the total space between digits
-		for (Number n : digits) {
+		int digitsWidth = 45; //The starting amount for this is equal to the CharSprite of spaces in between the digits times the amount of space between them in order to get the total space between digits
+		for (CharSprite n : digits) {
 			digitsWidth += n.width(1);
 		}
 		return new CVector(position.getValue(0) - digitsWidth / 2, position.getValue(1));
@@ -48,25 +49,25 @@ public class TimerDisplayer extends Entity implements Tickable {
 		Integer seconds = (int) secondsLeft;
 		Integer minutes = ((int) secondsLeft) / 60; // same as floorDiv, more readable
 		
-		/* turning minutes number into a string, then using that string to find chars from each place */
+		/* turning minutes CharSprite into a string, then using that string to find chars from each place */
 		String minuteString = minutes.toString();
 		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
 		char minuteTensChar = minuteString.length() < 2 ? 0 : minuteString.charAt(minuteString.length() - 2);
 		char minuteOnesChar = minuteString.charAt(minuteString.length() - 1);
 		 
-		/* turning seconds number into string then into chars */
+		/* turning seconds CharSprite into string then into chars */
 		String secondString = seconds.toString();
 		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
 		char secondTensChar = secondString.length() < 2 ? 0 : secondString.charAt(secondString.length() - 2);
 		char secondOnesChar = secondString.charAt(secondString.length() - 1);
 		
-		// getting Number class for each calculated character
+		// getting CharSprite class for each calculated character
 		// will display...  MM:SS  ...where M is a min digit and S is a sec digit
-		digits[0] = Number.fromCharacter(minuteTensChar);
-		digits[1] = Number.fromCharacter(minuteOnesChar);
-		digits[2] = Number.fromCharacter(':');
-		digits[3] = Number.fromCharacter(secondTensChar);
-		digits[4] = Number.fromCharacter(secondOnesChar);
+		digits[0] = CharSprite.fromCharacter(minuteTensChar);
+		digits[1] = CharSprite.fromCharacter(minuteOnesChar);
+		digits[2] = CharSprite.fromCharacter(':');
+		digits[3] = CharSprite.fromCharacter(secondTensChar);
+		digits[4] = CharSprite.fromCharacter(secondOnesChar);
 	}
 	
 	//This method is what is called every second by the timer in order to update the game timer

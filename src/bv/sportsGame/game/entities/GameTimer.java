@@ -1,7 +1,6 @@
-package bv.framework.gui;
+package bv.sportsGame.game.entities;
 
 import bv.framework.core.Core;
-import bv.framework.math.CVector;
 import bv.framework.physics.Entity;
 import bv.framework.state.Tickable;
 
@@ -9,8 +8,7 @@ public class GameTimer extends Entity implements Tickable {
 	
 	private double secondsLeft; //This is what is specifically counted down
 	
-	public GameTimer(CVector position, int startingTime) {
-		this.position = position;
+	public GameTimer(int startingTime) {
 		this.secondsLeft = startingTime;
 	}
 	

@@ -9,17 +9,18 @@ import java.awt.event.KeyEvent;
 
 import bv.framework.core.Core;
 import bv.framework.core.Input;
-import bv.framework.gui.FieldObject;
-import bv.framework.gui.HUD;
 import bv.framework.math.CVector;
 import bv.framework.math.Rect;
 import bv.framework.state.GameState;
 import bv.framework.syntax.BV;
 import bv.sportsGame.game.entities.Ball;
+import bv.sportsGame.game.entities.GameTimer;
 import bv.sportsGame.game.entities.Goal;
 import bv.sportsGame.game.entities.classes.BasicClass;
 import bv.sportsGame.game.entities.classes.TankClass;
 import bv.sportsGame.game.entities.classes.Team;
+import bv.sportsGame.game.gui.FieldObject;
+import bv.sportsGame.game.gui.HUD;
 
 /** 
  * @author	Brennan Colberg
@@ -33,21 +34,20 @@ public class Game extends GameState {
 	Ball ball;
 	public Rect gamefield = new Rect(new CVector(0,0), Core.STARTING_SCREEN_SIZE);
 	public HUD hud;
+	public static GameTimer gameTimer;
 	
 	public void init() {
 		
 		objects.add(new FieldObject());
 		
-		//This can be implemented in a better way later, I just wanted to get the functionality down
 		objects.add(goal1	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
 		objects.add(goal2	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
 		objects.add(player	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.LEFT, true));
 		objects.add(dummy	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.RIGHT, false));
 		objects.add(ball	= new Ball());
 		
-		
-		// objects.add(new PointHighlighter()); // only used for debug
-		objects.add(hud		= new HUD());
+		objects.add(hud			= new HUD());
+		objects.add(gameTimer 	= new GameTimer(300));
 		
 		this.pixelsPerUnit = 0.25;
 	}

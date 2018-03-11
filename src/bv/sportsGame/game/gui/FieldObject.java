@@ -1,4 +1,4 @@
-package bv.framework.gui;
+package bv.sportsGame.game.gui;
 
 import java.awt.Color;
 
