@@ -11,7 +11,6 @@ import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
 import bv.framework.sprites.CharSprite;
 import bv.framework.sprites.Sprite;
-import bv.framework.syntax.BV;
 import bv.sportsGame.game.entities.classes.Team;
 
 public class HUD extends Entity implements Renderable {
@@ -70,7 +69,6 @@ public class HUD extends Entity implements Renderable {
 		double zoomFactor = Core.state().pixelsPerUnit;
 		this.position = window.getCorner(0,-.5*  0.90  ); // 90% of the way up the screen, in the middle
 		
-		BV.println("hudps " + position.toString());
 		Rect scoreBack = new Rect(position, scoreBackSize.scaledBy(1/zoomFactor));
 		Rect timerBack = new Rect(position, timerBackSize.scaledBy(1/zoomFactor));
 		
