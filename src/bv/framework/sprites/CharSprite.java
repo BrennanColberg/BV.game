@@ -1,11 +1,9 @@
-package bv.framework.gui;
+package bv.framework.sprites;
 
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
-import bv.framework.sprites.Sprite;
-import bv.framework.sprites.SpriteIO;
 
-public enum Number {
+public enum CharSprite {
 	ZERO	(0, '0'),
 	ONE		(1, '1'),
 	TWO		(2, '2'),
@@ -29,14 +27,14 @@ public enum Number {
 	public Sprite size(double size) { return sprite.scaleNew(size); }
 	public double width(double size) { return width * size; }
 	
-	private Number(int index, char character) {
+	private CharSprite(int index, char character) {
 		this.sprite = SpriteIO.get("numberCharacters").get(index);
 		this.width = sprite.rectBounds().getSize().getValue(0);
 		this.character = character;
 	}
 	
-	public static Number fromCharacter(char character) {
-		for (Number n:Number.values()) 
+	public static CharSprite fromCharacter(char character) {
+		for (CharSprite n:CharSprite.values()) 
 			if (n.character == character)
 				return n;
 		return null;

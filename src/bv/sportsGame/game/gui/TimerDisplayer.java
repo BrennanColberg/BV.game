@@ -1,41 +1,30 @@
-package bv.framework.gui;
+package bv.sportsGame.game.gui;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.Timer;
-
+import bv.framework.core.Core;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
+import bv.framework.physics.Entity;
+import bv.framework.sprites.CharSprite;
+import bv.framework.state.Tickable;
 
-public class GameTimer implements ActionListener {
+public class TimerDisplayer extends Entity implements Tickable {
 	
-	private CVector position;
-	private Number[] digits; //B- not good to have this as global variable
-	private int secondsLeft; //This is what is specifically counted down
-	private Timer timer; //B- let's use ticks, I'll fix (hey that rhymes)
+	private CharSprite[] digits; //B- not good to have this as global variable
+	private double secondsLeft; //This is what is specifically counted down
 	
-	public GameTimer(CVector pos, int startingTime) {
-		position = pos;
-		digits = new Number[5];
-		secondsLeft = startingTime;
-		
-		// let's not do this ... we have ticks for a reason and this will make it hella complicated to pause/play. Will fix later -B
-		timer = new Timer(1000, (ActionListener) this);
-		timer.start();
-		
-		updateDigits();
-	}
-	
-	public void setPosition(CVector position) {
+	public TimerDisplayer(CVector position, int startingTime) {
 		this.position = position;
+		this.digits = new CharSprite[5];
+		this.secondsLeft = startingTime;
+		updateDigits();
 	}
 	
 	//This is just used for centering the digits on the screen
 	private CVector leftBoundPosition() {
-		int digitsWidth = 45; //The starting amount for this is equal to the number of spaces in between the digits times the amount of space between them in order to get the total space between digits
-		for (Number n : digits) {
+		int digitsWidth = 45; //The starting amount for this is equal to the CharSprite of spaces in between the digits times the amount of space between them in order to get the total space between digits
+		for (CharSprite n : digits) {
 			digitsWidth += n.width(1);
 		}
 		return new CVector(position.getValue(0) - digitsWidth / 2, position.getValue(1));
@@ -57,35 +46,35 @@ public class GameTimer implements ActionListener {
 //		int secondsOnes = (secondsLeft % 60) - secondsTens * 10;
 		
 		// converting to Integer to have access to .toString() later on
-		Integer seconds = secondsLeft;
-		Integer minutes = secondsLeft / 60; // same as floorDiv, more readable
+		Integer seconds = (int) secondsLeft;
+		Integer minutes = ((int) secondsLeft) / 60; // same as floorDiv, more readable
 		
-		/* turning minutes number into a string, then using that string to find chars from each place */
+		/* turning minutes CharSprite into a string, then using that string to find chars from each place */
 		String minuteString = minutes.toString();
 		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
 		char minuteTensChar = minuteString.length() < 2 ? 0 : minuteString.charAt(minuteString.length() - 2);
 		char minuteOnesChar = minuteString.charAt(minuteString.length() - 1);
 		 
-		/* turning seconds number into string then into chars */
+		/* turning seconds CharSprite into string then into chars */
 		String secondString = seconds.toString();
 		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
 		char secondTensChar = secondString.length() < 2 ? 0 : secondString.charAt(secondString.length() - 2);
 		char secondOnesChar = secondString.charAt(secondString.length() - 1);
 		
-		// getting Number class for each calculated character
+		// getting CharSprite class for each calculated character
 		// will display...  MM:SS  ...where M is a min digit and S is a sec digit
-		digits[0] = Number.fromCharacter(minuteTensChar);
-		digits[1] = Number.fromCharacter(minuteOnesChar);
-		digits[2] = Number.fromCharacter(':');
-		digits[3] = Number.fromCharacter(secondTensChar);
-		digits[4] = Number.fromCharacter(secondOnesChar);
+		digits[0] = CharSprite.fromCharacter(minuteTensChar);
+		digits[1] = CharSprite.fromCharacter(minuteOnesChar);
+		digits[2] = CharSprite.fromCharacter(':');
+		digits[3] = CharSprite.fromCharacter(secondTensChar);
+		digits[4] = CharSprite.fromCharacter(secondOnesChar);
 	}
 	
 	//This method is what is called every second by the timer in order to update the game timer
-	public void actionPerformed(ActionEvent a) {
-		secondsLeft--;
+	public void tick() {
+		secondsLeft -= 1d / Core.tickEngine.targetFrequency;
 		if (secondsLeft <= 0) {
-			//The round has ended - time is up
+			// STOP
 		}
 		updateDigits();
 	}

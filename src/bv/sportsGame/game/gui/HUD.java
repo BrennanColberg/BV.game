@@ -1,7 +1,6 @@
-package bv.framework.gui;
+package bv.sportsGame.game.gui;
 
 import java.awt.Color;
-import java.util.HashMap;
 
 import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
@@ -9,61 +8,32 @@ import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
+import bv.framework.physics.Entity;
+import bv.framework.sprites.CharSprite;
 import bv.framework.sprites.Sprite;
 import bv.sportsGame.game.entities.classes.Team;
 
-public class HUD implements Renderable {
+public class HUD extends Entity implements Renderable {
 
 	/* VARIABLES */
-	public static HashMap<Team,Integer> scores = new HashMap<Team,Integer>();
-	
-	private CVector gamePosition = new CVector(0, 0);
-	private GameTimer gameTimer = new GameTimer(screenPosition(), 300);
-	private Rect scoreBack = new Rect(screenPosition(), new CVector(500, 70));
-	private Rect timerBack = new Rect(screenPosition(), new CVector(300, 100));
-	
-	
-	/* CONSTRUCTOR */
-	public HUD() {
-		scores.clear();
-		scores.put(Team.LEFT, 0);
-		scores.put(Team.RIGHT, 0);
-		
-		gamePosition = new CVector(0, 0);
-		gameTimer = new GameTimer(screenPosition(), 300);
-	}
-	
-	// point incrementer
-	public static void incrementScore(Team team) {
-		scores.put(team, scores.get(team) + 1);
-	}
-	
-	// positioning algorithms
-	public CVector screenPosition() {
-		return new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1) * 2 + 125).plus(gamePosition);
-	}
-	public void updateGamePosition(CVector position) {
-		gamePosition = position;
-		scoreBack.setPosition(screenPosition());
-		timerBack.setPosition(screenPosition());
-		gameTimer.setPosition(screenPosition());
-	}
+	private CVector scoreBackSize = new CVector(125, 17.5);
+	private CVector timerBackSize = new CVector(75, 25);
 	
 	private Sprite teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
 		
 		/* turning number into a string, then using that string to find chars from each place */
-		String scoreString = scores.get(team).toString();
+		String scoreString = "" + team.score;
 		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
 		char scoreTensChar = scoreString.length() < 2 ? 0 : scoreString.charAt(scoreString.length() - 2);
 		char scoreOnesChar = scoreString.charAt(scoreString.length() - 1);
 		
 		Poly[] digit = new Poly[] {
-				Number.fromCharacter(scoreTensChar).size(height).get(0),
-				Number.fromCharacter(scoreOnesChar).size(height).get(0)
+				CharSprite.fromCharacter(scoreTensChar).size(height).get(0),
+				CharSprite.fromCharacter(scoreOnesChar).size(height).get(0)
 		};
 		Double[] width = new Double[] {
-				Number.fromCharacter(scoreTensChar).width(height),
-				Number.fromCharacter(scoreOnesChar).width(height)
+				CharSprite.fromCharacter(scoreTensChar).width(height),
+				CharSprite.fromCharacter(scoreOnesChar).width(height)
 		};
 		
 		// setting up variables for spriteFrame creation
@@ -81,6 +51,7 @@ public class HUD implements Renderable {
 		return result;
 	}
 	
+	@SuppressWarnings("unused")
 	private void renderScore(Renderer r) {
 		
 		final int SCORE_SIZE = 10;
@@ -88,15 +59,24 @@ public class HUD implements Renderable {
 		Sprite rightScore 	= teamScoreSprite(Team.RIGHT, SCORE_SIZE);
 		Sprite leftScore	= teamScoreSprite(Team.LEFT, SCORE_SIZE);
 		
-		rightScore	.render(r, screenPosition().plus(new CVector(400, 0)), Color.white);
-		leftScore	.render(r, screenPosition().plus(new CVector(-400, 0)), Color.white);
+		rightScore	.render(r, position.plus(new CVector(400, 0)), Color.white);
+		leftScore	.render(r, position.plus(new CVector(-400, 0)), Color.white);
 	}
 	
 	public void render(Renderer r) {
+		
+		Rect window = Core.state().rectBounds();
+		double zoomFactor = Core.state().pixelsPerUnit;
+		this.position = window.getCorner(0,-.5*  0.90  ); // 90% of the way up the screen, in the middle
+		
+		Rect scoreBack = new Rect(position, scoreBackSize.scaledBy(1/zoomFactor));
+		Rect timerBack = new Rect(position, timerBackSize.scaledBy(1/zoomFactor));
+		
 		r.fill(scoreBack.rectBounds(), Color.black);
 		r.fill(timerBack.rectBounds(), Color.darkGray);
-		gameTimer.renderDigits(r);
-		renderScore(r);
+		// temp disabled because text is screwed up
+//		gameTimer.renderDigits(r);
+//		renderScore(r);
 	}
 
 	public Rect rectBounds() { return null; }

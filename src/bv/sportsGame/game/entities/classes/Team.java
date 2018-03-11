@@ -6,6 +6,7 @@ public enum Team {
 	
 	RIGHT(Color.red), LEFT(Color.blue);
 	
+	public int score = 0;
 	public Color color;
 	private Team (Color color) {
 		this.color = color;

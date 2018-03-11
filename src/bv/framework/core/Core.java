@@ -31,10 +31,10 @@ public class Core {
 		
 		SpriteIO.load();
 		
-		renderEngine = new RenderEngine(90, STARTING_SCREEN_SIZE);
+		renderEngine = new RenderEngine(60, STARTING_SCREEN_SIZE);
 		gameStateManager = new GameStateManager();
 		tickEngine = new TickEngine(90);
-		collisionEngine = new CollisionEngine(30);
+		collisionEngine = new CollisionEngine(45);
 		renderEngine.start();
 		tickEngine.start();
 		collisionEngine.start();
