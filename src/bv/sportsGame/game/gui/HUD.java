@@ -9,31 +9,16 @@ import bv.framework.math.CVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
-import bv.framework.physics.Physics;
 import bv.framework.sprites.CharSprite;
 import bv.framework.sprites.Sprite;
-import bv.sportsGame.game.entities.GameTimer;
+import bv.framework.syntax.BV;
 import bv.sportsGame.game.entities.classes.Team;
 
-public class HUD extends Entity implements Renderable, Physics {
+public class HUD extends Entity implements Renderable {
 
-	/* VARIABLES */	public GameTimer gameTimer = new GameTimer(300);
-	private Rect scoreBack = new Rect(screenPosition(), new CVector(500, 70));
-	private Rect timerBack = new Rect(screenPosition(), new CVector(300, 100));
-	
-	
-	/* CONSTRUCTOR */
-	public HUD() {
-		gameTimer = new GameTimer(300);
-	}
-	
-	// positioning algorithms
-	public CVector screenPosition() {
-		return position.plus(new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1) * 2 + 125));
-	}
-	public void setPosition(CVector position) {
-		super.setPosition(position);
-	}
+	/* VARIABLES */
+	private CVector scoreBackSize = new CVector(125, 17.5);
+	private CVector timerBackSize = new CVector(75, 25);
 	
 	private Sprite teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
 		
@@ -75,20 +60,25 @@ public class HUD extends Entity implements Renderable, Physics {
 		Sprite rightScore 	= teamScoreSprite(Team.RIGHT, SCORE_SIZE);
 		Sprite leftScore	= teamScoreSprite(Team.LEFT, SCORE_SIZE);
 		
-		rightScore	.render(r, screenPosition().plus(new CVector(400, 0)), Color.white);
-		leftScore	.render(r, screenPosition().plus(new CVector(-400, 0)), Color.white);
+		rightScore	.render(r, position.plus(new CVector(400, 0)), Color.white);
+		leftScore	.render(r, position.plus(new CVector(-400, 0)), Color.white);
 	}
 	
 	public void render(Renderer r) {
+		
+		Rect window = Core.state().rectBounds();
+		double zoomFactor = Core.state().pixelsPerUnit;
+		this.position = window.getCorner(0,-.5*  0.90  ); // 90% of the way up the screen, in the middle
+		
+		BV.println("hudps " + position.toString());
+		Rect scoreBack = new Rect(position, scoreBackSize.scaledBy(1/zoomFactor));
+		Rect timerBack = new Rect(position, timerBackSize.scaledBy(1/zoomFactor));
+		
 		r.fill(scoreBack.rectBounds(), Color.black);
 		r.fill(timerBack.rectBounds(), Color.darkGray);
 		// temp disabled because text is screwed up
 //		gameTimer.renderDigits(r);
 //		renderScore(r);
-	}
-	
-	public void updatePhysics() {
-		this.setPosition(Core.state().position);
 	}
 
 	public Rect rectBounds() { return null; }
