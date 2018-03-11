@@ -18,7 +18,7 @@ public class Core {
 	public static final CVector STARTING_SCREEN_SIZE = new CVector(1024,576);
 	
 	/** Decrees whether or not updates such as TPS and FPS should show in console. */
-	public static boolean printEngineUpdatesToConsole = true;
+	public static boolean printEngineUpdatesToConsole = false;
 	// no idea what this does
 	public static int engineUpdateDelay = 1000;
 	// good lord this is spaghetti, are these even used?
@@ -41,10 +41,10 @@ public class Core {
 		SpriteIO.load();
 		
 		// initializes various engines and managers
-		renderEngine = new RenderEngine(90, STARTING_SCREEN_SIZE);
+		renderEngine = new RenderEngine			(90, "FPS", STARTING_SCREEN_SIZE);
 		gameStateManager = new GameStateManager();
-		tickEngine = new TickEngine(90);
-		collisionEngine = new CollisionEngine(30);
+		tickEngine = new TickEngine				(90, "TPS");
+		collisionEngine = new CollisionEngine	(30, "CPS");
 		
 		// starts all three threads; program officially begins here!
 		renderEngine.start();
