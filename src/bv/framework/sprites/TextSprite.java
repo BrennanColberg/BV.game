@@ -21,7 +21,7 @@ public enum TextSprite {
 	
 	public static final double SPACE_TO_HEIGHT_RATIO = 0.25;
 	
-	private Sprite sprite;
+	public Sprite sprite;
 	private double width;
 	private char character;
 	
@@ -39,6 +39,9 @@ public enum TextSprite {
 			if (n.character == character)
 				return n;
 		return null;
+	}
+	public static Sprite fromCharacter(char character, double size) {
+		return fromCharacter(character).size(size);
 	}
 	
 	public static Sprite fromString(String string, double size) {

@@ -5,6 +5,7 @@ import bv.framework.core.engines.RenderEngine;
 import bv.framework.core.engines.TickEngine;
 import bv.framework.math.CVector;
 import bv.framework.sprites.SpriteIO;
+import bv.framework.sprites.text.TextTesting;
 import bv.framework.state.GameState;
 
 /** Centrally static class around which the running program revolves.
@@ -42,7 +43,7 @@ public class Core {
 		
 		// initializes various engines and managers
 		renderEngine = new RenderEngine			(60, "FPS", STARTING_SCREEN_SIZE);
-		gameStateManager = new GameStateManager();
+		gameStateManager = new GameStateManager(new TextTesting());
 		tickEngine = new TickEngine				(90, "TPS");
 		collisionEngine = new CollisionEngine	(45, "CPS");
 		
