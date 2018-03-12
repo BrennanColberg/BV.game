@@ -11,57 +11,16 @@ import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
 import bv.framework.sprites.Sprite;
 import bv.framework.sprites.TextSprite;
+import bv.framework.syntax.BColor;
 import bv.sportsGame.game.entities.classes.Team;
+import bv.sportsGame.gameStates.Game;
 
 public class HUD extends Entity implements Renderable {
 
 	/* VARIABLES */
-	private CVector scoreBackSize = new CVector(125, 17.5);
-	private CVector timerBackSize = new CVector(75, 25);
-	
-	private Sprite teamScoreSprite(Team team, int height) { // TODO move this char splicing method into Number itself
-		
-		/* turning number into a string, then using that string to find chars from each place */
-		String scoreString = "" + team.score;
-		// using if operator for first digit; basically, if string is not 2 digits long then display a zero
-		char scoreTensChar = scoreString.length() < 2 ? 0 : scoreString.charAt(scoreString.length() - 2);
-		char scoreOnesChar = scoreString.charAt(scoreString.length() - 1);
-		
-		Poly[] digit = new Poly[] {
-				TextSprite.fromCharacter(scoreTensChar).getSprite().get(0),
-				TextSprite.fromCharacter(scoreOnesChar).getSprite().get(0)
-		};
-		Double[] width = new Double[] {
-				TextSprite.fromCharacter(scoreTensChar).getWidth(),
-				TextSprite.fromCharacter(scoreOnesChar).getWidth()
-		};
-		
-		// setting up variables for spriteFrame creation
-		Sprite result = new Sprite();
-		final double SPACE_DISTANCE = height * 0.25;
-		
-		// offsets 
-		digit[0].setOffset(new CVector(0, -0.5 * (width[0] + SPACE_DISTANCE)));
-		digit[1].setOffset(new CVector(0, +0.5 * (width[1] + SPACE_DISTANCE)));
-		
-		// result formatting
-		result.add(digit[0]);
-		result.add(digit[1]);
-		
-		return result;
-	}
-	
-	@SuppressWarnings("unused")
-	private void renderScore(Renderer r) {
-		
-		final int SCORE_SIZE = 10;
-		
-		Sprite rightScore 	= teamScoreSprite(Team.RIGHT, SCORE_SIZE);
-		Sprite leftScore	= teamScoreSprite(Team.LEFT, SCORE_SIZE);
-		
-		rightScore	.render(r, position.plus(new CVector(400, 0)), Color.white);
-		leftScore	.render(r, position.plus(new CVector(-400, 0)), Color.white);
-	}
+	private final CVector SCORE_BACK_SIZE = new CVector(125, 17.5);
+	private final CVector TIMER_BACK_SIZE = new CVector(75, 25);
+	private static final double TIMER_TEXT_SIZE = 100, SCORE_TEXT_SIZE = 75;
 	
 	public void render(Renderer r) {
 		
@@ -69,14 +28,28 @@ public class HUD extends Entity implements Renderable {
 		double zoomFactor = Core.state().pixelsPerUnit;
 		this.position = window.getCorner(0,-.5*  0.90  ); // 90% of the way up the screen, in the middle
 		
-		Rect scoreBack = new Rect(position, scoreBackSize.scaledBy(1/zoomFactor));
-		Rect timerBack = new Rect(position, timerBackSize.scaledBy(1/zoomFactor));
+		Rect scoreBack = new Rect(position, SCORE_BACK_SIZE.scaledBy(1/zoomFactor));
+		Rect timerBack = new Rect(position, TIMER_BACK_SIZE.scaledBy(1/zoomFactor));
 		
 		r.fill(scoreBack.rectBounds(), Color.black);
 		r.fill(timerBack.rectBounds(), Color.darkGray);
-		// temp disabled because text is screwed up
-//		gameTimer.renderDigits(r);
-//		renderScore(r);
+		
+		renderTimer(r);
+		renderScore(r);
+	}
+	
+	private void renderTimer(Renderer r) {
+		Sprite secondsLeft = TextSprite.spriteFromString("" + Math.round(Game.gameTimer.secondsLeft));
+		secondsLeft.render(r, position.plus(new CVector(0, 0)), TIMER_TEXT_SIZE, 0, Color.WHITE);
+	}
+	
+	private void renderScore(Renderer r) {
+		
+		Sprite rightScore = TextSprite.spriteFromString("" + Team.RIGHT.score);
+		Sprite leftScore = TextSprite.spriteFromString("" + Team.LEFT.score);
+		
+		rightScore.render(r, position.plus(new CVector(400, 0)), SCORE_TEXT_SIZE, 0, BColor.shade(Team.RIGHT.color, 200));
+		leftScore.render(r, position.plus(new CVector(-400, 0)), SCORE_TEXT_SIZE, 0, BColor.shade(Team.LEFT.color, 200));
 	}
 
 	public Rect rectBounds() { return null; }

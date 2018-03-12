@@ -49,8 +49,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
 		if (object instanceof Ball) {
-			//Ball ball = (Ball)object;
-//			HUD.incrementScore(team);
+			team.score++;
 		}
 	}
 

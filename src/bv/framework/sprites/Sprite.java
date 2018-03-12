@@ -35,7 +35,7 @@ public class Sprite extends ArrayList<Poly> implements Cloneable, Renderable {
 	public void render(Renderer r, CVector position, double scale, double heading, Color color) {
 		for (int i = 0; i < this.size(); i++) {
 			Poly poly = this.get(i).rotatedBy(heading).scaledBy(scale);
-			poly.setOffset(new PVector(poly.getOffset()).scaledBy(scale).rotatedBy(heading).toCVector());
+			poly.setOffset(new PVector(poly.getOffset()).scaledBy(scale).rotatedBy(heading).toCVector().plus(position));
 			r.fill(poly, color);
 		}
 	}
