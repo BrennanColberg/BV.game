@@ -28,12 +28,12 @@ public class HUD extends Entity implements Renderable {
 		char scoreOnesChar = scoreString.charAt(scoreString.length() - 1);
 		
 		Poly[] digit = new Poly[] {
-				TextSprite.fromCharacter(scoreTensChar).size(height).get(0),
-				TextSprite.fromCharacter(scoreOnesChar).size(height).get(0)
+				TextSprite.fromCharacter(scoreTensChar).getSprite().get(0),
+				TextSprite.fromCharacter(scoreOnesChar).getSprite().get(0)
 		};
 		Double[] width = new Double[] {
-				TextSprite.fromCharacter(scoreTensChar).width(height),
-				TextSprite.fromCharacter(scoreOnesChar).width(height)
+				TextSprite.fromCharacter(scoreTensChar).getWidth(),
+				TextSprite.fromCharacter(scoreOnesChar).getWidth()
 		};
 		
 		// setting up variables for spriteFrame creation
@@ -41,8 +41,8 @@ public class HUD extends Entity implements Renderable {
 		final double SPACE_DISTANCE = height * 0.25;
 		
 		// offsets 
-		digit[0].setPosition(new CVector(0, -0.5 * (width[0] + SPACE_DISTANCE)));
-		digit[1].setPosition(new CVector(0, +0.5 * (width[1] + SPACE_DISTANCE)));
+		digit[0].setOffset(new CVector(0, -0.5 * (width[0] + SPACE_DISTANCE)));
+		digit[1].setOffset(new CVector(0, +0.5 * (width[1] + SPACE_DISTANCE)));
 		
 		// result formatting
 		result.add(digit[0]);

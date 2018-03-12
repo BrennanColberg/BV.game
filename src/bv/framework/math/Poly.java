@@ -19,21 +19,21 @@ public class Poly implements Renderable {
 	/* VARIABLES */
 	
 	private ArrayList<PVector> points = new ArrayList<PVector>();
-	private CVector position = new CVector(0, 0);
+	private CVector offset = new CVector(0, 0);
 	
 	
 	/* CONSTRUCTORS */
 	
-	public Poly(CVector newPosition, List<PVector> list) {
-		this.position = newPosition;
+	public Poly(CVector offset, List<PVector> list) {
+		this.offset = offset;
 		for (PVector point:list) points.add(point);
 	}
-	public Poly(CVector newPosition, PVector...newPoints) {	
-		this(newPosition, Arrays.asList(newPoints));
+	public Poly(CVector offset, PVector...newPoints) {	
+		this(offset, Arrays.asList(newPoints));
 	}
 	
 	public Poly(Poly template) {
-		this.position = template.position;
+		this.offset = template.offset;
 		for (PVector point:template.points) points.add(new PVector(point));
 	}
 	public Poly() {
@@ -53,7 +53,7 @@ public class Poly implements Renderable {
 			points.get(i).scale(in);
 	}
 	public void translate(CVector in) {
-		this.position.add(in);
+		this.offset.add(in);
 	}
 	
 	public Poly rotatedBy(double in) {
@@ -75,11 +75,11 @@ public class Poly implements Renderable {
 	
 	/* GETTERS & SETTERS */
 	
-	public CVector getPosition() {
-		return position;
+	public CVector getOffset() {
+		return offset;
 	}
-	public void setPosition(CVector newPosition) {
-		this.position = newPosition;
+	public void setOffset(CVector offset) {
+		this.offset = offset;
 	}
 	
 	public ArrayList<PVector> getPoints() {
@@ -93,7 +93,7 @@ public class Poly implements Renderable {
 	}
 	public PVector getAdjustedPoint(int index) {
 		PVector point = new PVector(points.get(index));
-		point.add(position);
+		point.add(offset);
 		return point;
 	}
 	public void setPoint(int index, PVector newPoint) {
@@ -127,7 +127,7 @@ public class Poly implements Renderable {
 	public Polygon toPolygon() {
 		Polygon result = new Polygon();
 		for (int i = 0; i < points.size(); i++) {
-			CVector cartPoint = points.get(i).toCVector().plus(this.position);
+			CVector cartPoint = points.get(i).toCVector().plus(this.offset);
 			result.addPoint((int) cartPoint.getValue(0), (int) cartPoint.getValue(1)); 
 		}
 		return result;
@@ -135,7 +135,7 @@ public class Poly implements Renderable {
 	public Polygon toAdjustedPolygon() {
 		Polygon result = new Polygon();
 		for (int i = 0; i < points.size(); i++) {
-			CVector cartPoint = points.get(i).toCVector().plus(this.position);
+			CVector cartPoint = points.get(i).toCVector().plus(this.offset);
 			result.addPoint((int) cartPoint.getValue(0), (int) cartPoint.getValue(1)); 
 		}
 		return result;
@@ -156,7 +156,7 @@ public class Poly implements Renderable {
 			if (cv.values[i] > max.values[i]) max.values[i] = cv.values[i];
 		}
 		
-		return new Rect(this.position, max.minus(min));		
+		return new Rect(this.offset, max.minus(min));		
 	}
 	
 	public void render(Renderer r) {

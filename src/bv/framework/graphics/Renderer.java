@@ -119,13 +119,13 @@ public class Renderer {
 	
 	public Poly adjust(Poly poly) {
 		Poly result = new Poly(poly);
-		result.setPosition(adjust(poly.getPosition()));
+		result.setOffset(adjust(poly.getOffset()));
 		result.scale(getPixelsPerUnit());
 		return result;
 	}
 	public Poly normalize(Poly poly) {
 		Poly result = new Poly(poly);
-		result.setPosition(normalize(poly.getPosition()));
+		result.setOffset(normalize(poly.getOffset()));
 		result.scale(1 / getPixelsPerUnit());
 		return result;
 	}

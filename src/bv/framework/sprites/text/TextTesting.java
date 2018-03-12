@@ -10,12 +10,12 @@ public class TextTesting extends GameState {
 	Entity r;
 	
 	public void init() {
-		objects.add(r = new RChar('1'));
 		objects.add(new PointHighlighter() {
 			public void tick() {
 				this.setPosition(((TextTesting) Core.state()).r.position);
 			}
 		});
+		objects.add(r = new RText("011 378 1292"));
 	}
 	
 	public void tick() {

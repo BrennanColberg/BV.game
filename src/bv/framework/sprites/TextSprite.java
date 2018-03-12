@@ -19,18 +19,25 @@ public enum TextSprite {
 	COLON	(10, ':'),
 	DECIMAL	(11, '.');
 	
-	public static final double SPACE_TO_HEIGHT_RATIO = 0.25;
+	public static final double SPACE_SIZE = 0.5;
+	public static final double GAP_SIZE = 0.125;
+	
 	
 	public Sprite sprite;
 	private double width;
 	private char character;
 	
-	public Sprite size(double size) { return sprite.scaleNew(size); }
-	public double width(double size) { return width * size; }
+	public Sprite getSprite() { return sprite.clone(); }
+	public double getWidth() { return width; }
 	
 	private TextSprite(int index, char character) {
 		this.sprite = SpriteIO.get("numberCharacters").get(index);
-		this.width = sprite.rectBounds().getSize().getValue(0);
+		
+		// NECESSARY! now all are 1 unit high, enabling "height" inputs to be pixel-accurate
+		double height = this.sprite.rectBounds().getSize().getValue(1);
+		for (Poly p:sprite) p.scale(1/height);
+		
+		this.width = sprite.rectBounds().getSize().getValue(0); // for some reason this needs to be halved. no idea, don't touch it
 		this.character = character;
 	}
 	
@@ -40,36 +47,44 @@ public enum TextSprite {
 				return n;
 		return null;
 	}
-	public static Sprite fromCharacter(char character, double size) {
-		return fromCharacter(character).size(size);
+	public static Sprite spriteFromCharacter(char character) {
+		TextSprite ts = fromCharacter(character);
+		return (ts == null) ? null : ts.getSprite();
 	}
 	
-	public static Sprite fromString(String string, double size) {
-		char[] chars = string.toCharArray();
+	public static Sprite spriteFromString(String string) {
+		
 		Sprite result = new Sprite();
-//		double width = 0;
 		
-//		for (char c:chars) {
-//			switch(c) {
-//			case ' ': width += size * SPACE_TO_HEIGHT_RATIO; break;
-//			default: width += fromCharacter(c).width(size); break;
-//			}
-//		}
+		// needs to keep track of the total width of the string
+		// used to track where to place each new letter
+		double width = 0;
 		
-		CVector cursor = new CVector(0,0);
-		for (char c:chars) {
+		for (char c : string.toCharArray()) {
 			switch(c) {
-			case ' ': 
-				cursor.add(new CVector(SPACE_TO_HEIGHT_RATIO, 0));
+			case ' ':
+				if (result.size() != 0) 
+					width += GAP_SIZE;
+				width += SPACE_SIZE;
 				break;
 			default:
-				Poly newCharPoly = fromCharacter(c).sprite.get(0);
-				cursor.add(new CVector(newCharPoly.getPosition().getValue(0), 0));
-				result.add(newCharPoly);
-				cursor.add(new CVector(newCharPoly.getPosition().getValue(0), 0));
+				TextSprite charObj = TextSprite.fromCharacter(c);
+				if (charObj == null) break;
+				Poly charPoly = charObj.sprite.get(0).clone();
+				
+				if (result.size() != 0) width += GAP_SIZE;
+				
+				charPoly.setOffset(new CVector(width + charObj.width * 0.5, 0));
+				result.add(charPoly);
+				
+				width += charObj.width;
+				
 				break;
 			}
 		}
+		
+		// hacky way to center result sprite on position
+		for (Poly p:result) p.setOffset(p.getOffset().minus(new CVector(width/2, 0)));
 		
 		return result;
 	}

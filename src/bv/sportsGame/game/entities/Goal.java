@@ -57,7 +57,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 	@Override
 	public Poly trigger() {
 		Poly poly = polyBounds();
-		poly.setPosition(position);
+		poly.setOffset(position);
 		return poly;
 	}
 	

@@ -19,7 +19,7 @@ public class Missile extends Projectile {
 	@Override
 	public Poly trigger() {
 		Poly poly = polyBounds();
-		poly.setPosition(position);
+		poly.setOffset(position);
 		return poly;
 	}	
 

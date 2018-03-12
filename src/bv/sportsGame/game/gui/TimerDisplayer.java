@@ -25,7 +25,7 @@ public class TimerDisplayer extends Entity implements Tickable {
 	private CVector leftBoundPosition() {
 		int digitsWidth = 45; //The starting amount for this is equal to the CharSprite of spaces in between the digits times the amount of space between them in order to get the total space between digits
 		for (TextSprite n : digits) {
-			digitsWidth += n.width(1);
+			digitsWidth += n.getWidth();
 		}
 		return new CVector(position.getValue(0) - digitsWidth / 2, position.getValue(1));
 	}
@@ -33,9 +33,9 @@ public class TimerDisplayer extends Entity implements Tickable {
 	public void renderDigits(Renderer r) {
 		CVector posAdjustment = new CVector(0, 0);
 		for (int i = 0; i < 4; i++) {
-			posAdjustment.add(new CVector(digits[i].width(1) / 2, 0));
-			digits[i].size(10).render(r, leftBoundPosition().plus(posAdjustment), Color.white);
-			posAdjustment.add(new CVector(digits[i].width(1) / 2 + 15, 0));
+			posAdjustment.add(new CVector(digits[i].getWidth() / 2, 0));
+			digits[i].getSprite().render(r, leftBoundPosition().plus(posAdjustment), Color.white);
+			posAdjustment.add(new CVector(digits[i].getWidth() / 2 + 15, 0));
 		}
 	}
 	

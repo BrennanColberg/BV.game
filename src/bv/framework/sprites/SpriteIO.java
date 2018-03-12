@@ -83,7 +83,7 @@ public class SpriteIO {
 			
 				case "POSITION":
 					if (word.length < 3) break;
-					poly.setPosition(new CVector(Double.parseDouble(word[1]), Double.parseDouble(word[2])));
+					poly.setOffset(new CVector(Double.parseDouble(word[1]), Double.parseDouble(word[2])));
 					break;
 			
 				case "POINT":
