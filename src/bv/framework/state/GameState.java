@@ -28,7 +28,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	/* VARIABLES */
 	
 	/** Used as a scaling factor; increase to zoom out, decrease to zoom in. */
-	public double pixelsPerUnit = 1;
+	public double zoomFactor = 1;
 	
 	/** This {@link ArrayList} of {@link Object}s is used to store ALL relevant objects to a single GameState.
 	 * Any object should be placed here, and will automatically be dealt with:
@@ -51,7 +51,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	/** Custom zoom constructor; sets magnification to what you would like (see {@link GameState.pixelsPerUnit}. DO NOT OVERRIDE; instead, put custom code into init()
 	 * @param pixelsPerUnit is the custom zoom you would like. */
 	public GameState(double pixelsPerUnit) {
-		this.pixelsPerUnit = pixelsPerUnit;
+		this.zoomFactor = pixelsPerUnit;
 		init();
 	}
 	
@@ -114,7 +114,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	
 	/** @return the size of the currently rendered screen, in {@link CVector} form */
 	public CVector getSize() {
-		return (CVector) Core.renderEngine.getDisplay().getSize().scaledBy(1/pixelsPerUnit);
+		return (CVector) Core.renderEngine.getDisplay().getSize().scaledBy(1/zoomFactor);
 	}
 	
 	
@@ -124,7 +124,7 @@ public abstract class GameState extends Entity implements Renderable, Tickable {
 	public Rect rectBounds() {
 		Rect result = Core.renderEngine.getDisplay().rectBounds();
 		result.setPosition(getPosition());
-		result.getSize().scale(1/pixelsPerUnit);
+		result.getSize().scale(1/zoomFactor);
 		return result;
 	}
 	

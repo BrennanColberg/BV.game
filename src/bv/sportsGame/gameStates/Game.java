@@ -49,7 +49,7 @@ public class Game extends GameState {
 		objects.add(hud			= new HUD());
 		objects.add(gameTimer 	= new GameTimer(300));
 		
-		this.pixelsPerUnit = 0.25;
+		this.zoomFactor = 0.25;
 	}
 	
 	public void updatePhysics() {
@@ -58,11 +58,11 @@ public class Game extends GameState {
 		double zoomIncrement = 0;
 		if (Input.isKeyPressed(KeyEvent.VK_1)) zoomIncrement = +0.01;
 		if (Input.isKeyPressed(KeyEvent.VK_2)) zoomIncrement = -0.01;
-		this.pixelsPerUnit = BV.clamp(pixelsPerUnit + zoomIncrement, 0.25, 1.0);
+		this.zoomFactor = BV.clamp(zoomFactor + zoomIncrement, 0.25, 1.0);
 		
 		// proportionally decreasing speed; position limits to player position
 		this.velocity.setAngle(Math.atan2(player.getPosition().getValue(1) - position.getValue(1), player.getPosition().getValue(0) - position.getValue(0)));
-		this.velocity.setMagnitude(player.getPosition().minus(this.position).toPVector().getMagnitude() / (50 * this.pixelsPerUnit));
+		this.velocity.setMagnitude(player.getPosition().minus(this.position).toPVector().getMagnitude() / (50 * this.zoomFactor));
 		
 		// updates physics for all contained entities
 		super.updatePhysics();

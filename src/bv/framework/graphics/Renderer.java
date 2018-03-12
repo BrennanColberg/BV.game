@@ -41,7 +41,7 @@ public class Renderer {
 	}
 	
 	public double getPixelsPerUnit() {
-		return Core.state().pixelsPerUnit;
+		return Core.state().zoomFactor;
 	}
 	
 	
