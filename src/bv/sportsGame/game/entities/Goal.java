@@ -1,5 +1,8 @@
 package bv.sportsGame.game.entities;
 
+import java.awt.Color;
+
+import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
@@ -8,6 +11,8 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
+import bv.framework.sprites.AnimatedSprite;
+import bv.framework.sprites.SpriteIO;
 import bv.sportsGame.game.entities.classes.Team;
 
 
@@ -24,6 +29,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 
 	protected Team team;
 	protected CVector size;
+	AnimatedSprite goalArea = SpriteIO.get("square").scale(300);
 	
 	public Goal(CVector pos, Team team) {
 		size = new CVector(165, 500);
@@ -34,6 +40,8 @@ public class Goal extends Entity implements Renderable, Collidable {
 	@Override
 	public void render(Renderer r) {
 		//r.fill(this.rectBounds(), Color.gray); //This is for testing collisions with the goal
+		goalArea.render(r, new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0) * 2,0), 0.0, Color.white);
+		goalArea.render(r, new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)* 2,0), Math.PI, Color.white);
 	}
 
 	@Override
