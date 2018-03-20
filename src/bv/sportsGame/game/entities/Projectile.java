@@ -24,11 +24,11 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 	public Rect bounds = new Rect(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0),-Core.STARTING_SCREEN_SIZE.getValue(1)),
 			new CVector(Core.STARTING_SCREEN_SIZE.getValue(0),Core.STARTING_SCREEN_SIZE.getValue(1)));
 	
-	public Projectile(AnimatedSprite sprite, double speed, Collidable parent){
+	public Projectile(AnimatedSprite sprite, CVector position, double heading, double speed, Collidable parent){
 		this.projectileSprite = sprite;
 		this.velocity.setMagnitude(speed);
-		this.velocity.setAngle(sprite.heading);
-//		this.position = sprite.position;
+		this.velocity.setAngle(heading);
+		this.position = position;
 		this.parent = parent;
 	}
 	public void updatePhysics() {
@@ -38,8 +38,7 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 		super.updatePhysics();
 	}
 	public void render(Renderer r){
-		projectileSprite.render(r);
-		
+		projectileSprite.render(r, position); //Rendering using the position in order to move it from the base origin
 	}
 	@Override
 	public Rect rectBounds() {
