@@ -22,23 +22,27 @@ public class SpriteIO {
 		String[] files = FOLDER.read(BASE_PATH);
 		for (int i = 0; i < files.length; i++) {
 			String path = files[i];
+			BV.println(path);
 			switch (IO.fileTypeOf(path)) {
-				case FOLDER: spriteLibrary.put(path, loadSprite(BASE_PATH + "/" + path)); break;
+				case FOLDER: 
+					BV.println("folder: " + path);
+					spriteLibrary.put(path, loadAnimatedSprite(BASE_PATH + "/" + path)); break;
 				case TXT: 
 					spriteLibrary.put(path.substring(0, path.length()-4), new AnimatedSprite(new Sprite(loadPoly(BASE_PATH + "/" + path))));
 					break;
 				default: break;
 			}
 		}
+		BV.println("Sprites Loaded.");
 	}
-	private static AnimatedSprite loadSprite(String path) {
-		BV.println(path);
+	private static AnimatedSprite loadAnimatedSprite(String path) {
+		BV.println("[A] " + path);
 		AnimatedSprite result = new AnimatedSprite();
 		String[] frames = FOLDER.read(path);
 		for (int i = 0; i < frames.length; i++) {
 			String file = frames[i];
 			switch (IO.fileTypeOf(file)) {
-				case FOLDER: result.add(loadSpriteFrame(path + "/" + file)); break;
+				case FOLDER: result.add(loadSprite(path + "/" + file)); break;
 				case TXT: 
 					if (file.equals("settings.txt"));
 //						BV.println(path + "/" + file); 
@@ -49,8 +53,8 @@ public class SpriteIO {
 		}
 		return result;
 	}
-	private static Sprite loadSpriteFrame(String path) {
-		BV.println(path);
+	private static Sprite loadSprite(String path) {
+		BV.println("[S] " + path);
 		Sprite result = new Sprite();
 		String[] polies = FOLDER.read(path);
 		for (int i = 0; i < polies.length; i++) {
@@ -64,7 +68,7 @@ public class SpriteIO {
 		return result;
 	}
 	private static Poly[] loadPoly(String path) {
-		BV.println(path);
+		BV.println("[P] " + path);
 		ArrayList<Poly> result = new ArrayList<Poly>();
 		Poly poly = new Poly();
 		String[] lines = TXT.read(path);
