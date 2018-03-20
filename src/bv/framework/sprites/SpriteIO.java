@@ -22,10 +22,8 @@ public class SpriteIO {
 		String[] files = FOLDER.read(BASE_PATH);
 		for (int i = 0; i < files.length; i++) {
 			String path = files[i];
-			BV.println(path);
 			switch (IO.fileTypeOf(path)) {
 				case FOLDER: 
-					BV.println("folder: " + path);
 					spriteLibrary.put(path, loadAnimatedSprite(BASE_PATH + "/" + path)); break;
 				case TXT: 
 					spriteLibrary.put(path.substring(0, path.length()-4), new AnimatedSprite(new Sprite(loadPoly(BASE_PATH + "/" + path))));
