@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
 import bv.framework.math.CVector;
+import bv.framework.math.PVector;
 import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 
@@ -18,7 +19,7 @@ public class Sprite extends ArrayList<Poly> implements Cloneable, Renderable {
 	
 	public Sprite(Poly...polies) {
 		for (Poly p:polies) {
-			this.add(p);
+			this.add(p.clone());
 		}
 	}
 	public Sprite(Sprite template) {
@@ -34,7 +35,7 @@ public class Sprite extends ArrayList<Poly> implements Cloneable, Renderable {
 	public void render(Renderer r, CVector position, double scale, double heading, Color color) {
 		for (int i = 0; i < this.size(); i++) {
 			Poly poly = this.get(i).rotatedBy(heading).scaledBy(scale);
-			poly.setPosition(position);
+			poly.setOffset(new PVector(poly.getOffset()).scaledBy(scale).rotatedBy(heading).toCVector().plus(position));
 			r.fill(poly, color);
 		}
 	}
@@ -54,6 +55,18 @@ public class Sprite extends ArrayList<Poly> implements Cloneable, Renderable {
 	public void add(Poly...polies) {
 		for (Poly p : polies) super.add(p);
 	}
+	// commented out even though it makes sense
+	// bascially, I'm tired and don't want to deal with this crap rn
+//	@Deprecated
+//	public Poly get(int index) {
+//		Poly result = super.get(index).clone();
+//		result.scale(this.scale);
+//		result.rotate(this.heading);
+//		return result;
+//	}
+//	public Poly getRaw(int index) {
+//		return super.get(index);
+//	}
 	
 	public Sprite scale(double factor) {
 		this.scale = factor;

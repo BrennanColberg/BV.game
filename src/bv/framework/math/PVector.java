@@ -77,6 +77,11 @@ public class PVector {
 		result.scale(in);
 		return result;
 	}
+	public PVector rotatedBy(double in) {
+		PVector result = new PVector(this);
+		result.rotate(in);
+		return result;
+	}
 	
 	// CVector operations
 	

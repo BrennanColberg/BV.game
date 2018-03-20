@@ -20,7 +20,7 @@ public class AnimatedSprite extends ArrayList<Sprite> implements Cloneable, Tick
 	
 	public AnimatedSprite(Sprite...frames) {
 		for (Sprite sf:frames) {
-			this.add(sf);
+			this.add(sf.clone());
 		}
 	}
 	public AnimatedSprite(AnimatedSprite template) {
@@ -66,6 +66,17 @@ public class AnimatedSprite extends ArrayList<Sprite> implements Cloneable, Tick
 	public void add(Sprite...frames) {
 		for (Sprite f : frames) super.add(f);
 	}
+	// commented out even though it makes sense
+	// bascially, I'm tired and don't want to deal with this crap rn
+//	public Sprite get(int index) {
+//		Sprite result = super.get(index).clone();
+//		result.scale *= this.scale;
+//		result.heading += this.heading;
+//		return result;
+//	}
+//	public Sprite getRaw(int index) {
+//		return super.get(index);
+//	}
 	
 	public AnimatedSprite scale(double factor) {
 		this.scale = factor;
