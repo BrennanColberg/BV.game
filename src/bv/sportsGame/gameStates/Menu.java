@@ -13,8 +13,9 @@ public class Menu extends GameState {
 
 	public void init() {
 		
-		objects.add(new Button(new CVector(0,0),SpriteIO.get("drone").scaleNew(100),0,Color.red) {
+		objects.add(new Button(new CVector(0,0),SpriteIO.get("rusher").scaleNew(100),0,Color.red) {
 			public void clicked() {
+				System.out.println("clicked");
 				Core.gameStateManager.loadGameState(new Game());
 			}
 			
