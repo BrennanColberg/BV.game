@@ -10,6 +10,8 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Collidable;
 import bv.framework.physics.Entity;
+import bv.framework.sprites.AnimatedSprite;
+import bv.framework.sprites.SpriteIO;
 import bv.sportsGame.game.entities.classes.BasicClass;
 import bv.sportsGame.game.entities.classes.Team;
 
@@ -17,12 +19,14 @@ public class Ball extends Entity implements Renderable, Collidable {
 
 	private static double dragConst = -0.0007d;
 	private static double bouncinessConst = 1.5d;
+	public AnimatedSprite sprite;
 	public int size;
 	protected double maxVelocity;
 	protected Team teamLastHit;
 	protected Color ballColor; //Just an option for the future, making the ball the color of the last team to touch it
 	
 	public Ball() {
+		sprite = SpriteIO.get("ball");
 		mass = 10;
 		size = 100;
 		maxVelocity = 12.5d;
@@ -50,17 +54,17 @@ public class Ball extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public void render(Renderer r) {
-		r.fill(this.rectBounds(), Color.white);
+		sprite.render(r, position, velocity.getAngle(), Color.white);
 	}
 
 	@Override
 	public Rect rectBounds() {
-		return new Rect(this.position, new CVector(size / 2, size / 2));
+		return sprite.rectBounds();
 	}
 
 	@Override
 	public Poly polyBounds() {
-		return this.rectBounds().polyBounds();
+		return sprite.polyBounds();
 	}
 
 	@Override
@@ -81,7 +85,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public Poly trigger() {
-		Poly poly = polyBounds();
+		Poly poly = polyBounds().clone();
 		poly.setOffset(position);
 		return poly;
 	}

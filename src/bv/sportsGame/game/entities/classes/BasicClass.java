@@ -46,7 +46,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected boolean isWASD;
 	
 	public BasicClass() {
-		sprite = SpriteIO.get("podracer").scaleNew(50);
+		sprite = SpriteIO.get("podracer");
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -61,7 +61,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	public BasicClass(CVector pos, Team team) {
 		position = pos;
 		this.team = team;
-		sprite = SpriteIO.get("podracer").scaleNew(50);
+		sprite = SpriteIO.get("podracer");
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -181,8 +181,8 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public Poly trigger() {
-		Poly poly = polyBounds();
-		poly.setOffset(position);
+		Poly poly = polyBounds().clone(); //poly derived from clone of polyBounds in order to avoid manipulating the actual polyBounds' offset value
+		poly.setOffset(position); //Offsets the cloned poly by the position in order to calculate collisions from the player's position and not 0,0
 		return poly;
 	}
 }
