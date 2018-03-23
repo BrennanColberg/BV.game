@@ -32,7 +32,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 	AnimatedSprite goalArea = SpriteIO.get("square").scale(300);
 
 	public Goal(CVector pos, Team team) {
-		size = new CVector(165, 500);
+		size = new CVector(10, 500);
 		this.team = team;
 		position = pos.plus(new CVector((team == Team.RIGHT) ? size.getValue(0) : -size.getValue(0), 0)); //This is temporary, based off of a 2-team set up
 	}
@@ -41,7 +41,7 @@ public class Goal extends Entity implements Renderable, Collidable {
 	public void render(Renderer r) {
 		//r.fill(this.rectBounds(), Color.gray); //This is for testing collisions with the goal
 		goalArea.render(r, new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0) * 2,0), 0.0, Color.white);
-		goalArea.render(r, new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)* 2,0), Math.PI, Color.white);
+		goalArea.render(r, new CVector( Core.STARTING_SCREEN_SIZE.getValue(0) * 2,0), Math.PI, Color.white);
 	}
 
 	@Override

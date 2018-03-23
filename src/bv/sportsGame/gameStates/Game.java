@@ -17,6 +17,7 @@ import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.GameTimer;
 import bv.sportsGame.game.entities.Goal;
 import bv.sportsGame.game.entities.classes.BasicClass;
+import bv.sportsGame.game.entities.classes.SpeedsterClass;
 import bv.sportsGame.game.entities.classes.TankClass;
 import bv.sportsGame.game.entities.classes.Team;
 import bv.sportsGame.game.gui.FieldObject;
@@ -42,8 +43,8 @@ public class Game extends GameState {
 		
 		objects.add(goal1	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
 		objects.add(goal2	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
-		objects.add(player	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.LEFT, true));
-		objects.add(dummy	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.RIGHT, false));
+		objects.add(player	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true));
+		objects.add(dummy	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.RIGHT, false));
 		objects.add(ball	= new Ball());
 		
 		objects.add(hud			= new HUD());

@@ -99,6 +99,9 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
+		else {
+			
+		}
 		checkDrag();
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();
@@ -139,6 +142,14 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 	}
 	
+	//Used by AI to move; targets and moves towards the ball
+	public void aiMovement() {
+		//Somehow get information from ball
+		
+		//Sets the position of the goal according to the opposite x-coordinate and the player's y-coordinate clamped down to just smaller than that of the goal. That way, the bot shoots into the goal and not to the edges where it can miss 
+		CVector goalPos = new CVector((team == Team.RIGHT) ? -Core.STARTING_SCREEN_SIZE.getValue(0) * 2 : Core.STARTING_SCREEN_SIZE.getValue(0) * 2, BMath.clamp(400, -400, position.getValue(1)));
+	}
+	
 	//Like shoot, moved to accommodate for implementation of bots in future
 	public void checkDrag() {
 		if (acceleration.getMagnitude() == 0 && velocity.getMagnitude() > velocityCutOff) {
@@ -148,7 +159,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	//Moved in order to accommodate for implementation of bots in future (possibly) as this will be reused
 	public void shoot() {
-		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
+		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10, (Collidable)this)); //size of projectile is equal to its strength
 		acceleration.add(recoil());
 		shotCountDown = shotSpeed;
 	}

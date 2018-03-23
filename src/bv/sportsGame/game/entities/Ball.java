@@ -17,7 +17,7 @@ import bv.sportsGame.game.entities.classes.Team;
 
 public class Ball extends Entity implements Renderable, Collidable {
 
-	private static double dragConst = -0.0007d;
+	private static double dragConst = -0.0003d;
 	private static double bouncinessConst = 1.5d;
 	public AnimatedSprite sprite;
 	public int size;
@@ -54,7 +54,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 	
 	@Override
 	public void render(Renderer r) {
-		sprite.render(r, position, velocity.getAngle(), Color.white);
+		sprite.render(r, position, velocity.getAngle(), Color.gray);
 	}
 
 	@Override

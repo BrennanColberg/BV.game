@@ -1,5 +1,7 @@
 package bv.sportsGame.game.entities;
 
+import java.awt.Color;
+
 import bv.framework.core.Core;
 import bv.framework.graphics.Renderable;
 import bv.framework.graphics.Renderer;
@@ -38,7 +40,7 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 		super.updatePhysics();
 	}
 	public void render(Renderer r){
-		projectileSprite.render(r, position);
+		projectileSprite.render(r, position, velocity.getAngle(), Color.black);
 		
 	}
 	@Override

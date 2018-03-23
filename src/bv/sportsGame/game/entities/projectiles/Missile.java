@@ -13,14 +13,12 @@ import bv.sportsGame.game.entities.Projectile;
 public class Missile extends Projectile {
 	public Missile(CVector position, double heading, double scale, double speed, Collidable parent) {
 		super(SpriteIO.get("missile"), position, heading, speed, parent);
-		
 	}
 
 	@Override
 	public Poly trigger() {
-		Poly poly = polyBounds();
+		Poly poly = polyBounds().clone();
 		poly.setOffset(position);
 		return poly;
 	}	
-
 }

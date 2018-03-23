@@ -53,4 +53,8 @@ public class BMath extends BV {
 		return new PVector[] {pu1, pu2};
 	}
 	
+	public static double clamp (double max, double min, double value) {
+		return Math.max(min, Math.min(max, value));
+	}
+	
 }
