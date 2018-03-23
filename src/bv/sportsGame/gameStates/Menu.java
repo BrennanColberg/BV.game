@@ -19,37 +19,22 @@ import bv.sportsGame.game.entities.classes.Team;
 import bv.sportsGame.menu.entities.Button;
 
 public class Menu extends GameState {
-
-	CharSelection selectionOne;
-	CharSelection selectionTwo;
-	CharSelection selectionThree;
-	CharSelector selector;
 	
 	public void init() {
 		
-		objects.add(selectionOne = new CharSelection(SpriteIO.get("podracer").scaleNew(25), new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/3, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false)));
-		objects.add(selectionOne = new CharSelection(SpriteIO.get("swarmV2").scaleNew(25), new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false)));
-		objects.add(selectionOne = new CharSelection(SpriteIO.get("dualGunner").scaleNew(25), new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/3, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new TankClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false)));
-		objects.add(selector = new CharSelector(SpriteIO.get("ball").scaleNew(0.1), TextSprite.spriteFromCharacter('C').scaleNew(25), new CVector(0, 150)));
-		
-		/* objects.add(new Button(new CVector(0,0),SpriteIO.get("drone").scaleNew(100),0,Color.red) {
+		objects.add(new Button(new CVector(0,0),SpriteIO.get("drone").scaleNew(1),0,Color.red) {
 			public void clicked() {
-				Core.gameStateManager.loadGameState(new Game());
+				Core.gameStateManager.loadGameState(new CharacterSelection());
 			}
 			
 			public void tick() {
 				heading += 0.01;
 			}
 			
-		}); */
+		});
 	}
 	
-	public void updatePhysics() {
-		// updates physics for all contained entities
-		super.updatePhysics();
-	}
-	
-	/* Long lastClick = System.currentTimeMillis();
+	Long lastClick = System.currentTimeMillis();
 	public void tick() {
 		if (Input.getLastClickTime() > lastClick) {
 			lastClick = Input.getLastClickTime();
@@ -59,7 +44,7 @@ public class Menu extends GameState {
 					button.clicked();
 			}
 		}
-	} */
+	}
 
 	public void load() {
 		Core.renderEngine.renderer.setBackgroundColor(Color.gray);
