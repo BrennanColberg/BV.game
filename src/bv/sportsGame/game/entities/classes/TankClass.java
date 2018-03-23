@@ -26,8 +26,9 @@ public class TankClass extends BasicClass {
 		accelAmount = 0.008d;
 		isWASD = false;
 	}
-	public TankClass(CVector pos, Team team, boolean isPlayer){
+	public TankClass(CVector pos, Team team, boolean isPlayer, boolean isDefending){
 		this(pos, team);
 		this.isPlayer = isPlayer;
+		this.isDefending = isDefending;
 	}
 }

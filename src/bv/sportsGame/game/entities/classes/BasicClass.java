@@ -16,6 +16,8 @@ import bv.framework.physics.Entity;
 import bv.framework.sprites.AnimatedSprite;
 import bv.framework.sprites.SpriteIO;
 import bv.framework.syntax.BMath;
+import bv.framework.syntax.BV;
+import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.projectiles.Missile;
 
 /**
@@ -44,9 +46,10 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected double accelAmount;
 	protected boolean isPlayer;
 	protected boolean isWASD;
+	protected boolean isDefending;
 	
 	public BasicClass() {
-		sprite = SpriteIO.get("podracer");
+		sprite = SpriteIO.get("balanced").scaleNew(50);
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -61,7 +64,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	public BasicClass(CVector pos, Team team) {
 		position = pos;
 		this.team = team;
-		sprite = SpriteIO.get("podracer");
+		sprite = SpriteIO.get("balanced").scaleNew(50);
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -73,9 +76,10 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		accelAmount = 0.15d; //This basically just controls how easily the player is to change direction at this point (WASD controls)
 		isWASD = false;
 	}
-	public BasicClass(CVector pos, Team team, boolean isPlayer){
+	public BasicClass(CVector pos, Team team, boolean isPlayer, boolean isDefending){
 		this(pos, team);
 		this.isPlayer = isPlayer;
+		this.isDefending = isDefending;
 	}
 	
 	public Team getTeam() {
@@ -90,18 +94,16 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		return new PVector((strength != 0) ? recoilConst * strength : -0.1d, playerAngle() + BMath.PI);
 	}
 
-	private double mouseAngle() {
+	protected double mouseAngle() {
 		return Math.atan2(Input.getMouseAdjustedPosition().getValue(1) - position.getValue(1), Input.getMouseAdjustedPosition().getValue(0) - position.getValue(0));
 	}
-	private double playerAngle() {
+	protected double playerAngle() {
 		return (isPlayer) ? mouseAngle() : this.velocity.getAngle();
 	}
 	
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
-		else {
-			
-		}
+		else aiBehavior();
 		checkDrag();
 		velocity.clamp(-maxVelocity, maxVelocity);
 		super.updatePhysics();
@@ -142,12 +144,84 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 	}
 	
+	//Gets clone of ball from gamestate
+	protected Ball findBall() {
+		Ball output = null;
+		for (Object o : Core.state().objects) {
+			if (o instanceof Ball) {
+				output = (Ball)o;
+			}
+		}
+		return output;
+	}
+	
 	//Used by AI to move; targets and moves towards the ball
-	public void aiMovement() {
-		//Somehow get information from ball
+	public void aiBehavior() {
+		//Get ball
+		Ball ball = findBall();
 		
 		//Sets the position of the goal according to the opposite x-coordinate and the player's y-coordinate clamped down to just smaller than that of the goal. That way, the bot shoots into the goal and not to the edges where it can miss 
-		CVector goalPos = new CVector((team == Team.RIGHT) ? -Core.STARTING_SCREEN_SIZE.getValue(0) * 2 : Core.STARTING_SCREEN_SIZE.getValue(0) * 2, BMath.clamp(400, -400, position.getValue(1)));
+		CVector goalPos = new CVector((team == Team.RIGHT) ? -Core.STARTING_SCREEN_SIZE.getValue(0) * 2 : Core.STARTING_SCREEN_SIZE.getValue(0) * 2, BV.clamp(position.getValue(1), 400, -400));
+		
+		if (!isDefending) {
+			move_AttackingBehavior(ball, goalPos);
+			shoot_BallBehavior(ball, goalPos);
+		}
+		else {
+			move_DefendingBehavior(ball, goalPos);
+			shoot_BallBehavior(ball, goalPos);
+		}
+	}
+	
+	//Method estimates the new position of an object (target) if it were to collide with another object going directly towards it at a specific velocity
+	protected PVector estimatedPos(Entity target, double velocityMag) {
+		//Calculate the estimated position that the ball would be at if the bot moved straight in the direction of the ball
+		PVector targetDisp = this.getPosition().minus(target.getPosition()).toPVector(); //Get displacement between the ball and the bot
+		double targetTime = targetDisp.getMagnitude() / velocityMag; //Find the time that it would take to reach the ball
+		PVector newTargetDisp = target.getVelocity().scaledBy(1/targetTime); //Calculate the displacement of the ball if it were to travel in its current direction for the amount of time that it would take for the bot to reach it (about)
+		return target.getPosition().plus(newTargetDisp).toPVector(); //Find the new position of the ball by adding its current position to the displacement of the ball calculated previously
+	}
+	
+	//Behavior for bots where they aggressively attack the ball
+	protected void move_AttackingBehavior(Ball ball, CVector goalPos) {
+		//Get the estimated position of the ball if the bot were to go straight towards it and collide with it
+		PVector estBallPos = estimatedPos(ball, maxVelocity);
+		
+		//Get the target position for the bot to collide with the ball to get it into the goal
+		PVector targetPos = (estBallPos.minus(goalPos)).normal().scaledBy(75).plus(ball.getPosition());
+		
+		//Get the displacement from the targetPos to the currentPos to be able to determine the angle required to point there
+		PVector targetDisp = targetPos.minus(this.getPosition());
+		this.acceleration.add(new PVector(accelAmount, targetDisp.getAngle()));
+	}
+	
+	//Behavior for bots where they defend the goal
+	protected void move_DefendingBehavior(Ball ball, CVector goalPos) {
+		CVector ownGoalPos = new CVector(-goalPos.getValue(0), goalPos.getValue(1));
+		PVector dispThisToGoal = ownGoalPos.toPVector().minus(this.getPosition());
+		PVector dispBallToGoal = ball.getPosition().minus(ownGoalPos).toPVector();
+		
+		if (dispThisToGoal.getMagnitude() >= dispBallToGoal.getMagnitude() / 2 && dispThisToGoal.getMagnitude() >= 200) {
+			//Move closer to goal
+			this.acceleration.add(new PVector(accelAmount, dispThisToGoal.getAngle()));
+		}
+		else {
+			//Protect the goal
+			PVector targetPos = dispBallToGoal.normal().scaledBy(-50).plus(ownGoalPos);
+			PVector dispThisToTarget = targetPos.minus(this.getPosition());
+			this.acceleration.add(new PVector(accelAmount, dispThisToTarget.getAngle()));
+		}
+	}
+	
+	//Behavior for bots where they shoot the ball when it would possibly score a goal
+	protected void shoot_BallBehavior(Ball ball, CVector goalPos) {
+		//Shoots when shot would sink ball into goal
+		PVector estBallPos_Shot = estimatedPos(ball, 10);
+		PVector posToGoal = goalPos.minus(this.getPosition()).toPVector();
+		PVector ballToGoal = goalPos.minus(estBallPos_Shot).toPVector();
+		if (Math.abs(ballToGoal.getAngle() - posToGoal.getAngle()) <= 0.01 && shotCountDown <= 0) {
+			shoot(posToGoal.getAngle());
+		}
 	}
 	
 	//Like shoot, moved to accommodate for implementation of bots in future
@@ -160,6 +234,12 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	//Moved in order to accommodate for implementation of bots in future (possibly) as this will be reused
 	public void shoot() {
 		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10, (Collidable)this)); //size of projectile is equal to its strength
+		acceleration.add(recoil());
+		shotCountDown = shotSpeed;
+	}
+	
+	public void shoot(double angle) {
+		Core.state().objects.add(new Missile(this.getPosition(), angle, strength * 2, 10, (Collidable)this)); //size of projectile is equal to its strength
 		acceleration.add(recoil());
 		shotCountDown = shotSpeed;
 	}
@@ -188,6 +268,10 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	@Override
 	public void onCollision(PVector newVelocity, Entity object) {
 		velocity = new PVector(newVelocity);
+		if (object instanceof Missile) {
+			Missile missile = (Missile)object;
+			health -= missile.scale;
+		}
 	}
 	
 	@Override

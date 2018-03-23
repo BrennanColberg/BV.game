@@ -65,6 +65,11 @@ public class PVector {
 		//else if (vector.magnitude > max) vector.setMagnitude(max);
 		this.setMagnitude(Math.max(min, Math.min(max, this.magnitude))); //This sets the magnitude within a range of values
 	}
+	public void normalize() {
+		CVector vector = this.toCVector();
+		vector.scale(1 / this.getMagnitude());
+		this.setAngle(vector.toPVector().getAngle()); this.setMagnitude(vector.toPVector().getMagnitude());
+	}
 
 	public PVector plus(PVector in) {
 		return this.plus(in.toCVector());
@@ -82,7 +87,12 @@ public class PVector {
 		result.rotate(in);
 		return result;
 	}
-	
+	public PVector normal() {
+		PVector output = this.clone();
+		output.normalize();
+		return output;
+	}
+
 	// CVector operations
 	
 	public void add(CVector in) {

@@ -31,7 +31,9 @@ public class Game extends GameState {
 
 	Goal goal1, goal2;
 	BasicClass player;
-	BasicClass dummy;
+	BasicClass teammate;
+	BasicClass opponent1;
+	BasicClass opponent2;
 	Ball ball;
 	public Rect gamefield = new Rect(new CVector(0,0), Core.STARTING_SCREEN_SIZE);
 	public HUD hud;
@@ -43,8 +45,10 @@ public class Game extends GameState {
 		
 		objects.add(goal1	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
 		objects.add(goal2	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
-		objects.add(player	= new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true));
-		objects.add(dummy	= new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.RIGHT, false));
+		objects.add(player	    = new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false));
+		//objects.add(teammate    = new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.LEFT, false, true));
+		//objects.add(opponent1	= new SpeedsterClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.RIGHT, false, false));
+		objects.add(opponent2  = new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.RIGHT, false, true));
 		objects.add(ball	= new Ball());
 		
 		objects.add(hud			= new HUD());

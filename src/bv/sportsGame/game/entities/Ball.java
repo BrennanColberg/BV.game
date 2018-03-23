@@ -29,7 +29,7 @@ public class Ball extends Entity implements Renderable, Collidable {
 		sprite = SpriteIO.get("ball");
 		mass = 10;
 		size = 100;
-		maxVelocity = 12.5d;
+		maxVelocity = 10d;
 		teamLastHit = Team.LEFT;
 	}
 	

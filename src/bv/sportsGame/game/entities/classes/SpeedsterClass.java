@@ -26,8 +26,9 @@ public class SpeedsterClass extends BasicClass {
 		accelAmount = 0.04d;
 		isWASD = false;
 	}
-	public SpeedsterClass(CVector pos, Team team, boolean isPlayer){
+	public SpeedsterClass(CVector pos, Team team, boolean isPlayer, boolean isDefending){
 		this(pos, team);
 		this.isPlayer = isPlayer;
+		this.isDefending = isDefending;
 	}
 }
