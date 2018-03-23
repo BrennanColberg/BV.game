@@ -54,7 +54,7 @@ public class Game extends GameState {
 		objects.add(ball	= new Ball());
 		
 		objects.add(hud			= new HUD());
-		objects.add(gameTimer 	= new GameTimer(10));
+		objects.add(gameTimer 	= new GameTimer(300));
 		
 		this.zoomFactor = 0.25;
 	}

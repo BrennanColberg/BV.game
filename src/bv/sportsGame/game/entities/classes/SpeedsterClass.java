@@ -22,7 +22,7 @@ public class SpeedsterClass extends BasicClass {
 		shotSpeed = 5;
 		shotCountDown = 0;
 		mass = 75;
-		maxVelocity = 7.5d;
+		maxVelocity = 6d;
 		accelAmount = 0.2d;
 		isWASD = false;
 	}

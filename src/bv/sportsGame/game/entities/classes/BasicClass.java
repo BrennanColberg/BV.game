@@ -162,15 +162,16 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		Ball ball = findBall();
 		
 		//Sets the position of the goal according to the opposite x-coordinate and the player's y-coordinate clamped down to just smaller than that of the goal. That way, the bot shoots into the goal and not to the edges where it can miss 
-		CVector goalPos = new CVector((team == Team.RIGHT) ? -Core.STARTING_SCREEN_SIZE.getValue(0) * 2 : Core.STARTING_SCREEN_SIZE.getValue(0) * 2, BV.clamp(position.getValue(1), 400, -400));
+		CVector goalPosBot = new CVector((team == Team.RIGHT) ? -Core.STARTING_SCREEN_SIZE.getValue(0) * 2 : Core.STARTING_SCREEN_SIZE.getValue(0) * 2, BV.clamp(position.getValue(1), -400, 400));
+		CVector goalPosBall = new CVector((team == Team.RIGHT) ? Core.STARTING_SCREEN_SIZE.getValue(0) * 2 : -Core.STARTING_SCREEN_SIZE.getValue(0) * 2, BV.clamp(ball.getPosition().getValue(1), -400, 400));
 		
 		if (!isDefending) {
-			move_AttackingBehavior(ball, goalPos);
-			shoot_BallBehavior(ball, goalPos);
+			move_AttackingBehavior(ball, goalPosBot, goalPosBall);
+			shoot_BallBehavior(ball, goalPosBot, goalPosBall);
 		}
 		else {
-			move_DefendingBehavior(ball, goalPos);
-			shoot_BallBehavior(ball, goalPos);
+			move_DefendingBehavior(ball, goalPosBot, goalPosBall);
+			shoot_BallBehavior(ball, goalPosBot, goalPosBall);
 		}
 	}
 	
@@ -184,12 +185,12 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	}
 	
 	//Behavior for bots where they aggressively attack the ball
-	protected void move_AttackingBehavior(Ball ball, CVector goalPos) {
+	protected void move_AttackingBehavior(Ball ball, CVector goalPosBot, CVector goalPosBall) {
 		//Get the estimated position of the ball if the bot were to go straight towards it and collide with it
 		PVector estBallPos = estimatedPos(ball, maxVelocity);
 		
 		//Get the target position for the bot to collide with the ball to get it into the goal
-		PVector targetPos = (estBallPos.minus(goalPos)).normal().scaledBy(75).plus(ball.getPosition());
+		PVector targetPos = (estBallPos.minus(goalPosBot)).normal().scaledBy(75).plus(ball.getPosition());
 		
 		//Get the displacement from the targetPos to the currentPos to be able to determine the angle required to point there
 		PVector targetDisp = targetPos.minus(this.getPosition());
@@ -197,29 +198,27 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	}
 	
 	//Behavior for bots where they defend the goal
-	protected void move_DefendingBehavior(Ball ball, CVector goalPos) {
-		CVector ownGoalPos = new CVector(-goalPos.getValue(0), goalPos.getValue(1));
-		PVector dispThisToGoal = ownGoalPos.toPVector().minus(this.getPosition());
+	protected void move_DefendingBehavior(Ball ball, CVector goalPosBot, CVector goalPosBall) {
+		CVector ownGoalPos = new CVector(goalPosBall.getValue(0), goalPosBall.getValue(1));
 		PVector dispBallToGoal = ball.getPosition().minus(ownGoalPos).toPVector();
 		
-		if (dispThisToGoal.getMagnitude() >= dispBallToGoal.getMagnitude() / 2 && dispThisToGoal.getMagnitude() >= 200) {
-			//Move closer to goal
-			this.acceleration.add(new PVector(accelAmount, dispThisToGoal.getAngle()));
-		}
-		else {
+		if (dispBallToGoal.getMagnitude() >= Core.STARTING_SCREEN_SIZE.getValue(0)*4/3) {
 			//Protect the goal
-			PVector targetPos = ownGoalPos.minus(dispBallToGoal.normal().scaledBy(5).toCVector()).toPVector();
+			PVector targetPos = ownGoalPos.plus(dispBallToGoal.scaledBy(0.33)).toPVector();
 			PVector dispThisToTarget = targetPos.minus(this.getPosition());
 			this.acceleration.add(new PVector(accelAmount, dispThisToTarget.getAngle()));
+		}
+		else {
+			move_AttackingBehavior(ball, goalPosBot, goalPosBall);
 		}
 	}
 	
 	//Behavior for bots where they shoot the ball when it would possibly score a goal
-	protected void shoot_BallBehavior(Ball ball, CVector goalPos) {
+	protected void shoot_BallBehavior(Ball ball, CVector goalPosBot, CVector goalPosBall) {
 		//Shoots when shot would sink ball into goal
-		PVector estBallPos_Shot = estimatedPos(ball, 10);
-		PVector posToGoal = goalPos.minus(this.getPosition()).toPVector();
-		PVector ballToGoal = goalPos.minus(estBallPos_Shot).toPVector();
+		PVector estBallPos_Shot = estimatedPos(ball, 15);
+		PVector posToGoal = goalPosBot.minus(this.getPosition()).toPVector();
+		PVector ballToGoal = goalPosBot.minus(estBallPos_Shot).toPVector();
 		if (Math.abs(ballToGoal.getAngle() - posToGoal.getAngle()) <= 0.01 && shotCountDown <= 0) {
 			shoot(posToGoal.getAngle());
 		}
@@ -234,19 +233,19 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	
 	//Moved in order to accommodate for implementation of bots in future (possibly) as this will be reused
 	public void shoot() {
-		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 10, (Collidable)this)); //size of projectile is equal to its strength
+		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 2, 15, (Collidable)this)); //size of projectile is equal to its strength
 		acceleration.add(recoil());
 		shotCountDown = shotSpeed;
 	}
 	
 	public void shoot(double angle) {
-		Core.state().objects.add(new Missile(this.getPosition(), angle, strength * 2, 10, (Collidable)this)); //size of projectile is equal to its strength
+		Core.state().objects.add(new Missile(this.getPosition(), angle, strength * 2, 15, (Collidable)this)); //size of projectile is equal to its strength
 		acceleration.add(recoil());
 		shotCountDown = shotSpeed;
 	}
 	
 	public void useSpecial() {
-		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 8, 10 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
+		Core.state().objects.add(new Missile(this.getPosition(), playerAngle(), strength * 8, 15 + this.velocity.getMagnitude(), (Collidable)this)); //size of projectile is equal to its strength
 		acceleration.add(recoil().scaledBy(4d));
 		specialCountDown = specialSpeed;
 	}
