@@ -7,6 +7,8 @@ import bv.framework.core.Input;
 import bv.framework.math.CVector;
 import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
+import bv.sportsGame.game.entities.debug.MouseTracker;
+import bv.sportsGame.game.entities.debug.PointHighlighter;
 import bv.sportsGame.menu.entities.Button;
 
 public class Menu extends GameState {
@@ -24,6 +26,7 @@ public class Menu extends GameState {
 			}
 			
 		});
+		objects.add(new PointHighlighter());
 		
 	}
 	
