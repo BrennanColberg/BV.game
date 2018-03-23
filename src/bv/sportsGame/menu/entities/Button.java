@@ -9,14 +9,15 @@ import bv.framework.math.Poly;
 import bv.framework.math.Rect;
 import bv.framework.physics.Entity;
 import bv.framework.sprites.AnimatedSprite;
+import bv.framework.sprites.Sprite;
 
 public abstract class Button extends Entity implements Renderable {
 	
-	public AnimatedSprite sprite;
+	public Sprite sprite;
 	public double heading;
 	public Color color;
 	
-	public Button(CVector position, AnimatedSprite sprite, double heading, Color color) {
+	public Button(CVector position, Sprite sprite, double heading, Color color) {
 		this.position = position;
 		this.sprite = sprite;
 		this.heading = heading;
@@ -26,7 +27,7 @@ public abstract class Button extends Entity implements Renderable {
 	public abstract void clicked();
 	
 	public void render(Renderer r) {
-		this.sprite.render(r, position, heading, color);
+		this.sprite.render(r, position, sprite.scale, heading, color);
 	}
 
 	public Rect rectBounds() {

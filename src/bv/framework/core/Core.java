@@ -6,6 +6,7 @@ import bv.framework.core.engines.TickEngine;
 import bv.framework.math.CVector;
 import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
+import bv.sportsGame.gameStates.CharacterSelection;
 import bv.sportsGame.gameStates.Game;
 import bv.sportsGame.gameStates.Menu;
 
@@ -44,7 +45,7 @@ public class Core {
 		
 		// initializes various engines and managers
 		renderEngine = new RenderEngine			(60, "FPS", STARTING_SCREEN_SIZE);
-		gameStateManager = new GameStateManager(new Menu());
+		gameStateManager = new GameStateManager(new CharacterSelection());
 		tickEngine = new TickEngine				(90, "TPS");
 		collisionEngine = new CollisionEngine	(45, "CPS");
 		

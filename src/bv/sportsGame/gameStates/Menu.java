@@ -22,7 +22,7 @@ public class Menu extends GameState {
 	
 	public void init() {
 		
-		objects.add(new Button(new CVector(0,0),SpriteIO.get("drone").scaleNew(1),0,Color.red) {
+		objects.add(new Button(new CVector(0,0),TextSprite.spriteFromCharacter('1').scaleNew(50),0,Color.red) {
 			public void clicked() {
 				Core.gameStateManager.loadGameState(new CharacterSelection());
 			}

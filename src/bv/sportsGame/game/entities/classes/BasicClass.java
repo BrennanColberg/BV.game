@@ -19,6 +19,7 @@ import bv.framework.syntax.BMath;
 import bv.framework.syntax.BV;
 import bv.sportsGame.game.entities.Ball;
 import bv.sportsGame.game.entities.projectiles.Missile;
+import bv.sportsGame.gameStates.Game;
 
 /**
  * This is the Basic class. The other classes (Tank, Speedster) will inherit the 
@@ -136,11 +137,11 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 				acceleration.add(new PVector(accelAmount, mouseAngle()));
 		}
 		
-		if (Input.isMousePressed() && shotCountDown <= 0) {
+		if (Input.isMousePressed() && shotCountDown <= 0 && Core.state() instanceof Game) {
 			shoot();
 		}
 		
-		if (Input.isRightMousePressed() && specialCountDown <= 0) {
+		if (Input.isRightMousePressed() && specialCountDown <= 0 && Core.state() instanceof Game) {
 			useSpecial();
 		}
 	}
