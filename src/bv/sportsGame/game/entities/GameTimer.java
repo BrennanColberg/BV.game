@@ -2,6 +2,7 @@ package bv.sportsGame.game.entities;
 
 import bv.framework.core.Core;
 import bv.framework.state.Tickable;
+import bv.sportsGame.gameStates.Menu;
 
 public class GameTimer implements Tickable {
 	
@@ -15,8 +16,7 @@ public class GameTimer implements Tickable {
 	public void tick() {
 		secondsLeft -= 1d / Core.tickEngine.targetFrequency;
 		if (secondsLeft <= 0) {
-			// TODO implement game stop function
-			// basically, new state which proclaims winner & returns to menu
+			Core.gameStateManager.loadGameState(new Menu());
 		}
 	}
 

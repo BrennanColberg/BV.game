@@ -31,6 +31,7 @@ import bv.sportsGame.game.entities.projectiles.Missile;
 
 public class BasicClass extends Entity implements Renderable, Collidable {
 
+	public static BasicClass playerClass = new BasicClass();
 	protected static double dragConst = 0.0005d;
 	protected static double recoilConst = 0.15d;
 	protected static double velocityCutOff = 0.005d; //This is in an attempt to get rid off the jittering when the player isn't moving
@@ -49,7 +50,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	protected boolean isDefending;
 	
 	public BasicClass() {
-		sprite = SpriteIO.get("balanced").scaleNew(50);
+		sprite = SpriteIO.get("podracer").scaleNew(50);
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -64,7 +65,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 	public BasicClass(CVector pos, Team team) {
 		position = pos;
 		this.team = team;
-		sprite = SpriteIO.get("balanced").scaleNew(50);
+		sprite = SpriteIO.get("podracer").scaleNew(50);
 		health = 125;
 		strength = 7;
 		shotSpeed = 50;
@@ -207,7 +208,7 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		}
 		else {
 			//Protect the goal
-			PVector targetPos = dispBallToGoal.normal().scaledBy(-50).plus(ownGoalPos);
+			PVector targetPos = ownGoalPos.minus(dispBallToGoal.normal().scaledBy(5).toCVector()).toPVector();
 			PVector dispThisToTarget = targetPos.minus(this.getPosition());
 			this.acceleration.add(new PVector(accelAmount, dispThisToTarget.getAngle()));
 		}

@@ -17,7 +17,11 @@ public enum TextSprite {
 	NINE	(9, '9'),
 	
 	COLON	(10, ':'),
-	DECIMAL	(11, '.');
+	DECIMAL	(11, '.'),
+	
+	A (12, 'A'),
+	B (13, 'B'),
+	C (14, 'C');
 	
 	public static final double SPACE_SIZE = 0.5;
 	public static final double GAP_SIZE = 0.125;

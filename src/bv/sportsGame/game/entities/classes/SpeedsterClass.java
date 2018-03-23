@@ -23,7 +23,7 @@ public class SpeedsterClass extends BasicClass {
 		shotCountDown = 0;
 		mass = 75;
 		maxVelocity = 7.5d;
-		accelAmount = 0.04d;
+		accelAmount = 0.2d;
 		isWASD = false;
 	}
 	public SpeedsterClass(CVector pos, Team team, boolean isPlayer, boolean isDefending){

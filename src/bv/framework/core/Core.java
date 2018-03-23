@@ -7,6 +7,7 @@ import bv.framework.math.CVector;
 import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
 import bv.sportsGame.gameStates.Game;
+import bv.sportsGame.gameStates.Menu;
 
 /** Centrally static class around which the running program revolves.
  *  You can see it as the hub; all managers and threads can be accessed through a static call to this class.
@@ -43,7 +44,7 @@ public class Core {
 		
 		// initializes various engines and managers
 		renderEngine = new RenderEngine			(60, "FPS", STARTING_SCREEN_SIZE);
-		gameStateManager = new GameStateManager(new Game());
+		gameStateManager = new GameStateManager(new Menu());
 		tickEngine = new TickEngine				(90, "TPS");
 		collisionEngine = new CollisionEngine	(45, "CPS");
 		

@@ -36,6 +36,7 @@ public class HUD extends Entity implements Renderable {
 		
 		renderTimer(r);
 		renderScore(r);
+
 	}
 	
 	private void renderTimer(Renderer r) {

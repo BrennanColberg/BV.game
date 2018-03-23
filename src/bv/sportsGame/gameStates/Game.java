@@ -11,6 +11,8 @@ import bv.framework.core.Core;
 import bv.framework.core.Input;
 import bv.framework.math.CVector;
 import bv.framework.math.Rect;
+import bv.framework.sprites.AnimatedSprite;
+import bv.framework.sprites.SpriteIO;
 import bv.framework.state.GameState;
 import bv.framework.syntax.BV;
 import bv.sportsGame.game.entities.Ball;
@@ -45,14 +47,14 @@ public class Game extends GameState {
 		
 		objects.add(goal1	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
 		objects.add(goal2	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
-		objects.add(player	    = new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false));
-		//objects.add(teammate    = new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.LEFT, false, true));
-		//objects.add(opponent1	= new SpeedsterClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.RIGHT, false, false));
+		objects.add(player	    = BasicClass.playerClass);
+		objects.add(teammate    = new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.LEFT, false, true));
+		objects.add(opponent1	= new SpeedsterClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.RIGHT, false, false));
 		objects.add(opponent2  = new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.RIGHT, false, true));
 		objects.add(ball	= new Ball());
 		
 		objects.add(hud			= new HUD());
-		objects.add(gameTimer 	= new GameTimer(300));
+		objects.add(gameTimer 	= new GameTimer(10));
 		
 		this.zoomFactor = 0.25;
 	}

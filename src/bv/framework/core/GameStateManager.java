@@ -9,6 +9,7 @@ import bv.framework.physics.Physics;
 import bv.framework.state.GameState;
 import bv.framework.state.Tickable;
 import bv.sportsGame.gameStates.Game;
+import bv.sportsGame.gameStates.Menu;
 
 /** A class which coordinates {@link GameState}s relevant to the current program. 
  * @author Brennan D. Colberg - {@link http://github.com/BrennanColberg} */
@@ -17,7 +18,7 @@ public class GameStateManager {
 	/* VARIABLES */
 	
 	/** The {@link GameState} with which the current program always begins. */
-	public static final GameState STARTING_GAME_STATE = new Game();
+	public static final GameState STARTING_GAME_STATE = new Menu();
 	
 	/** The {@link Stack} which stores currently loaded {@link GameState}s in order.
 	 * 	The currently focused {@link GameState} is always the one at the top; when it is removed, the one below it comes into focus.

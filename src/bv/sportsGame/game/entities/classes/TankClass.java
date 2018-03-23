@@ -23,7 +23,7 @@ public class TankClass extends BasicClass {
 		shotCountDown = 0;
 		mass = 150;
 		maxVelocity = 2.25d;
-		accelAmount = 0.008d;
+		accelAmount = 0.08d;
 		isWASD = false;
 	}
 	public TankClass(CVector pos, Team team, boolean isPlayer, boolean isDefending){
