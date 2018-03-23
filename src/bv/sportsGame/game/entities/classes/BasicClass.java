@@ -103,7 +103,6 @@ public class BasicClass extends Entity implements Renderable, Collidable {
 		return (isPlayer) ? mouseAngle() : this.velocity.getAngle();
 	}
 	
-	//Minor change
 	public void updatePhysics() {
 		if (isPlayer) playerMovement();
 		else aiBehavior();

@@ -83,9 +83,9 @@ public class Entity implements Tickable, Physics {
 		CVector max = Core.gameStateManager.currentState.maxBounds;
 		CVector min = Core.gameStateManager.currentState.minBounds;
 
-		if (position.getValue(1) < min.getValue(1) || position.getValue(1) > max.getValue(1))
+		if (position.getValue(1) + velocity.toCVector().getValue(1) < min.getValue(1) || position.getValue(1) + velocity.toCVector().getValue(1) > max.getValue(1))
 			this.velocity = (new PVector((new CVector(cOldVelocity.getValue(0), -cOldVelocity.getValue(1)).toPVector().scaledBy(2))));
-		else if (position.getValue(0) < min.getValue(0) || position.getValue(0) > max.getValue(0))
+		else if (position.getValue(0) + velocity.toCVector().getValue(0) < min.getValue(0) || position.getValue(0) + velocity.toCVector().getValue(0) > max.getValue(0))
 			this.velocity = (new PVector((new CVector(-cOldVelocity.getValue(0), cOldVelocity.getValue(1)).toPVector().scaledBy(2))));
 	}
 }

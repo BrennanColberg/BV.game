@@ -13,11 +13,11 @@ import bv.framework.sprites.Sprite;
 
 public abstract class Button extends Entity implements Renderable {
 	
-	public Sprite sprite;
+	public AnimatedSprite sprite;
 	public double heading;
 	public Color color;
 	
-	public Button(CVector position, Sprite sprite, double heading, Color color) {
+	public Button(CVector position, AnimatedSprite sprite, double heading, Color color) {
 		this.position = position;
 		this.sprite = sprite;
 		this.heading = heading;
@@ -27,7 +27,7 @@ public abstract class Button extends Entity implements Renderable {
 	public abstract void clicked();
 	
 	public void render(Renderer r) {
-		this.sprite.render(r, position, sprite.scale, heading, color);
+		this.sprite.render(r, position, heading, color);
 	}
 
 	public Rect rectBounds() {

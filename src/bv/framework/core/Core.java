@@ -45,7 +45,7 @@ public class Core {
 		
 		// initializes various engines and managers
 		renderEngine = new RenderEngine			(60, "FPS", STARTING_SCREEN_SIZE);
-		gameStateManager = new GameStateManager(new Menu());
+		gameStateManager = new GameStateManager (new Menu());
 		tickEngine = new TickEngine				(90, "TPS");
 		collisionEngine = new CollisionEngine	(45, "CPS");
 		

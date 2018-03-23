@@ -36,7 +36,7 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 		this.parent = parent;
 	}
 	public void updatePhysics() {
-		if (!Core.gameStateManager.currentState.inBounds(this.position)){
+		if (!Core.gameStateManager.currentState.inBounds(this.position.plus(this.velocity))){
 			die();
 		}
 		super.updatePhysics();
@@ -62,6 +62,6 @@ public abstract class Projectile extends Entity implements Renderable, Collidabl
 		}
 	}
 	public void die() {
-		Core.state().objects.remove(Core.state().objects.indexOf(this));
+		if (Core.state().objects.indexOf(this) >= 0) Core.state().objects.remove(Core.state().objects.indexOf(this));
 	}
 }

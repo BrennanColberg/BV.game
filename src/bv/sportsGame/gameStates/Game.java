@@ -33,9 +33,11 @@ public class Game extends GameState {
 
 	Goal goal1, goal2;
 	BasicClass player;
-	BasicClass teammate;
+	BasicClass teammate1;
+	BasicClass teammate2;
 	BasicClass opponent1;
 	BasicClass opponent2;
+	BasicClass opponent3;
 	Ball ball;
 	public Rect gamefield = new Rect(new CVector(0,0), Core.STARTING_SCREEN_SIZE);
 	public HUD hud;
@@ -48,9 +50,11 @@ public class Game extends GameState {
 		objects.add(goal1	= new Goal(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/2 * 4, 0), Team.RIGHT));
 		objects.add(goal2	= new Goal(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/ 2 * 4, 0), Team.LEFT));
 		objects.add(player	    = BasicClass.playerClass);
-		objects.add(teammate    = new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.LEFT, false, true));
+		objects.add(teammate1    = new TankClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.LEFT, false, true));
+		objects.add(teammate2    = new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, false, false));
 		objects.add(opponent1	= new SpeedsterClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.RIGHT, false, false));
-		objects.add(opponent2  = new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.RIGHT, false, true));
+		objects.add(opponent2  = new TankClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.RIGHT, false, true));
+		objects.add(opponent3  = new BasicClass(new CVector(Core.STARTING_SCREEN_SIZE.getValue(0), 100), Team.RIGHT, false, false));
 		objects.add(ball	= new Ball());
 		
 		objects.add(hud			= new HUD());

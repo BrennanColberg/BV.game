@@ -22,7 +22,7 @@ public class Menu extends GameState {
 	
 	public void init() {
 		
-		objects.add(new Button(new CVector(0,0),TextSprite.spriteFromCharacter('A').scaleNew(50),0,Color.red) {
+		objects.add(new Button(new CVector(0,0),SpriteIO.get("drone").scaleNew(1),0,Color.red) {
 			public void clicked() {
 				Core.gameStateManager.loadGameState(new CharacterSelection());
 			}
@@ -30,8 +30,8 @@ public class Menu extends GameState {
 			public void tick() {
 				heading += 0.01;
 			}
-			
 		});
+		
 	}
 	
 	Long lastClick = System.currentTimeMillis();
@@ -47,7 +47,7 @@ public class Menu extends GameState {
 	}
 
 	public void load() {
-		Core.renderEngine.renderer.setBackgroundColor(Color.gray);
+		Core.renderEngine.renderer.setBackgroundColor(Color.black);
 	}
 
 }

@@ -23,7 +23,27 @@ public enum TextSprite {
 	D (14, 'D'),
 	DECIMAL	(15, '.'),
 	E (16, 'E'),
-	F (17, 'F');
+	F (17, 'F'),
+	G (18, 'G'),
+	H (19, 'H'),
+	I (20, 'I'),
+	J (21, 'J'),
+	K (22, 'K'),
+	L (23, 'L'),
+	M (24, 'M'),
+	N (25, 'N'),
+	O (26, 'O'),
+	P (27, 'P'),
+	Q (28, 'Q'),
+	R (29, 'R'),
+	S (30, 'S'),
+	T (31, 'T'),
+	U (32, 'U'),
+	V (33, 'V'),
+	W (34, 'W'),
+	X (35, 'X'),
+	Y (36, 'Y'),
+	Z (37, 'Z');
 	
 	public static final double SPACE_SIZE = 0.5;
 	public static final double GAP_SIZE = 0.125;

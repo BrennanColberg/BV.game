@@ -19,7 +19,7 @@ public class SpeedsterClass extends BasicClass {
 		sprite = SpriteIO.get("swarmV2").scaleNew(50);
 		health = 75;
 		strength = 2;
-		shotSpeed = 5;
+		shotSpeed = 15;
 		shotCountDown = 0;
 		mass = 75;
 		maxVelocity = 6d;

@@ -23,9 +23,9 @@ public class CharacterSelection extends GameState {
 	
 	public void init() {
 		
-		objects.add(selectionOne = new CharSelection(SpriteIO.get("podracer").scaleNew(25), new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/3, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false)));
-		objects.add(selectionOne = new CharSelection(SpriteIO.get("swarmV2").scaleNew(25), new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false)));
-		objects.add(selectionOne = new CharSelection(SpriteIO.get("dualGunner").scaleNew(25), new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/3, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new TankClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), -100), Team.LEFT, true, false)));
+		objects.add(selectionOne = new CharSelection(SpriteIO.get("podracer").scaleNew(25), new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0)/3, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new BasicClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.LEFT, true, false)));
+		objects.add(selectionOne = new CharSelection(SpriteIO.get("swarmV2").scaleNew(25), new CVector(0, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new SpeedsterClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.LEFT, true, false)));
+		objects.add(selectionOne = new CharSelection(SpriteIO.get("dualGunner").scaleNew(25), new CVector(Core.STARTING_SCREEN_SIZE.getValue(0)/3, -Core.STARTING_SCREEN_SIZE.getValue(1)/4), new TankClass(new CVector(-Core.STARTING_SCREEN_SIZE.getValue(0), 0), Team.LEFT, true, false)));
 		objects.add(selector = new CharSelector(SpriteIO.get("ball").scaleNew(0.1), TextSprite.spriteFromCharacter('C').scaleNew(25), new CVector(0, 150)));
 		
 	}
@@ -36,7 +36,7 @@ public class CharacterSelection extends GameState {
 	}
 
 	public void load() {
-		Core.renderEngine.renderer.setBackgroundColor(Color.gray);
+		Core.renderEngine.renderer.setBackgroundColor(Color.black);
 	}
 
 }
