@@ -5,6 +5,7 @@ import bv.framework.math.Poly;
 
 public enum TextSprite {
 	
+	//These need to appear in order, top-to-bottom, as how they appear in the numberCharacters sprite list
 	ZERO	(0, '0'),
 	ONE		(1, '1'),
 	TWO		(2, '2'),
@@ -15,13 +16,14 @@ public enum TextSprite {
 	SEVEN	(7, '7'),
 	EIGHT	(8, '8'),
 	NINE	(9, '9'),
-	
-	COLON	(10, ':'),
-	DECIMAL	(11, '.'),
-	
-	A (12, 'A'),
-	B (13, 'B'),
-	C (14, 'C');
+	A (10, 'A'),
+	B (11, 'B'),
+	C (12, 'C'),
+	COLON	(13, ':'),
+	D (14, 'D'),
+	DECIMAL	(15, '.'),
+	E (16, 'E'),
+	F (17, 'F');
 	
 	public static final double SPACE_SIZE = 0.5;
 	public static final double GAP_SIZE = 0.125;
