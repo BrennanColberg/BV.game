@@ -35,7 +35,7 @@ public abstract class Button extends Entity implements Renderable {
 	}
 
 	public Poly polyBounds() {
-		Poly result = new Poly(this.sprite.get(0).polyBounds());
+		Poly result = new Poly(this.sprite.get(0).polyBounds()); 
 		result.setOffset(this.position);
 		return result;
 	}
